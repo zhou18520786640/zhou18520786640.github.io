@@ -259,7 +259,7 @@
           
             <h2 id="简单工厂模式概述"><a href="#简单工厂模式概述" class="headerlink" title="简单工厂模式概述"></a>简单工厂模式概述</h2><p>简单工厂模式（简称工厂模式）属于创建型模式，又叫做静态工厂方法，也就是说使用这种模式是为了创建对象。</p>
 <h2 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h2><p>简单工厂模式中有几种类型的角色:<br>工厂角色（Factory）:创建具体产品的类，负责创建的逻辑<br>抽象产品（Product）角色: 为具体产品提供统一接口,可以是协议，也可以是抽象类<br>具体产品（Concrete Product):角色要创建的对象的对应的类<br>客户端: 调用工厂角色创建具体产品。<br>显然，工厂角色的创建是这种模式的核心。下面是示意图<br><img src="http://www.runoob.com/wp-content/uploads/2014/08/factory_pattern_uml_diagram.jpg" alt="image"></p>
-<h2 id="演示代码"><a href="#演示代码" class="headerlink" title="演示代码"></a>演示代码</h2><p>Factory 类</p>
+<h2 id="演示代码"><a href="#演示代码" class="headerlink" title="演示代码"></a>演示代码</h2><h3 id="地址：https-github-com-zhou18520786640-Factory"><a href="#地址：https-github-com-zhou18520786640-Factory" class="headerlink" title="地址：https://github.com/zhou18520786640/Factory"></a>地址：<a href="https://github.com/zhou18520786640/Factory" target="_blank" rel="external">https://github.com/zhou18520786640/Factory</a></h3><p>Factory 类</p>
 <pre><code>#import &quot;ZZProduct.h&quot;
 
 @interface ZZProductFactory : ZZProduct
