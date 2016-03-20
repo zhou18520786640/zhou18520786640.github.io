@@ -57,39 +57,30 @@
 
 
 
-<meta name="description" content="初衷使用Hexo可以快速搭建一个简单，优雅的静态博客。通过博客，可以沉淀自己在学习和开发中遇到的问题。使用hexo自己搭建,而不是借助其他平台，如CSDN，博客园等，可以更加自由更加优雅的配置导航和内容的样式。是现在比较流行的一种方式。
-搭建博客的准备工作我们首先要了解一些基本概念。如Hexo是什么。正如hexo官网所言，
+<meta name="description" content="本文大部分思路参考小王子基本思路类似容器视图控制器的思想。对于一个侧边栏，至少需要三个角色控制器。
 
-快速、简洁且高效的博客框架
-
-a.下载依赖软件
-
-node.js">
+侧边栏控制器提供侧边栏的显示内容。用户点击侧边栏的按钮可以调用管理控制器隐藏侧边栏，显示主要展示内容
+主要展示内容控制器多个内容控制器。和侧边栏上的按钮对应。
+管理控制器侧边栏和主要展示内容控制器的视图都添加到管理控制器的视图上。真正决定显示内容给用户看的控制器。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo github部署静态blog">
-<meta property="og:url" content="http://yoursite.com/2016/03/12/hexo-github部署静态blog/index.html">
+<meta property="og:title" content="侧边栏的实现">
+<meta property="og:url" content="http://yoursite.com/2016/03/20/侧边栏的实现/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="初衷使用Hexo可以快速搭建一个简单，优雅的静态博客。通过博客，可以沉淀自己在学习和开发中遇到的问题。使用hexo自己搭建,而不是借助其他平台，如CSDN，博客园等，可以更加自由更加优雅的配置导航和内容的样式。是现在比较流行的一种方式。
-搭建博客的准备工作我们首先要了解一些基本概念。如Hexo是什么。正如hexo官网所言，
+<meta property="og:description" content="本文大部分思路参考小王子基本思路类似容器视图控制器的思想。对于一个侧边栏，至少需要三个角色控制器。
 
-快速、简洁且高效的博客框架
-
-a.下载依赖软件
-
-node.js">
-<meta property="og:image" content="http://static.open-open.com/lib/uploadImg/20150620/20150620203424_361.png">
-<meta property="og:updated_time" content="2016-03-11T17:13:42.000Z">
+侧边栏控制器提供侧边栏的显示内容。用户点击侧边栏的按钮可以调用管理控制器隐藏侧边栏，显示主要展示内容
+主要展示内容控制器多个内容控制器。和侧边栏上的按钮对应。
+管理控制器侧边栏和主要展示内容控制器的视图都添加到管理控制器的视图上。真正决定显示内容给用户看的控制器。">
+<meta property="og:image" content="http://www.lanou3g.com/upload/image/201312/20131227100929_666.png">
+<meta property="og:updated_time" content="2016-03-20T04:57:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo github部署静态blog">
-<meta name="twitter:description" content="初衷使用Hexo可以快速搭建一个简单，优雅的静态博客。通过博客，可以沉淀自己在学习和开发中遇到的问题。使用hexo自己搭建,而不是借助其他平台，如CSDN，博客园等，可以更加自由更加优雅的配置导航和内容的样式。是现在比较流行的一种方式。
-搭建博客的准备工作我们首先要了解一些基本概念。如Hexo是什么。正如hexo官网所言，
+<meta name="twitter:title" content="侧边栏的实现">
+<meta name="twitter:description" content="本文大部分思路参考小王子基本思路类似容器视图控制器的思想。对于一个侧边栏，至少需要三个角色控制器。
 
-快速、简洁且高效的博客框架
-
-a.下载依赖软件
-
-node.js">
-<meta name="twitter:image" content="http://static.open-open.com/lib/uploadImg/20150620/20150620203424_361.png">
+侧边栏控制器提供侧边栏的显示内容。用户点击侧边栏的按钮可以调用管理控制器隐藏侧边栏，显示主要展示内容
+主要展示内容控制器多个内容控制器。和侧边栏上的按钮对应。
+管理控制器侧边栏和主要展示内容控制器的视图都添加到管理控制器的视图上。真正决定显示内容给用户看的控制器。">
+<meta name="twitter:image" content="http://www.lanou3g.com/upload/image/201312/20131227100929_666.png">
 
 
 
@@ -107,7 +98,7 @@ node.js">
   };
 </script>
 
-  <title> hexo github部署静态blog | 周明的技术博客 </title>
+  <title> 侧边栏的实现 | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -229,7 +220,7 @@ node.js">
             
             
               
-                hexo github部署静态blog
+                侧边栏的实现
               
             
           </h1>
@@ -241,8 +232,8 @@ node.js">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-12T00:55:29+08:00" content="2016-03-12">
-              2016-03-12
+            <time itemprop="dateCreated" datetime="2016-03-20T12:32:48+08:00" content="2016-03-20">
+              2016-03-20
             </time>
           </span>
 
@@ -268,18 +259,14 @@ node.js">
       
 
       
-        <p><img src="http://static.open-open.com/lib/uploadImg/20150620/20150620203424_361.png" alt="image"></p>
-<h3 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h3><p>使用Hexo可以快速搭建一个简单，优雅的静态博客。通过博客，可以沉淀自己在学习和开发中遇到的问题。使用hexo自己搭建,而不是借助其他平台，如CSDN，博客园等，可以更加自由更加优雅的配置导航和内容的样式。是现在比较流行的一种方式。</p>
-<h3 id="搭建博客的准备工作"><a href="#搭建博客的准备工作" class="headerlink" title="搭建博客的准备工作"></a>搭建博客的准备工作</h3><p>我们首先要了解一些基本概念。如Hexo是什么。正如hexo官网所言，</p>
-<blockquote>
-<p>快速、简洁且高效的博客框架</p>
-</blockquote>
-<p>a.下载依赖软件</p>
+        <p><img src="http://www.lanou3g.com/upload/image/201312/20131227100929_666.png" alt="http://www.lanou3g.com/upload/image/201312/20131227100929_666.png
+"></p>
+<h3 id="本文大部分思路参考小王子"><a href="#本文大部分思路参考小王子" class="headerlink" title="本文大部分思路参考小王子"></a>本文大部分思路参考<a href="http://www.jianshu.com/p/3ddcb71df2f7" target="_blank" rel="external">小王子</a></h3><h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><p>类似容器视图控制器的思想。对于一个侧边栏，至少需要三个角色控制器。</p>
 <ol>
-<li>node.js  </li>
-<li>git (Mac下自带)</li>
+<li>侧边栏控制器<br>提供侧边栏的显示内容。用户点击侧边栏的按钮可以调用管理控制器隐藏侧边栏，显示主要展示内容</li>
+<li>主要展示内容控制器<br>多个内容控制器。和侧边栏上的按钮对应。</li>
+<li>管理控制器<br>侧边栏和主要展示内容控制器的视图都添加到管理控制器的视图上。真正决定显示内容给用户看的控制器。</li>
 </ol>
-<p>b.安装</p>
 
       
     </div>
@@ -303,17 +290,13 @@ node.js">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/12/使用TableView布局UI控件/" rel="next" title="使用TableView布局UI控件">
-                <i class="fa fa-chevron-left"></i> 使用TableView布局UI控件
+              <a href="/2016/03/12/hexo-github部署静态blog/" rel="next" title="hexo github部署静态blog">
+                <i class="fa fa-chevron-left"></i> hexo github部署静态blog
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/20/侧边栏的实现/" rel="prev" title="侧边栏的实现">
-                侧边栏的实现 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -424,7 +407,7 @@ node.js">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#初衷"><span class="nav-number">1.</span> <span class="nav-text">初衷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搭建博客的准备工作"><span class="nav-number">2.</span> <span class="nav-text">搭建博客的准备工作</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#本文大部分思路参考小王子"><span class="nav-number">1.</span> <span class="nav-text">本文大部分思路参考小王子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本思路"><span class="nav-number">2.</span> <span class="nav-text">基本思路</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
