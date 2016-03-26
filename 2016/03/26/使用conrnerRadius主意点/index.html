@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="设计模式," />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -57,21 +57,16 @@
 
 
 
-<meta name="description" content="简单工厂模式概述简单工厂模式（简称工厂模式）属于创建型模式，又叫做静态工厂方法，也就是说使用这种模式是为了创建对象。
-角色简单工厂模式中有几种类型的角色:工厂角色（Factory）:创建具体产品的类，负责创建的逻辑抽象产品（Product）角色: 为具体产品提供统一接口,可以是协议，也可以是抽象类具体产品（Concrete Product):角色要创建的对象的对应的类客户端: 调用工厂角色创建具体">
+<meta name="description" content="“CALayer有一个叫做conrnerRadius的属性控制着图层角的曲率。它是一个浮点数，默认为0（为0的时候就是直角），但是你可以把它设置成任意值。默认情况下，这个曲率值只影响背景颜色而不影响背景图片或是子图层。不过，如果把masksToBounds设置成YES的话，图层里面的所有东西都会被截取”">
 <meta property="og:type" content="article">
-<meta property="og:title" content="OC设计模式之简单工厂模式">
-<meta property="og:url" content="http://yoursite.com/2016/03/05/oc设计模式之简单工厂模式/index.html">
+<meta property="og:title" content="使用conrnerRadius主意点">
+<meta property="og:url" content="http://yoursite.com/2016/03/26/使用conrnerRadius主意点/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="简单工厂模式概述简单工厂模式（简称工厂模式）属于创建型模式，又叫做静态工厂方法，也就是说使用这种模式是为了创建对象。
-角色简单工厂模式中有几种类型的角色:工厂角色（Factory）:创建具体产品的类，负责创建的逻辑抽象产品（Product）角色: 为具体产品提供统一接口,可以是协议，也可以是抽象类具体产品（Concrete Product):角色要创建的对象的对应的类客户端: 调用工厂角色创建具体">
-<meta property="og:image" content="http://www.runoob.com/wp-content/uploads/2014/08/factory_pattern_uml_diagram.jpg">
-<meta property="og:updated_time" content="2016-03-07T17:42:59.000Z">
+<meta property="og:description" content="“CALayer有一个叫做conrnerRadius的属性控制着图层角的曲率。它是一个浮点数，默认为0（为0的时候就是直角），但是你可以把它设置成任意值。默认情况下，这个曲率值只影响背景颜色而不影响背景图片或是子图层。不过，如果把masksToBounds设置成YES的话，图层里面的所有东西都会被截取”">
+<meta property="og:updated_time" content="2016-03-26T10:47:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OC设计模式之简单工厂模式">
-<meta name="twitter:description" content="简单工厂模式概述简单工厂模式（简称工厂模式）属于创建型模式，又叫做静态工厂方法，也就是说使用这种模式是为了创建对象。
-角色简单工厂模式中有几种类型的角色:工厂角色（Factory）:创建具体产品的类，负责创建的逻辑抽象产品（Product）角色: 为具体产品提供统一接口,可以是协议，也可以是抽象类具体产品（Concrete Product):角色要创建的对象的对应的类客户端: 调用工厂角色创建具体">
-<meta name="twitter:image" content="http://www.runoob.com/wp-content/uploads/2014/08/factory_pattern_uml_diagram.jpg">
+<meta name="twitter:title" content="使用conrnerRadius主意点">
+<meta name="twitter:description" content="“CALayer有一个叫做conrnerRadius的属性控制着图层角的曲率。它是一个浮点数，默认为0（为0的时候就是直角），但是你可以把它设置成任意值。默认情况下，这个曲率值只影响背景颜色而不影响背景图片或是子图层。不过，如果把masksToBounds设置成YES的话，图层里面的所有东西都会被截取”">
 
 
 
@@ -89,7 +84,7 @@
   };
 </script>
 
-  <title> OC设计模式之简单工厂模式 | 周明的技术博客 </title>
+  <title> 使用conrnerRadius主意点 | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -211,7 +206,7 @@
             
             
               
-                OC设计模式之简单工厂模式
+                使用conrnerRadius主意点
               
             
           </h1>
@@ -223,8 +218,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-05T14:04:13+08:00" content="2016-03-05">
-              2016-03-05
+            <time itemprop="dateCreated" datetime="2016-03-26T18:46:20+08:00" content="2016-03-26">
+              2016-03-26
             </time>
           </span>
 
@@ -250,89 +245,10 @@
       
 
       
-        <h2 id="简单工厂模式概述"><a href="#简单工厂模式概述" class="headerlink" title="简单工厂模式概述"></a>简单工厂模式概述</h2><p>简单工厂模式（简称工厂模式）属于创建型模式，又叫做静态工厂方法，也就是说使用这种模式是为了创建对象。</p>
-<h2 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h2><p>简单工厂模式中有几种类型的角色:<br>工厂角色（Factory）:创建具体产品的类，负责创建的逻辑<br>抽象产品（Product）角色: 为具体产品提供统一接口,可以是协议，也可以是抽象类<br>具体产品（Concrete Product):角色要创建的对象的对应的类<br>客户端: 调用工厂角色创建具体产品。<br>显然，工厂角色的创建是这种模式的核心。下面是示意图<br><img src="http://www.runoob.com/wp-content/uploads/2014/08/factory_pattern_uml_diagram.jpg" alt="image"></p>
-<h2 id="演示代码"><a href="#演示代码" class="headerlink" title="演示代码"></a>演示代码</h2><h3 id="地址：https-github-com-zhou18520786640-Factory"><a href="#地址：https-github-com-zhou18520786640-Factory" class="headerlink" title="地址：https://github.com/zhou18520786640/Factory"></a>地址：<a href="https://github.com/zhou18520786640/Factory" target="_blank" rel="external">https://github.com/zhou18520786640/Factory</a></h3><p>Factory 类</p>
-<pre><code>#import &quot;ZZProduct.h&quot;
+        <blockquote>
+<p>“CALayer有一个叫做conrnerRadius的属性控制着图层角的曲率。它是一个浮点数，默认为0（为0的时候就是直角），但是你可以把它设置成任意值。默认情况下，这个曲率值只影响背景颜色而不影响背景图片或是子图层。不过，如果把masksToBounds设置成YES的话，图层里面的所有东西都会被截取”</p>
+</blockquote>
 
-@interface ZZProductFactory : ZZProduct
-+ (ZZProduct *)createProductWithclassName:(NSString *)className;
-@end
-
-#import &quot;ZZProductFactory.h&quot;
-
-@implementation ZZProductFactory
-+ (ZZProduct *)createProductWithclassName:(NSString *)className {
-    Class class = NSClassFromString(className);
-    ZZProduct *product = [[class alloc] init];
-    return product;
-}
-@end
-</code></pre><p>Product 类</p>
-<pre><code>#import &lt;Foundation/Foundation.h&gt;
-
-@interface ZZProduct : NSObject
-- (void)show;
-
-@end
-
-#import &quot;ZZProduct.h&quot;
-
-@implementation ZZProduct
-
-@end
-</code></pre><p>BeautyProduct 类</p>
-<pre><code>#import &quot;ZZProduct.h&quot;
-
-@interface ZZBeautyProduct : ZZProduct
-
-@end
-#import &quot;ZZBeautyProduct.h&quot;
-
-@implementation ZZBeautyProduct
-- (void)show {
-    NSLog(@&quot;我是一个美妆产品&quot;);
-}
-@end
-</code></pre><p>ITProduct 类</p>
-<pre><code>#import &quot;ZZProduct.h&quot;
-
-@interface ZZITProduct : ZZProduct
-
-@end
-
-#import &quot;ZZITProduct.h&quot;
-
-@implementation ZZITProduct
-- (void)show {
-    NSLog(@&quot;I am a IT 产品&quot;);
-}
-@end
-</code></pre><p>Client 类</p>
-<pre><code>@implementation ZZViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    ZZProduct *product = [ZZProductFactory createProductWithclassName:@&quot;ZZITProduct&quot;];
-    [product show];
-    ZZProduct *product2 = [ZZProductFactory createProductWithclassName:@&quot;ZZBeautyProduct&quot;];
-    [product2 show];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-</code></pre><h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>在下面一些场景下可以考虑使用简单工厂模式</p>
-<ol>
-<li>需要创建具体产品的地方很多，如果不使用工厂类创建，每个客户端地方都需要｀if(…)else(…)`来创建.代码不优雅。实际上这部分逻辑可以全部封装到工厂类来实现</li>
-<li>创建每一个具体产品后还需要做一些繁琐的配置工作。在客户端做这些配置工作也会让代码很难看。</li>
-<li>1还有一个问题，就是又新添加一个具体产品的时候。如果客户端有很多地方，需要很多地方都继续添加else(…)创建具体的产品。</li>
-</ol>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>在iOS中，可以根据类名（NSString）生成对应的Class对象。然后根据Class对象生成对应的实例对象<br>应用这种方法，可以避免在工厂类中写if…else.</p>
-<pre><code>Class class = NSClassFromString(className);
-ZZProduct *product = [[class alloc] init];
-</code></pre>
       
     </div>
 
@@ -346,7 +262,7 @@ ZZProduct *product = [[class alloc] init];
       
         <div class="post-tags">
           
-            <a href="/tags/设计模式/" rel="tag">#设计模式</a>
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
           
         </div>
       
@@ -355,17 +271,13 @@ ZZProduct *product = [[class alloc] init];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/05/       使用GCD实现iOS多线程编程/" rel="next" title="使用GCD实现iOS多线程编程">
-                <i class="fa fa-chevron-left"></i> 使用GCD实现iOS多线程编程
+              <a href="/2016/03/26/隐式动画/" rel="next" title="隐式动画">
+                <i class="fa fa-chevron-left"></i> 隐式动画
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/12/使用TableView布局UI控件/" rel="prev" title="使用TableView布局UI控件">
-                使用TableView布局UI控件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -476,7 +388,7 @@ ZZProduct *product = [[class alloc] init];
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单工厂模式概述"><span class="nav-number">1.</span> <span class="nav-text">简单工厂模式概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#角色"><span class="nav-number">2.</span> <span class="nav-text">角色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#演示代码"><span class="nav-number">3.</span> <span class="nav-text">演示代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#地址：https-github-com-zhou18520786640-Factory"><span class="nav-number">3.1.</span> <span class="nav-text">地址：https://github.com/zhou18520786640/Factory</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用场景"><span class="nav-number">4.</span> <span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补充"><span class="nav-number">5.</span> <span class="nav-text">补充</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
