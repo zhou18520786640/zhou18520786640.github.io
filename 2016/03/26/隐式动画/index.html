@@ -57,22 +57,25 @@
 
 
 
-<meta name="description" content="前言GCD是iOS编程中实现多线程的一种解决方案。先贴出权威的表述,苹果官方文档中这样描述GCD:
+<meta name="description" content="什么是隐式动画
+“所谓的隐式动画。之所以叫隐式是因为我们并没有指定任何动画的类型。我们仅仅改变了一个属性，然后Core Animation来决定如何并且何时去做动画”
 
-Grand Central Dispatch (GCD) comprises language features, runtime libraries, and system enhancements that provide systemic, comprehensive improvement">
+通俗的说，就是只需要改变layer的属性。CoreAnimation库自动帮你实现动画。相比于你考虑如何做一个动画，还不如考虑如何关闭动画。因为动画是不需要配置的，不要动画却需要配置。下面是一个简单的demo,点击按钮后，laye">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用GCD实现iOS多线程编程">
-<meta property="og:url" content="http://yoursite.com/2016/03/05/       使用GCD实现iOS多线程编程/index.html">
+<meta property="og:title" content="隐式动画">
+<meta property="og:url" content="http://yoursite.com/2016/03/26/隐式动画/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="前言GCD是iOS编程中实现多线程的一种解决方案。先贴出权威的表述,苹果官方文档中这样描述GCD:
+<meta property="og:description" content="什么是隐式动画
+“所谓的隐式动画。之所以叫隐式是因为我们并没有指定任何动画的类型。我们仅仅改变了一个属性，然后Core Animation来决定如何并且何时去做动画”
 
-Grand Central Dispatch (GCD) comprises language features, runtime libraries, and system enhancements that provide systemic, comprehensive improvement">
-<meta property="og:updated_time" content="2016-03-06T08:51:44.000Z">
+通俗的说，就是只需要改变layer的属性。CoreAnimation库自动帮你实现动画。相比于你考虑如何做一个动画，还不如考虑如何关闭动画。因为动画是不需要配置的，不要动画却需要配置。下面是一个简单的demo,点击按钮后，laye">
+<meta property="og:updated_time" content="2016-03-26T10:02:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用GCD实现iOS多线程编程">
-<meta name="twitter:description" content="前言GCD是iOS编程中实现多线程的一种解决方案。先贴出权威的表述,苹果官方文档中这样描述GCD:
+<meta name="twitter:title" content="隐式动画">
+<meta name="twitter:description" content="什么是隐式动画
+“所谓的隐式动画。之所以叫隐式是因为我们并没有指定任何动画的类型。我们仅仅改变了一个属性，然后Core Animation来决定如何并且何时去做动画”
 
-Grand Central Dispatch (GCD) comprises language features, runtime libraries, and system enhancements that provide systemic, comprehensive improvement">
+通俗的说，就是只需要改变layer的属性。CoreAnimation库自动帮你实现动画。相比于你考虑如何做一个动画，还不如考虑如何关闭动画。因为动画是不需要配置的，不要动画却需要配置。下面是一个简单的demo,点击按钮后，laye">
 
 
 
@@ -90,7 +93,7 @@ Grand Central Dispatch (GCD) comprises language features, runtime libraries, and
   };
 </script>
 
-  <title> 使用GCD实现iOS多线程编程 | 周明的技术博客 </title>
+  <title> 隐式动画 | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -212,7 +215,7 @@ Grand Central Dispatch (GCD) comprises language features, runtime libraries, and
             
             
               
-                使用GCD实现iOS多线程编程
+                隐式动画
               
             
           </h1>
@@ -224,8 +227,8 @@ Grand Central Dispatch (GCD) comprises language features, runtime libraries, and
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-05T13:00:58+08:00" content="2016-03-05">
-              2016-03-05
+            <time itemprop="dateCreated" datetime="2016-03-26T17:48:04+08:00" content="2016-03-26">
+              2016-03-26
             </time>
           </span>
 
@@ -251,24 +254,41 @@ Grand Central Dispatch (GCD) comprises language features, runtime libraries, and
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>GCD是iOS编程中实现多线程的一种解决方案。先贴出权威的表述,苹果官方文档中这样描述GCD:</p>
-<blockquote>
-<p>Grand Central Dispatch (GCD) comprises language features, runtime libraries, and system enhancements that provide systemic, comprehensive improvements to the support for concurrent code execution on<br>multicore hardware in iOS and OS X.</p>
+        <h3 id="什么是隐式动画"><a href="#什么是隐式动画" class="headerlink" title="什么是隐式动画"></a>什么是隐式动画</h3><blockquote>
+<p>“所谓的隐式动画。之所以叫隐式是因为我们并没有指定任何动画的类型。我们仅仅改变了一个属性，然后Core Animation来决定如何并且何时去做动画”</p>
 </blockquote>
-<p>个人认为对于开发者，学习GCD主要是学习GCD中涉及的概念和API.本文首先介绍GCD的一些基本术语和概念。然后介绍一些常见的GCD API的使用方法和使用场景，最后谈谈使用过程中注意的地方。</p>
-<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>线程:程序的一条代码执行路径。<br>进程:处于运行状态的应用程序。</p>
-<p>主线程:一个进程必须有且只有一个主线程。</p>
-<p>子线程:处主线程之外的线程</p>
-<p>调度:</p>
-<p>任务:在iOS GCD编程中，可以简单理解为一段block</p>
-<p>同步:不用等</p>
-<p>异步:</p>
-<p>调度队列:</p>
-<p>串行队列:</p>
-<p>并行队列:</p>
-<h2 id="GCD的常见API和使用场景"><a href="#GCD的常见API和使用场景" class="headerlink" title="GCD的常见API和使用场景"></a>GCD的常见API和使用场景</h2><p>功能1:在非主线程上执行耗时的工作<br>功能2:创建单例<br>功能3:延时调用<br>功能4:同步刷新</p>
-<h2 id="GCD使用中注意的地方"><a href="#GCD使用中注意的地方" class="headerlink" title="GCD使用中注意的地方"></a>GCD使用中注意的地方</h2><p>注意点1:死锁<br>注意点2:</p>
+<p>通俗的说，就是只需要改变layer的属性。CoreAnimation库自动帮你实现动画。相比于你考虑如何做一个动画，还不如考虑如何关闭动画。因为动画是不需要配置的，不要动画却需要配置。下面是一个简单的demo,点击按钮后，layer的颜色经过一定时间动画后从蓝色变为红色。</p>
+<pre><code>#import &quot;ZZViewController.h&quot;
 
+@interface ZZViewController ()
+@property (nonatomic, strong) CALayer *layer;
+@end
+
+@implementation ZZViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(buttonDidPressed:) forControlEvents:UIControlEventTouchUpInside];
+    button.frame = CGRectMake(40, 40, 80, 80);
+    button.backgroundColor = [UIColor redColor];
+    [self.view addSubview:button];
+
+    CALayer *layer = [CALayer layer];
+    self.layer = layer;
+    self.layer.backgroundColor = [UIColor blueColor].CGColor;
+    self.layer.frame = CGRectMake(120, 120, 120, 120);
+    [self.view.layer addSublayer:self.layer];
+
+}
+
+- (void)buttonDidPressed:(UIButton *)button {
+    self.layer.backgroundColor = [UIColor redColor].CGColor;
+
+}
+
+@end
+</code></pre>
       
     </div>
 
@@ -291,13 +311,13 @@ Grand Central Dispatch (GCD) comprises language features, runtime libraries, and
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/03/20/使用UICollectionView/" rel="next" title="使用UICollectionView">
+                <i class="fa fa-chevron-left"></i> 使用UICollectionView
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/05/oc设计模式之简单工厂模式/" rel="prev" title="OC设计模式之简单工厂模式">
-                OC设计模式之简单工厂模式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -408,7 +428,7 @@ Grand Central Dispatch (GCD) comprises language features, runtime libraries, and
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#术语"><span class="nav-number">2.</span> <span class="nav-text">术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GCD的常见API和使用场景"><span class="nav-number">3.</span> <span class="nav-text">GCD的常见API和使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GCD使用中注意的地方"><span class="nav-number">4.</span> <span class="nav-text">GCD使用中注意的地方</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是隐式动画"><span class="nav-number">1.</span> <span class="nav-text">什么是隐式动画</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
