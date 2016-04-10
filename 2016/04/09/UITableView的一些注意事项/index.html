@@ -65,7 +65,7 @@
 <meta property="og:site_name" content="周明的技术博客">
 <meta property="og:description" content="实现cell之间的间距有两种常见的方案。1.利用section.不同的section之间可以设置footerView和headerView。通过设置footerView和headerView来实现间距2.将cell的背景色设置比要展示的内容高。那样看起来就有部分间距。
 不要在UITableView中嵌套UITableView。理论上说，UITableView中是可以嵌套UITableView的。但">
-<meta property="og:updated_time" content="2016-04-09T15:26:41.000Z">
+<meta property="og:updated_time" content="2016-04-10T16:46:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UITableView的一些注意事项">
 <meta name="twitter:description" content="实现cell之间的间距有两种常见的方案。1.利用section.不同的section之间可以设置footerView和headerView。通过设置footerView和headerView来实现间距2.将cell的背景色设置比要展示的内容高。那样看起来就有部分间距。
@@ -250,7 +250,9 @@
       
         <h3 id="实现cell之间的间距"><a href="#实现cell之间的间距" class="headerlink" title="实现cell之间的间距"></a>实现cell之间的间距</h3><p>有两种常见的方案。<br>1.利用section.不同的section之间可以设置footerView和headerView。通过设置footerView和headerView来实现间距<br>2.将cell的背景色设置比要展示的内容高。那样看起来就有部分间距。</p>
 <h3 id="不要在UITableView中嵌套UITableView。"><a href="#不要在UITableView中嵌套UITableView。" class="headerlink" title="不要在UITableView中嵌套UITableView。"></a>不要在UITableView中嵌套UITableView。</h3><p>理论上说，UITableView中是可以嵌套UITableView的。但是实际上这样做会产生很多问题。</p>
-
+<h3 id="TableView的Header不滚动出显示区域"><a href="#TableView的Header不滚动出显示区域" class="headerlink" title="TableView的Header不滚动出显示区域"></a>TableView的Header不滚动出显示区域</h3><p>当设置plain风格的时候，Header不会和cell一样滚出屏幕显示区域。设置group风格即可。</p>
+<pre><code>self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+</code></pre>
       
     </div>
 
@@ -394,7 +396,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现cell之间的间距"><span class="nav-number">1.</span> <span class="nav-text">实现cell之间的间距</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不要在UITableView中嵌套UITableView。"><span class="nav-number">2.</span> <span class="nav-text">不要在UITableView中嵌套UITableView。</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现cell之间的间距"><span class="nav-number">1.</span> <span class="nav-text">实现cell之间的间距</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不要在UITableView中嵌套UITableView。"><span class="nav-number">2.</span> <span class="nav-text">不要在UITableView中嵌套UITableView。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TableView的Header不滚动出显示区域"><span class="nav-number">3.</span> <span class="nav-text">TableView的Header不滚动出显示区域</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
