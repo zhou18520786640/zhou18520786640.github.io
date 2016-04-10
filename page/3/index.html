@@ -60,7 +60,7 @@
 <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="周明的技术博客">
-<meta property="og:url" content="http://yoursite.com/tags/iOS/page/2/index.html">
+<meta property="og:url" content="http://yoursite.com/page/3/index.html">
 <meta property="og:site_name" content="周明的技术博客">
 <meta property="og:description">
 <meta name="twitter:card" content="summary">
@@ -83,7 +83,7 @@
   };
 </script>
 
-  <title> 标签: iOS | 周明的技术博客 </title>
+  <title> 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -102,7 +102,9 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -183,133 +185,125 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
+  <section id="posts" class="posts-expand">
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        iOS
-        <small>标签</small>
-      </h2>
+    
+
+    
+    
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/05/       使用GCD实现iOS多线程编程/" itemprop="url">
+                  使用GCD实现iOS多线程编程
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-05T13:00:58+08:00" content="2016-03-05">
+              2016-03-05
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>GCD是iOS编程中实现多线程的一种解决方案。先贴出权威的表述,苹果官方文档中这样描述GCD:</p>
+<blockquote>
+<p>Grand Central Dispatch (GCD) comprises language features, runtime libraries, and system enhancements that provide systemic, comprehensive improvements to the support for concurrent code execution on<br>multicore hardware in iOS and OS X.</p>
+</blockquote>
+<p>个人认为对于开发者，学习GCD主要是学习GCD中涉及的概念和API.本文首先介绍GCD的一些基本术语和概念。然后介绍一些常见的GCD API的使用方法和使用场景，最后谈谈使用过程中注意的地方。</p>
+<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>线程:程序的一条代码执行路径。<br>进程:处于运行状态的应用程序。</p>
+<p>主线程:一个进程必须有且只有一个主线程。</p>
+<p>子线程:处主线程之外的线程</p>
+<p>调度:</p>
+<p>任务:在iOS GCD编程中，可以简单理解为一段block</p>
+<p>同步:不用等</p>
+<p>异步:</p>
+<p>调度队列:</p>
+<p>串行队列:</p>
+<p>并行队列:</p>
+<h2 id="GCD的常见API和使用场景"><a href="#GCD的常见API和使用场景" class="headerlink" title="GCD的常见API和使用场景"></a>GCD的常见API和使用场景</h2><p>功能1:在非主线程上执行耗时的工作<br>功能2:创建单例<br>功能3:延时调用<br>功能4:同步刷新</p>
+<h2 id="GCD使用中注意的地方"><a href="#GCD使用中注意的地方" class="headerlink" title="GCD使用中注意的地方"></a>GCD使用中注意的地方</h2><p>注意点1:死锁<br>注意点2:</p>
+
+          
+        
+      
     </div>
 
-    
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
 
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/03/20/侧边栏的实现/" itemprop="url">
-              
-                <span itemprop="name">侧边栏的实现</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-03-20T12:32:48+08:00"
-              content="2016-03-20" >
-          03-20
-        </time>
-      </div>
-
-    </header>
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </article>
 
 
     
-      
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/03/12/hexo-github部署静态blog/" itemprop="url">
-              
-                <span itemprop="name">hexo github部署静态blog</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-03-12T00:55:29+08:00"
-              content="2016-03-12" >
-          03-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/03/12/使用TableView布局UI控件/" itemprop="url">
-              
-                <span itemprop="name">使用TableView布局UI控件</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-03-12T00:32:54+08:00"
-              content="2016-03-12" >
-          03-12
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/03/05/       使用GCD实现iOS多线程编程/" itemprop="url">
-              
-                <span itemprop="name">使用GCD实现iOS多线程编程</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-03-05T13:00:58+08:00"
-              content="2016-03-05" >
-          03-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </div>
+  </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/tags/iOS/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/tags/iOS/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
   </nav>
 
 
