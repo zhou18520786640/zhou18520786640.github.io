@@ -214,6 +214,138 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/26/隐式动画/" itemprop="url">
+                  隐式动画
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-26T17:48:04+08:00" content="2016-03-26">
+              2016-03-26
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://img5.imgtn.bdimg.com/it/u=468612700,771848995&amp;fm=21&amp;gp=0.jpg" alt="image"></p>
+<h3 id="什么是隐式动画"><a href="#什么是隐式动画" class="headerlink" title="什么是隐式动画"></a>什么是隐式动画</h3><blockquote>
+<p>“所谓的隐式动画。之所以叫隐式是因为我们并没有指定任何动画的类型。我们仅仅改变了一个属性，然后Core Animation来决定如何并且何时去做动画”</p>
+</blockquote>
+<p>通俗的说，就是只需要改变layer的属性。CoreAnimation库自动帮你实现动画。相比于你考虑如何做一个动画，还不如考虑如何关闭动画。因为动画是不需要配置的，不要动画却需要配置。下面是一个简单的demo,点击按钮后，layer的颜色经过一定时间动画后从蓝色变为红色。</p>
+<pre><code>#import &quot;ZZViewController.h&quot;
+
+@interface ZZViewController ()
+@property (nonatomic, strong) CALayer *layer;
+@end
+
+@implementation ZZViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button addTarget:self action:@selector(buttonDidPressed:) forControlEvents:UIControlEventTouchUpInside];
+    button.frame = CGRectMake(40, 40, 80, 80);
+    button.backgroundColor = [UIColor redColor];
+    [self.view addSubview:button];
+
+    CALayer *layer = [CALayer layer];
+    self.layer = layer;
+    self.layer.backgroundColor = [UIColor blueColor].CGColor;
+    self.layer.frame = CGRectMake(120, 120, 120, 120);
+    [self.view.layer addSublayer:self.layer];
+
+}
+
+- (void)buttonDidPressed:(UIButton *)button {
+    self.layer.backgroundColor = [UIColor redColor].CGColor;
+
+}
+
+@end
+</code></pre><h3 id="决定隐式动画执行时间的事务-CATransaction"><a href="#决定隐式动画执行时间的事务-CATransaction" class="headerlink" title="决定隐式动画执行时间的事务 CATransaction"></a>决定隐式动画执行时间的事务 CATransaction</h3><blockquote>
+<p>“但当你改变一个属性，Core Animation是如何判断动画类型和持续时间的呢？实际上动画执行的时间取决于当前事务的设置，动画类型取决于图层行为”</p>
+</blockquote>
+<p>在上面那个Demo中，有一个从蓝色到红色过度的动画。但是这远远不够，我们需要能够设置动画的执行时间。事务类可以实现。</p>
+<blockquote>
+<p>“事务是通过CATransaction类来做管理，这个类的设计有些奇怪，不像你从它的命名预期的那样去管理一个简单的事务，而是管理了一叠你不能访问的事务。CATransaction没有属性或者实例方法，并且也不能用+alloc和-init方法创建它。但是可以用+begin和+commit分别来入栈或者出栈。”</p>
+</blockquote>
+<p>简单的说，就是我们不能创建一个CATransaction对象。也不能访问一个CATransaction对象。只能通过类方法来实现一个事务对象的入栈和出栈。当添加到栈顶的事务，可以通过<code>+setAnimationDuration:</code></p>
+<p>总结的说，在隐私动画的执行过程中，需要配置</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/20/使用UICollectionView/" itemprop="url">
                   使用UICollectionView
                 </a>
@@ -586,176 +718,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/05/oc设计模式之简单工厂模式/" itemprop="url">
-                  OC设计模式之简单工厂模式
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-05T14:04:13+08:00" content="2016-03-05">
-              2016-03-05
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="简单工厂模式概述"><a href="#简单工厂模式概述" class="headerlink" title="简单工厂模式概述"></a>简单工厂模式概述</h2><p>简单工厂模式（简称工厂模式）属于创建型模式，又叫做静态工厂方法，也就是说使用这种模式是为了创建对象。</p>
-<h2 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h2><p>简单工厂模式中有几种类型的角色:<br>工厂角色（Factory）:创建具体产品的类，负责创建的逻辑<br>抽象产品（Product）角色: 为具体产品提供统一接口,可以是协议，也可以是抽象类<br>具体产品（Concrete Product):角色要创建的对象的对应的类<br>客户端: 调用工厂角色创建具体产品。<br>显然，工厂角色的创建是这种模式的核心。下面是示意图<br><img src="http://www.runoob.com/wp-content/uploads/2014/08/factory_pattern_uml_diagram.jpg" alt="image"></p>
-<h2 id="演示代码"><a href="#演示代码" class="headerlink" title="演示代码"></a>演示代码</h2><h3 id="地址：https-github-com-zhou18520786640-Factory"><a href="#地址：https-github-com-zhou18520786640-Factory" class="headerlink" title="地址：https://github.com/zhou18520786640/Factory"></a>地址：<a href="https://github.com/zhou18520786640/Factory" target="_blank" rel="external">https://github.com/zhou18520786640/Factory</a></h3><p>Factory 类</p>
-<pre><code>#import &quot;ZZProduct.h&quot;
-
-@interface ZZProductFactory : ZZProduct
-+ (ZZProduct *)createProductWithclassName:(NSString *)className;
-@end
-
-#import &quot;ZZProductFactory.h&quot;
-
-@implementation ZZProductFactory
-+ (ZZProduct *)createProductWithclassName:(NSString *)className {
-    Class class = NSClassFromString(className);
-    ZZProduct *product = [[class alloc] init];
-    return product;
-}
-@end
-</code></pre><p>Product 类</p>
-<pre><code>#import &lt;Foundation/Foundation.h&gt;
-
-@interface ZZProduct : NSObject
-- (void)show;
-
-@end
-
-#import &quot;ZZProduct.h&quot;
-
-@implementation ZZProduct
-
-@end
-</code></pre><p>BeautyProduct 类</p>
-<pre><code>#import &quot;ZZProduct.h&quot;
-
-@interface ZZBeautyProduct : ZZProduct
-
-@end
-#import &quot;ZZBeautyProduct.h&quot;
-
-@implementation ZZBeautyProduct
-- (void)show {
-    NSLog(@&quot;我是一个美妆产品&quot;);
-}
-@end
-</code></pre><p>ITProduct 类</p>
-<pre><code>#import &quot;ZZProduct.h&quot;
-
-@interface ZZITProduct : ZZProduct
-
-@end
-
-#import &quot;ZZITProduct.h&quot;
-
-@implementation ZZITProduct
-- (void)show {
-    NSLog(@&quot;I am a IT 产品&quot;);
-}
-@end
-</code></pre><p>Client 类</p>
-<pre><code>@implementation ZZViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    ZZProduct *product = [ZZProductFactory createProductWithclassName:@&quot;ZZITProduct&quot;];
-    [product show];
-    ZZProduct *product2 = [ZZProductFactory createProductWithclassName:@&quot;ZZBeautyProduct&quot;];
-    [product2 show];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-</code></pre><h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>在下面一些场景下可以考虑使用简单工厂模式</p>
-<ol>
-<li>需要创建具体产品的地方很多，如果不使用工厂类创建，每个客户端地方都需要｀if(…)else(…)`来创建.代码不优雅。实际上这部分逻辑可以全部封装到工厂类来实现</li>
-<li>创建每一个具体产品后还需要做一些繁琐的配置工作。在客户端做这些配置工作也会让代码很难看。</li>
-<li>1还有一个问题，就是又新添加一个具体产品的时候。如果客户端有很多地方，需要很多地方都继续添加else(…)创建具体的产品。</li>
-</ol>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><p>在iOS中，可以根据类名（NSString）生成对应的Class对象。然后根据Class对象生成对应的实例对象<br>应用这种方法，可以避免在工厂类中写if…else.</p>
-<pre><code>Class class = NSClassFromString(className);
-ZZProduct *product = [[class alloc] init];
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -802,7 +764,7 @@ ZZProduct *product = [[class alloc] init];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
