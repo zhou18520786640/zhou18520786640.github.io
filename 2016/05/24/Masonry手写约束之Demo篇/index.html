@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="读书笔记," />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -57,27 +57,28 @@
 
 
 
-<meta name="description" content="什么是隐式动画
-“所谓的隐式动画。之所以叫隐式是因为我们并没有指定任何动画的类型。我们仅仅改变了一个属性，然后Core Animation来决定如何并且何时去做动画”
-
-通俗的说，就是只需要改变layer的属性。CoreAnimation库自动帮你实现动画。相比于你考虑如何做一个动画，还不如考虑如何关闭动画。因为动画是不需要配置的，不要动画却需要配置。下面是一个简单的demo,点击按钮后，lay">
+<meta name="description" content="Basic实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        UI">
 <meta property="og:type" content="article">
-<meta property="og:title" content="隐式动画">
-<meta property="og:url" content="http://yoursite.com/2016/03/26/隐式动画/index.html">
+<meta property="og:title" content="Masonry手写约束之Demo篇">
+<meta property="og:url" content="http://yoursite.com/2016/05/24/Masonry手写约束之Demo篇/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="什么是隐式动画
-“所谓的隐式动画。之所以叫隐式是因为我们并没有指定任何动画的类型。我们仅仅改变了一个属性，然后Core Animation来决定如何并且何时去做动画”
-
-通俗的说，就是只需要改变layer的属性。CoreAnimation库自动帮你实现动画。相比于你考虑如何做一个动画，还不如考虑如何关闭动画。因为动画是不需要配置的，不要动画却需要配置。下面是一个简单的demo,点击按钮后，lay">
-<meta property="og:image" content="http://img5.imgtn.bdimg.com/it/u=468612700,771848995&fm=21&gp=0.jpg">
-<meta property="og:updated_time" content="2016-03-26T10:30:38.000Z">
+<meta property="og:description" content="Basic实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        UI">
+<meta property="og:updated_time" content="2016-05-24T14:30:32.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="隐式动画">
-<meta name="twitter:description" content="什么是隐式动画
-“所谓的隐式动画。之所以叫隐式是因为我们并没有指定任何动画的类型。我们仅仅改变了一个属性，然后Core Animation来决定如何并且何时去做动画”
-
-通俗的说，就是只需要改变layer的属性。CoreAnimation库自动帮你实现动画。相比于你考虑如何做一个动画，还不如考虑如何关闭动画。因为动画是不需要配置的，不要动画却需要配置。下面是一个简单的demo,点击按钮后，lay">
-<meta name="twitter:image" content="http://img5.imgtn.bdimg.com/it/u=468612700,771848995&fm=21&gp=0.jpg">
+<meta name="twitter:title" content="Masonry手写约束之Demo篇">
+<meta name="twitter:description" content="Basic实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        UI">
 
 
 
@@ -95,7 +96,7 @@
   };
 </script>
 
-  <title> 隐式动画 | 周明的技术博客 </title>
+  <title> Masonry手写约束之Demo篇 | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -217,7 +218,7 @@
             
             
               
-                隐式动画
+                Masonry手写约束之Demo篇
               
             
           </h1>
@@ -229,8 +230,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-26T17:48:04+08:00" content="2016-03-26">
-              2016-03-26
+            <time itemprop="dateCreated" datetime="2016-05-24T21:49:00+08:00" content="2016-05-24">
+              2016-05-24
             </time>
           </span>
 
@@ -256,50 +257,69 @@
       
 
       
-        <p><img src="http://img5.imgtn.bdimg.com/it/u=468612700,771848995&amp;fm=21&amp;gp=0.jpg" alt="image"></p>
-<h3 id="什么是隐式动画"><a href="#什么是隐式动画" class="headerlink" title="什么是隐式动画"></a>什么是隐式动画</h3><blockquote>
-<p>“所谓的隐式动画。之所以叫隐式是因为我们并没有指定任何动画的类型。我们仅仅改变了一个属性，然后Core Animation来决定如何并且何时去做动画”</p>
-</blockquote>
-<p>通俗的说，就是只需要改变layer的属性。CoreAnimation库自动帮你实现动画。相比于你考虑如何做一个动画，还不如考虑如何关闭动画。因为动画是不需要配置的，不要动画却需要配置。下面是一个简单的demo,点击按钮后，layer的颜色经过一定时间动画后从蓝色变为红色。</p>
-<pre><code>#import &quot;ZZViewController.h&quot;
+        <h3 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h3><p>实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.</p>
+<pre><code>- (instancetype)init {
+    self = [super init];
+    if (self) {
+        UIView *greenView = UIView.new;
+        greenView.backgroundColor = UIColor.greenColor;
+        greenView.layer.borderColor = UIColor.blackColor.CGColor;
+        greenView.layer.borderWidth = 2;
+        [self addSubview:greenView];
+        self.greenView = greenView;
 
-@interface ZZViewController ()
-@property (nonatomic, strong) CALayer *layer;
-@end
+        UIView *redView = UIView.new;
+        redView.backgroundColor = UIColor.redColor;
+        redView.layer.borderColor = UIColor.blackColor.CGColor;
+        redView.layer.borderWidth = 2;
+        [self addSubview:redView];
+        self.redView = redView;
 
-@implementation ZZViewController
+        UIView *blueView = UIView.new;
+        blueView.backgroundColor = UIColor.blueColor;
+        blueView.layer.borderColor = UIColor.blackColor.CGColor;
+        blueView.layer.borderWidth = 2;
+        [self addSubview:blueView];
+        self.blueView = blueView;
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button addTarget:self action:@selector(buttonDidPressed:) forControlEvents:UIControlEventTouchUpInside];
-    button.frame = CGRectMake(40, 40, 80, 80);
-    button.backgroundColor = [UIColor redColor];
-    [self.view addSubview:button];
+        UIView *superview = self;
 
-    CALayer *layer = [CALayer layer];
-    self.layer = layer;
-    self.layer.backgroundColor = [UIColor blueColor].CGColor;
-    self.layer.frame = CGRectMake(120, 120, 120, 120);
-    [self.view.layer addSublayer:self.layer];
+        [greenView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(superview).offset(10);
+            make.top.equalTo(superview).offset(10);
+            make.width.equalTo(redView);
+            make.height.equalTo(@[redView, blueView]);
+        }];
 
+        [redView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(greenView.right).offset(10);
+            make.top.equalTo(greenView);
+            make.width.equalTo(greenView);
+            make.right.equalTo(superview).offset(-10);
+        }];
+
+        [blueView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(redView.bottom).offset(10);
+            make.left.equalTo(superview).offset(10);
+            make.right.equalTo(superview).offset(-10);
+            make.bottom.equalTo(superview).offset(-10);
+        }];
+//        [self setNeedsUpdateConstraints];
+    }
+    return self;
 }
 
-- (void)buttonDidPressed:(UIButton *)button {
-    self.layer.backgroundColor = [UIColor redColor].CGColor;
-
-}
-
+//- (void)updateConstraints {
+//    [self.blueView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.redView.bottom).offset(10);
+//        make.left.equalTo(self).offset(20);
+//        make.right.equalTo(self).offset(-20);
+//        make.bottom.equalTo(self).offset(-10);
+//    }];
+//    [super updateConstraints];
+//}
 @end
-</code></pre><h3 id="决定隐式动画执行时间的事务-CATransaction"><a href="#决定隐式动画执行时间的事务-CATransaction" class="headerlink" title="决定隐式动画执行时间的事务 CATransaction"></a>决定隐式动画执行时间的事务 CATransaction</h3><blockquote>
-<p>“但当你改变一个属性，Core Animation是如何判断动画类型和持续时间的呢？实际上动画执行的时间取决于当前事务的设置，动画类型取决于图层行为”</p>
-</blockquote>
-<p>在上面那个Demo中，有一个从蓝色到红色过度的动画。但是这远远不够，我们需要能够设置动画的执行时间。事务类可以实现。</p>
-<blockquote>
-<p>“事务是通过CATransaction类来做管理，这个类的设计有些奇怪，不像你从它的命名预期的那样去管理一个简单的事务，而是管理了一叠你不能访问的事务。CATransaction没有属性或者实例方法，并且也不能用+alloc和-init方法创建它。但是可以用+begin和+commit分别来入栈或者出栈。”</p>
-</blockquote>
-<p>简单的说，就是我们不能创建一个CATransaction对象。也不能访问一个CATransaction对象。只能通过类方法来实现一个事务对象的入栈和出栈。当添加到栈顶的事务，可以通过<code>+setAnimationDuration:</code></p>
-<p>总结的说，在隐私动画的执行过程中，需要配置</p>
+</code></pre><p>我们建立的约束只需要建立一次。并且不再需要修改。因此调用<code>mas_makeConstraints</code>。这个例子十分简单。要注意的是equalTo的参数可以是视图数组。</p>
 
       
     </div>
@@ -314,7 +334,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/读书笔记/" rel="tag">#读书笔记</a>
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
           
         </div>
       
@@ -323,17 +343,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/20/使用UICollectionView/" rel="next" title="使用UICollectionView">
-                <i class="fa fa-chevron-left"></i> 使用UICollectionView
+              <a href="/2016/05/24/Masonry手写约束原理篇/" rel="next" title="Masonry手写约束原理篇">
+                <i class="fa fa-chevron-left"></i> Masonry手写约束原理篇
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/26/使用conrnerRadius主意点/" rel="prev" title="使用conrnerRadius主意点">
-                使用conrnerRadius主意点 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -444,7 +460,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是隐式动画"><span class="nav-number">1.</span> <span class="nav-text">什么是隐式动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#决定隐式动画执行时间的事务-CATransaction"><span class="nav-number">2.</span> <span class="nav-text">决定隐式动画执行时间的事务 CATransaction</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

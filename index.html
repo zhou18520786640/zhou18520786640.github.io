@@ -214,6 +214,157 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/24/Masonry手写约束之Demo篇/" itemprop="url">
+                  Masonry手写约束之Demo篇
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-24T21:49:00+08:00" content="2016-05-24">
+              2016-05-24
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h3><p>实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.</p>
+<pre><code>- (instancetype)init {
+    self = [super init];
+    if (self) {
+        UIView *greenView = UIView.new;
+        greenView.backgroundColor = UIColor.greenColor;
+        greenView.layer.borderColor = UIColor.blackColor.CGColor;
+        greenView.layer.borderWidth = 2;
+        [self addSubview:greenView];
+        self.greenView = greenView;
+
+        UIView *redView = UIView.new;
+        redView.backgroundColor = UIColor.redColor;
+        redView.layer.borderColor = UIColor.blackColor.CGColor;
+        redView.layer.borderWidth = 2;
+        [self addSubview:redView];
+        self.redView = redView;
+
+        UIView *blueView = UIView.new;
+        blueView.backgroundColor = UIColor.blueColor;
+        blueView.layer.borderColor = UIColor.blackColor.CGColor;
+        blueView.layer.borderWidth = 2;
+        [self addSubview:blueView];
+        self.blueView = blueView;
+
+        UIView *superview = self;
+
+        [greenView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(superview).offset(10);
+            make.top.equalTo(superview).offset(10);
+            make.width.equalTo(redView);
+            make.height.equalTo(@[redView, blueView]);
+        }];
+
+        [redView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(greenView.right).offset(10);
+            make.top.equalTo(greenView);
+            make.width.equalTo(greenView);
+            make.right.equalTo(superview).offset(-10);
+        }];
+
+        [blueView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(redView.bottom).offset(10);
+            make.left.equalTo(superview).offset(10);
+            make.right.equalTo(superview).offset(-10);
+            make.bottom.equalTo(superview).offset(-10);
+        }];
+//        [self setNeedsUpdateConstraints];
+    }
+    return self;
+}
+
+//- (void)updateConstraints {
+//    [self.blueView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.redView.bottom).offset(10);
+//        make.left.equalTo(self).offset(20);
+//        make.right.equalTo(self).offset(-20);
+//        make.bottom.equalTo(self).offset(-10);
+//    }];
+//    [super updateConstraints];
+//}
+@end
+</code></pre><p>我们建立的约束只需要建立一次。并且不再需要修改。因此调用<code>mas_makeConstraints</code>。这个例子十分简单。要注意的是equalTo的参数可以是视图数组。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/24/Masonry手写约束原理篇/" itemprop="url">
                   Masonry手写约束原理篇
                 </a>
@@ -628,100 +779,6 @@ jaime@westeros:~/helloworld$ git push sae master:1
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/03/MySQL的安装与配置/" itemprop="url">
-                  MySQL的安装与配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-03T13:14:47+08:00" content="2016-04-03">
-              2016-04-03
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="http://images.51cto.com/files/uploadimg/20100601/1626140.jpg" alt="image"></p>
-<h3 id="软件下载"><a href="#软件下载" class="headerlink" title="软件下载"></a>软件下载</h3><ol>
-<li>MySQL <a href="http://dev.mysql.com/downloads/mysql/" target="_blank" rel="external">下载</a></li>
-<li>MySQL workbenach (GUI工具) <a href="http://dev.mysql.com/downloads/workbench/" target="_blank" rel="external">下载</a></li>
-</ol>
-<h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><p>重置密码后,打开workbenach,连接本地数据库。注意端口号是3306.</p>
-<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -768,7 +825,7 @@ jaime@westeros:~/helloworld$ git push sae master:1
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-count">14</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
