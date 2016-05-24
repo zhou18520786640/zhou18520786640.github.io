@@ -294,7 +294,7 @@
 <li>Ambiguous Layouts. Your layout has two or more possible solutions<br>两种或者多种有效的解决方案。</li>
 <li>Logical Errors. There is a bug in your layout logic<br>约束建立成功，但是解决方案不是你想要的结果。</li>
 </ul>
-<p>Masonry支持的属性</p>
+<p>方法确定了到底使用哪个约束，实际上每个方法都接受一个block变量。block变量的定义中操作约束的attribute来完成约束，Masonry支持下面的一些属性</p>
 <pre><code>@property (nonatomic, strong, readonly) MASConstraint *left;
 @property (nonatomic, strong, readonly) MASConstraint *top;
 @property (nonatomic, strong, readonly) MASConstraint *right;
