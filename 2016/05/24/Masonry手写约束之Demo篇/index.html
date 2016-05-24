@@ -71,7 +71,7 @@
     self = [super init];
     if (self) {
         UI">
-<meta property="og:updated_time" content="2016-05-24T14:30:32.000Z">
+<meta property="og:updated_time" content="2016-05-24T14:41:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Masonry手写约束之Demo篇">
 <meta name="twitter:description" content="Basic实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.
@@ -320,6 +320,7 @@
 //}
 @end
 </code></pre><p>我们建立的约束只需要建立一次。并且不再需要修改。因此调用<code>mas_makeConstraints</code>。这个例子十分简单。要注意的是equalTo的参数可以是视图数组。</p>
+<h3 id="equalTo的参数可以是常量"><a href="#equalTo的参数可以是常量" class="headerlink" title="equalTo的参数可以是常量"></a>equalTo的参数可以是常量</h3><p>实际上,三种约束参数都可以被equal所接收。他们分别是MASViewAttribute，UIView，NSNumber。当你传NSNumber的时候。实际是相对于其父视图的constant.</p>
 
       
     </div>
@@ -460,7 +461,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equalTo的参数可以是常量"><span class="nav-number">2.</span> <span class="nav-text">equalTo的参数可以是常量</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
