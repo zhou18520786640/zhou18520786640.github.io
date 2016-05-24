@@ -74,7 +74,7 @@ Masonry 同时支持 iOS 和 Mac OS X两个平台
 
 2.AutoLayout公式与Masonry的等价形式在真正学习Masonry前，我们先退后一步 想一想，Masonry是AutoLayout">
 <meta property="og:image" content="https://developer.apple.com/library/mac/documentation/UserExperience/Conceptual/AutolayoutPG/Art/view_formula_2x.png">
-<meta property="og:updated_time" content="2016-05-23T16:48:14.000Z">
+<meta property="og:updated_time" content="2016-05-24T13:43:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Masonry手写约束原理篇">
 <meta name="twitter:description" content="1.Masonry是什么
@@ -313,7 +313,7 @@ Masonry 同时支持 iOS 和 Mac OS X两个平台
 @property (nonatomic, strong, readonly) MASConstraint *baseline;
 </code></pre><p>我们建立的约束一旦建立后不再有变化，且并不会出现Unsatisfiable Layouts，Ambiguous Layouts，Logical Errors。仅仅使用makeConstraints就好了。</p>
 <p>当我们使用makeConstraints建立的约束是有效的，用户的某个事件需要更改UIView的位置，此时需要做到两步。</p>
-<p>1.调用     [self setNeedsUpdateConstraints];<br>2.重写   updateConstraints方法（结尾添加[super updateConstraints]）,并且在这个方法的实现中调用updateConstraints或者remakeConstraints。前者是保持原来约束情况下，更新约束的关系。后者是清空约束后重新添加约束</p>
+<p>1.调用     [self setNeedsUpdateConstraints];<br>2.重写   updateConstraints方法（结尾添加[super updateConstraints]）,并且在这个方法的实现中调用updateConstraints或者remakeConstraints。前者是保持原来约束情况下，更新约束的关系。后者是清空约束后重新添加约束.还要注意的是remakeConstraints的调用并不意味着你必须先调用updateConstraints方法。实际上,remakeConstraints也可以单独调用。</p>
 <h3 id="4-Masonry链式语法"><a href="#4-Masonry链式语法" class="headerlink" title="4.Masonry链式语法"></a>4.Masonry链式语法</h3><p>链式语法的核心是A.fun1.fun2.fun3…funN.每个fun的输出返回的对象依然是A本身。<br>在Masonry中,MASConstraintMaker类充当一个工厂的角色。以<code>make.top.equalTo(superview.mas_top).with.offset(padding.top);</code>为例，make.top返回的是MASConstraint对象。此后的equalTo(superview.mas_top)，依然返回MASConstraint对象。所有的.fun都返回MASConstraint对象。显然这样的写法非常紧凑，易读。</p>
 
       
