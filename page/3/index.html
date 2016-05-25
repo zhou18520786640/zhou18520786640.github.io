@@ -214,6 +214,114 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/20/侧边栏的实现/" itemprop="url">
+                  侧边栏的实现
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-20T12:32:48+08:00" content="2016-03-20">
+              2016-03-20
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://www.lanou3g.com/upload/image/201312/20131227100929_666.png" alt="http://www.lanou3g.com/upload/image/201312/20131227100929_666.png
+"></p>
+<h3 id="本文大部分思路参考小王子"><a href="#本文大部分思路参考小王子" class="headerlink" title="本文大部分思路参考小王子"></a>本文大部分思路参考<a href="http://www.jianshu.com/p/3ddcb71df2f7" target="_blank" rel="external">小王子</a></h3><h3 id="基本框架"><a href="#基本框架" class="headerlink" title="基本框架"></a>基本框架</h3><p>类似容器视图控制器的思想。对于一个侧边栏，至少需要三个角色控制器。</p>
+<ol>
+<li>侧边栏视图控制器<br>提供侧边栏的显示内容。用户点击侧边栏的按钮可以调用管理控制器隐藏侧边栏，显示主要展示内容。</li>
+<li>主要展示内容控制器<br>多个内容控制器。和侧边栏上的按钮对应。</li>
+<li>管理容器控制器<br>侧边栏和主要展示内容控制器的视图都添加到管理控制器的视图上。真正决定显示内容给用户看的控制器。</li>
+</ol>
+<p>可以看出，三种角色控制器中，管理控制器是开发设计的核心。定义这个类叫做<code>ZZSlideBarViewController</code>.</p>
+<h3 id="不太好的思路"><a href="#不太好的思路" class="headerlink" title="不太好的思路"></a>不太好的思路</h3><p>可以考虑仅仅使用一个视图控制器。左边放侧边栏视图。右边放主内容视图。这样的的话，这个控制器实际上承担太多的职责。会使用类臃肿庞大，而且很难重用。</p>
+<h3 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h3><ol>
+<li>先不要求可以点击tab上的内容跳转不同的视图控制器，而是仅仅实现一个内容控制器的版本。而且动画是平行移动，  不是类似QQ侧边栏的缩放效果。</li>
+<li>再使用多个控制器的版本。</li>
+<li>最后实现可平行移动的控制器</li>
+</ol>
+<h3 id="初始版本1"><a href="#初始版本1" class="headerlink" title="初始版本1"></a>初始版本1</h3><h4 id="管理容器控制器的接口"><a href="#管理容器控制器的接口" class="headerlink" title="管理容器控制器的接口"></a>管理容器控制器的接口</h4><p>管理控制器需要管理两个视图控制器，分别叫做barController,contentController.我们可以初始化的时候叫两个控制器传递进去</p>
+<pre><code>@interface ZZSlideBarViewController
+- (instance)initWithContentViewController:(UIViewController *)viewController barController:(UIViewController *)barViewController;
+@end
+</code></pre><h4 id="管理容器控制器的接口-1"><a href="#管理容器控制器的接口-1" class="headerlink" title="管理容器控制器的接口"></a>管理容器控制器的接口</h4><p>为了方便布局。可以将slideBarViewController上添加两个视图。分别作为contentController，barController的父视图。</p>
+<h3 id="改进版本2"><a href="#改进版本2" class="headerlink" title="改进版本2"></a>改进版本2</h3><h3 id="最终版本3"><a href="#最终版本3" class="headerlink" title="最终版本3"></a>最终版本3</h3>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/12/hexo-github部署静态blog/" itemprop="url">
                   hexo github部署静态blog
                 </a>
@@ -704,7 +812,7 @@ ZZProduct *product = [[class alloc] init];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

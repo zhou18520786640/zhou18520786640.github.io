@@ -57,21 +57,31 @@
 
 
 
-<meta name="description" content="场景考虑一个电子商品app的商品展示页面。需要展示一个商品三部分的信息。分别是商品的领券入口，商品的优惠信息。商品是一个海淘商品。这三部分信息分别
-初版">
+<meta name="description" content="命令式执行与事件驱动首先我们来看看命令行代码  
+int main(int argc, char *argv[]) {
+    NSLog(@&amp;quot;hello world&amp;quot;);
+    return 0;
+}
+执行完了就程序结束。我们回想一下平时使用的手机应用程序，并非如此。可以不断的响应用户的操作，用户不做任何操作的时候，程序也不会终止。为了实现上面两个目标，实际的手机应用程序用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用TableView布局UI控件">
-<meta property="og:url" content="http://yoursite.com/2016/03/12/使用TableView布局UI控件/index.html">
+<meta property="og:title" content="RunLoop之作用篇">
+<meta property="og:url" content="http://yoursite.com/2016/05/25/RunLoop之作用篇/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="场景考虑一个电子商品app的商品展示页面。需要展示一个商品三部分的信息。分别是商品的领券入口，商品的优惠信息。商品是一个海淘商品。这三部分信息分别
-初版">
-<meta property="og:image" content="http://pic2.ooopic.com/11/39/38/20bOOOPIC97.jpg">
-<meta property="og:updated_time" content="2016-03-11T16:45:34.000Z">
+<meta property="og:description" content="命令式执行与事件驱动首先我们来看看命令行代码  
+int main(int argc, char *argv[]) {
+    NSLog(@&amp;quot;hello world&amp;quot;);
+    return 0;
+}
+执行完了就程序结束。我们回想一下平时使用的手机应用程序，并非如此。可以不断的响应用户的操作，用户不做任何操作的时候，程序也不会终止。为了实现上面两个目标，实际的手机应用程序用">
+<meta property="og:updated_time" content="2016-05-24T16:44:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用TableView布局UI控件">
-<meta name="twitter:description" content="场景考虑一个电子商品app的商品展示页面。需要展示一个商品三部分的信息。分别是商品的领券入口，商品的优惠信息。商品是一个海淘商品。这三部分信息分别
-初版">
-<meta name="twitter:image" content="http://pic2.ooopic.com/11/39/38/20bOOOPIC97.jpg">
+<meta name="twitter:title" content="RunLoop之作用篇">
+<meta name="twitter:description" content="命令式执行与事件驱动首先我们来看看命令行代码  
+int main(int argc, char *argv[]) {
+    NSLog(@&amp;quot;hello world&amp;quot;);
+    return 0;
+}
+执行完了就程序结束。我们回想一下平时使用的手机应用程序，并非如此。可以不断的响应用户的操作，用户不做任何操作的时候，程序也不会终止。为了实现上面两个目标，实际的手机应用程序用">
 
 
 
@@ -89,7 +99,7 @@
   };
 </script>
 
-  <title> 使用TableView布局UI控件 | 周明的技术博客 </title>
+  <title> RunLoop之作用篇 | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -211,7 +221,7 @@
             
             
               
-                使用TableView布局UI控件
+                RunLoop之作用篇
               
             
           </h1>
@@ -223,8 +233,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-12T00:32:54+08:00" content="2016-03-12">
-              2016-03-12
+            <time itemprop="dateCreated" datetime="2016-05-25T00:29:36+08:00" content="2016-05-25">
+              2016-05-25
             </time>
           </span>
 
@@ -250,9 +260,28 @@
       
 
       
-        <p><img src="http://pic2.ooopic.com/11/39/38/20bOOOPIC97.jpg" alt="image"></p>
-<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>考虑一个电子商品app的商品展示页面。需要展示一个商品三部分的信息。分别是商品的领券入口，商品的优惠信息。商品是一个海淘商品。这三部分信息分别</p>
-<h3 id="初版"><a href="#初版" class="headerlink" title="初版"></a>初版</h3>
+        <h2 id="命令式执行与事件驱动"><a href="#命令式执行与事件驱动" class="headerlink" title="命令式执行与事件驱动"></a>命令式执行与事件驱动</h2><p>首先我们来看看命令行代码  </p>
+<pre><code>int main(int argc, char *argv[]) {
+    NSLog(@&quot;hello world&quot;);
+    return 0;
+}
+</code></pre><p>执行完了就程序结束。我们回想一下平时使用的手机应用程序，并非如此。可以不断的响应用户的操作，用户不做任何操作的时候，程序也不会终止。为了实现上面两个目标，实际的手机应用程序用伪代码来表示基本可以认为是这样的</p>
+<pre><code>int main(int argc, char *argv[]) {
+    while(AppIsRunning) {
+        id whoWakeMe = SleepForWakingup();
+        id event = GetEvent(whoWakeMe);
+        Handle(event);
+    }
+    return 0;
+}
+</code></pre><p>通过死循环。如果没事的时候，就处于休眠状态。如果有事件，就将其唤醒，然后去处理这个事件。</p>
+<h3 id="为什么需要RunLoop"><a href="#为什么需要RunLoop" class="headerlink" title="为什么需要RunLoop"></a>为什么需要RunLoop</h3><ol>
+<li>让程序一直运行并接受用户输入</li>
+<li>决定何时处理哪些事件Event</li>
+<li>调用解耦？</li>
+<li>节省CPU时间，没事的时候闲着，不让cpu执行它。</li>
+</ol>
+
       
     </div>
 
@@ -275,17 +304,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/05/oc设计模式之简单工厂模式/" rel="next" title="OC设计模式之简单工厂模式">
-                <i class="fa fa-chevron-left"></i> OC设计模式之简单工厂模式
+              <a href="/2016/05/24/Masonry手写约束之Demo篇/" rel="next" title="Masonry手写约束之Demo篇">
+                <i class="fa fa-chevron-left"></i> Masonry手写约束之Demo篇
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/12/hexo-github部署静态blog/" rel="prev" title="hexo github部署静态blog">
-                hexo github部署静态blog <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -396,7 +421,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#场景"><span class="nav-number">1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初版"><span class="nav-number">2.</span> <span class="nav-text">初版</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令式执行与事件驱动"><span class="nav-number">1.</span> <span class="nav-text">命令式执行与事件驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要RunLoop"><span class="nav-number">1.1.</span> <span class="nav-text">为什么需要RunLoop</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
