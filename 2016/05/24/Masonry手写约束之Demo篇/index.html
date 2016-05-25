@@ -71,7 +71,7 @@
     self = [super init];
     if (self) {
         UI">
-<meta property="og:updated_time" content="2016-05-25T17:28:08.000Z">
+<meta property="og:updated_time" content="2016-05-25T17:38:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Masonry手写约束之Demo篇">
 <meta name="twitter:description" content="Basic实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.
@@ -349,11 +349,11 @@ orangeView.layer.borderWidth = 2;
     make.size.equalTo(CGSizeMake(200, 100));
 }];]
 </code></pre><h3 id="masonry可以结合xib一起使用"><a href="#masonry可以结合xib一起使用" class="headerlink" title="masonry可以结合xib一起使用"></a>masonry可以结合xib一起使用</h3><p>如果我在xib中已经布局了UI，而且建立了autolayout，当程序运行中需要动态修改autolayout，可以直接使用autolayout的API来修改和删除，更极端的，也可以直接使用masonry来删除</p>
-<h3 id="masonry-UITableView与autolayout"><a href="#masonry-UITableView与autolayout" class="headerlink" title="masonry,UITableView与autolayout"></a>masonry,UITableView与autolayout</h3><p>iOS8下，对于系统的autolayou方法，可以根据子视图的约束动态计算tableViewCell的高度.(注意一般情况下的autolayout的子视图对父视图的约束不会影响父视图，只能影响子视图。tableViewCell是比较特殊的情况)<br>而iOS8以下的系统。autolayout就无能为例了。<br>我们先给出iOS8下的解决方案。这种子视图改变，动态改变自身tableViewCell高度的苹果叫做 Self-Sizing Table View Cell。</p>
+<h3 id="masonry-UITableView与autolayout"><a href="#masonry-UITableView与autolayout" class="headerlink" title="masonry,UITableView与autolayout"></a>masonry,UITableView与autolayout</h3><p>iOS8以上，对于autolayout，不可以根据子视图的约束动态计算tableViewCell的高度.(注意一般情况下的autolayout的子视图对父视图的约束不会影响父视图，只能影响子视图).tableViewCell通过一定的设置可以开启这个功能。<br>而iOS8以下的系统。autolayout就无能为例了。<br>我们先给出iOS8下的解决方案。这种子视图改变，动态改变自身tableViewCell高度的苹果叫做 Self-Sizing Table View Cell。</p>
 <pre><code>tableView.estimatedRowHeight = 85.0
 tableView.rowHeight = UITableViewAutomaticDimension
 </code></pre><p>首先第一句话，给一个预估高度，等会儿自动布局的会在这个值的基础上再进行调整。第二句话，是开启autolayout的自动布局功能。甚至连高度回调都不需要，完成了整个布局控件的实现。</p>
-<p>如果要适配iOS7，那么这种方法就不奏效了。</p>
+<p>如果要适配iOS7，那么这种方法就不奏效了。我们依然可以对子视图使用autolayout来约束子视图和父视图之间位置。而对于tableViewCell本身。可以用frame算出高度后再返回。比较常规的实现是写一个类方法。</p>
 
       
     </div>
