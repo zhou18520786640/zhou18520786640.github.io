@@ -57,28 +57,21 @@
 
 
 
-<meta name="description" content="Basic实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        UI">
+<meta name="description" content="需求场景设计师希望在UILabel后面添加一个关于的图标。引导用户去点击这个Label.由于Label的文案接口返回，无法得知Label文案结束的位置，因此无法决定图标摆放在哪里。
+NSAttributeString与NSTextAttachmentNSTextAttachment，顾名思义，文本附件。UILabel有一个attributeString属性，我们可以称为带属性的字符串。通过设置该属">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Masonry手写约束之Demo篇">
-<meta property="og:url" content="http://yoursite.com/2016/05/24/Masonry手写约束之Demo篇/index.html">
+<meta property="og:title" content="NSTextAttachment实现图文混排">
+<meta property="og:url" content="http://yoursite.com/2016/05/26/NSTextAttachMent实现图文混排/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="Basic实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        UI">
-<meta property="og:updated_time" content="2016-05-26T15:11:34.000Z">
+<meta property="og:description" content="需求场景设计师希望在UILabel后面添加一个关于的图标。引导用户去点击这个Label.由于Label的文案接口返回，无法得知Label文案结束的位置，因此无法决定图标摆放在哪里。
+NSAttributeString与NSTextAttachmentNSTextAttachment，顾名思义，文本附件。UILabel有一个attributeString属性，我们可以称为带属性的字符串。通过设置该属">
+<meta property="og:image" content="http://i2.buimg.com/76405ce088476ad0.png">
+<meta property="og:updated_time" content="2016-05-26T15:23:51.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Masonry手写约束之Demo篇">
-<meta name="twitter:description" content="Basic实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        UI">
+<meta name="twitter:title" content="NSTextAttachment实现图文混排">
+<meta name="twitter:description" content="需求场景设计师希望在UILabel后面添加一个关于的图标。引导用户去点击这个Label.由于Label的文案接口返回，无法得知Label文案结束的位置，因此无法决定图标摆放在哪里。
+NSAttributeString与NSTextAttachmentNSTextAttachment，顾名思义，文本附件。UILabel有一个attributeString属性，我们可以称为带属性的字符串。通过设置该属">
+<meta name="twitter:image" content="http://i2.buimg.com/76405ce088476ad0.png">
 
 
 
@@ -96,7 +89,7 @@
   };
 </script>
 
-  <title> Masonry手写约束之Demo篇 | 周明的技术博客 </title>
+  <title> NSTextAttachment实现图文混排 | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -218,7 +211,7 @@
             
             
               
-                Masonry手写约束之Demo篇
+                NSTextAttachment实现图文混排
               
             
           </h1>
@@ -230,8 +223,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-24T21:49:00+08:00" content="2016-05-24">
-              2016-05-24
+            <time itemprop="dateCreated" datetime="2016-05-26T23:12:14+08:00" content="2016-05-26">
+              2016-05-26
             </time>
           </span>
 
@@ -257,103 +250,45 @@
       
 
       
-        <h3 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h3><p>实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.</p>
-<pre><code>- (instancetype)init {
-    self = [super init];
-    if (self) {
-        UIView *greenView = UIView.new;
-        greenView.backgroundColor = UIColor.greenColor;
-        greenView.layer.borderColor = UIColor.blackColor.CGColor;
-        greenView.layer.borderWidth = 2;
-        [self addSubview:greenView];
-        self.greenView = greenView;
+        <h3 id="需求场景"><a href="#需求场景" class="headerlink" title="需求场景"></a>需求场景</h3><p>设计师希望在UILabel后面添加一个关于的图标。引导用户去点击这个Label.由于Label的文案接口返回，无法得知Label文案结束的位置，因此无法决定图标摆放在哪里。</p>
+<h3 id="NSAttributeString与NSTextAttachment"><a href="#NSAttributeString与NSTextAttachment" class="headerlink" title="NSAttributeString与NSTextAttachment"></a>NSAttributeString与NSTextAttachment</h3><p>NSTextAttachment，顾名思义，文本附件。<br>UILabel有一个attributeString属性，我们可以称为带属性的字符串。通过设置该属性值，可以实现文案不同颜色显示，文案带下划线或者带删除线等。在iOS7中，NSAttributeString甚至可以实现简单的图文混排，关键的核心是将文本附件转换为NSAttributeString.和一般的NSAttributeString拼接在一起。那么我们布局按钮的事情直接转换为布局一个简单的字符串了。说了那么多废话，让我们直接来代码演示一下。下面展示了不同长度的字符串下图文混排。</p>
+<pre><code>@interface ViewController ()
 
-        UIView *redView = UIView.new;
-        redView.backgroundColor = UIColor.redColor;
-        redView.layer.borderColor = UIColor.blackColor.CGColor;
-        redView.layer.borderWidth = 2;
-        [self addSubview:redView];
-        self.redView = redView;
-
-        UIView *blueView = UIView.new;
-        blueView.backgroundColor = UIColor.blueColor;
-        blueView.layer.borderColor = UIColor.blackColor.CGColor;
-        blueView.layer.borderWidth = 2;
-        [self addSubview:blueView];
-        self.blueView = blueView;
-
-        UIView *superview = self;
-
-        [greenView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(superview).offset(10);
-            make.top.equalTo(superview).offset(10);
-            make.width.equalTo(redView);
-            make.height.equalTo(@[redView, blueView]);
-        }];
-
-        [redView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(greenView.right).offset(10);
-            make.top.equalTo(greenView);
-            make.width.equalTo(greenView);
-            make.right.equalTo(superview).offset(-10);
-        }];
-
-        [blueView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(redView.bottom).offset(10);
-            make.left.equalTo(superview).offset(10);
-            make.right.equalTo(superview).offset(-10);
-            make.bottom.equalTo(superview).offset(-10);
-        }];
-//        [self setNeedsUpdateConstraints];
-    }
-    return self;
-}
-
-//- (void)updateConstraints {
-//    [self.blueView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.redView.bottom).offset(10);
-//        make.left.equalTo(self).offset(20);
-//        make.right.equalTo(self).offset(-20);
-//        make.bottom.equalTo(self).offset(-10);
-//    }];
-//    [super updateConstraints];
-//}
+@property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UILabel *label2;
 @end
-</code></pre><p>我们建立的约束只需要建立一次。并且不再需要修改。因此调用<code>mas_makeConstraints</code>。这个例子十分简单。要注意的是equalTo的参数可以是视图数组。</p>
-<h3 id="equalTo的参数可以是常量"><a href="#equalTo的参数可以是常量" class="headerlink" title="equalTo的参数可以是常量"></a>equalTo的参数可以是常量</h3><p>实际上,三种约束参数都可以被equal所接收。他们分别是MASViewAttribute，UIView，NSNumber。当你传NSNumber的时候。实际是相对于其父视图的constant.</p>
-<pre><code>UIView *purpleView = UIView.new;
-[ purpleView.backgroundColor = UIColor.purpleColor;
-purpleView.layer.borderColor = UIColor.blackColor.CGColor;
-purpleView.layer.borderWidth = 2;
-[self addSubview:purpleView];
 
-UIView *orangeView = UIView.new;
-orangeView.backgroundColor = UIColor.orangeColor;
-orangeView.layer.borderColor = UIColor.blackColor.CGColor;
-orangeView.layer.borderWidth = 2;
-[self addSubview:orangeView];
+@implementation ViewController
 
-//example of using constants
+- (void)viewDidLoad {
+    [super viewDidLoad];
+   // 在变化的标签后添加图案
+    NSString *text = @&quot;我想实现简单的图文混排&quot;;
+    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:text];
 
-[purpleView mas_makeConstraints:^(MASConstraintMaker *make) {
-    make.top.equalTo(@20);
-    make.left.equalTo(@20);
-    make.bottom.equalTo(@-20);
-    make.right.equalTo(@-20);
-}];
+    NSTextAttachment *attachment = [[NSTextAttachment alloc] initWithData:nil ofType:nil];
+    attachment.image = [UIImage imageNamed:@&quot;about&quot;];
+    attachment.bounds = CGRectMake(10, -1, attachment.image.size.width, attachment.image.size.height);
 
-// auto-boxing macros allow you to simply use scalars and structs, they will be wrapped automatically
+    NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attachment];
+    [attributeString insertAttributedString:string atIndex:text.length];
+    self.label.attributedText = attributeString;
 
-[orangeView mas_makeConstraints:^(MASConstraintMaker *make) {
-    make.center.equalTo(CGPointMake(0, 50));
-    make.size.equalTo(CGSizeMake(200, 100));
-}];]
-</code></pre><h3 id="masonry可以结合xib一起使用"><a href="#masonry可以结合xib一起使用" class="headerlink" title="masonry可以结合xib一起使用"></a>masonry可以结合xib一起使用</h3><p>如果我在xib中已经布局了UI，而且建立了autolayout，当程序运行中需要动态修改autolayout，可以直接使用autolayout的API来修改和删除，更极端的，也可以直接使用masonry来删除</p>
-<h3 id="masonry-UITableView与autolayout"><a href="#masonry-UITableView与autolayout" class="headerlink" title="masonry,UITableView与autolayout"></a>masonry,UITableView与autolayout</h3><p>iOS8以上，对于autolayout，不可以根据子视图的约束动态计算tableViewCell的高度.(注意一般情况下的autolayout的子视图对父视图的约束不会影响父视图，只能影响子视图).tableViewCell通过一定的设置可以开启这个功能。<br>而iOS8以下的系统。autolayout就无能为例了。<br>我们先给出iOS8下的解决方案。这种子视图改变，动态改变自身tableViewCell高度的苹果叫做 Self-Sizing Table View Cell。</p>
-<pre><code>tableView.estimatedRowHeight = 85.0
-tableView.rowHeight = UITableViewAutomaticDimension
-</code></pre><p>首先第一句话，给一个预估高度，等会儿自动布局的会在这个值的基础上再进行调整。第二句话，是开启autolayout的自动布局功能。甚至连高度回调都不需要，完成了整个布局控件的实现。</p>
-<p>如果要适配iOS7，那么这种方法就不奏效了。我们依然可以对子视图使用autolayout来约束子视图和父视图之间位置。而对于tableViewCell本身。可以用frame算出高度后再返回。比较常规的实现是写一个类方法。</p>
+
+    // 在变化的标签后添加图案
+    NSString *text2 = @&quot;我想实现简单的图文混排我想实现简单的图文混排&quot;;
+    NSMutableAttributedString *attributeString2 = [[NSMutableAttributedString alloc] initWithString:text2];
+
+    NSTextAttachment *attachment2 = [[NSTextAttachment alloc] initWithData:nil ofType:nil];
+    attachment2.image = [UIImage imageNamed:@&quot;about&quot;];
+    attachment2.bounds = CGRectMake(10, -1, attachment2.image.size.width, attachment2.image.size.height);
+    NSAttributedString *string2 = [NSAttributedString attributedStringWithAttachment:attachment2];
+    [attributeString2 insertAttributedString:string2 atIndex:text2.length];
+    self.label2.attributedText = attributeString2;
+
+}
+</code></pre><p>最终展示效果如下:</p>
+<p><img src="http://i2.buimg.com/76405ce088476ad0.png" alt="http://i2.buimg.com/76405ce088476ad0.png"></p>
 
       
     </div>
@@ -377,17 +312,13 @@ tableView.rowHeight = UITableViewAutomaticDimension
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/24/Masonry手写约束原理篇/" rel="next" title="Masonry手写约束原理篇">
-                <i class="fa fa-chevron-left"></i> Masonry手写约束原理篇
+              <a href="/2016/05/25/RunLoop之作用篇/" rel="next" title="RunLoop之作用篇">
+                <i class="fa fa-chevron-left"></i> RunLoop之作用篇
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/25/RunLoop之作用篇/" rel="prev" title="RunLoop之作用篇">
-                RunLoop之作用篇 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -498,7 +429,7 @@ tableView.rowHeight = UITableViewAutomaticDimension
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equalTo的参数可以是常量"><span class="nav-number">2.</span> <span class="nav-text">equalTo的参数可以是常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#masonry可以结合xib一起使用"><span class="nav-number">3.</span> <span class="nav-text">masonry可以结合xib一起使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#masonry-UITableView与autolayout"><span class="nav-number">4.</span> <span class="nav-text">masonry,UITableView与autolayout</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#需求场景"><span class="nav-number">1.</span> <span class="nav-text">需求场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NSAttributeString与NSTextAttachment"><span class="nav-number">2.</span> <span class="nav-text">NSAttributeString与NSTextAttachment</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
