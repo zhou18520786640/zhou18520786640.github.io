@@ -214,6 +214,95 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/17/HTTP相关/" itemprop="url">
+                  HTTP相关123
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-17T22:45:35+08:00" content="2016-05-17">
+              2016-05-17
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="请求头关键字段"><a href="#请求头关键字段" class="headerlink" title="请求头关键字段"></a>请求头关键字段</h3><p>host：  同一个ip可能有多个网站，需要确定是哪个网站<br>cookie：使用了cookie之后，同一个网站不用重复登录<br>user-agent:浏览器，操作系统</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/10/使用新浪云来部署python应用/" itemprop="url">
                   使用新浪云来部署python应用
                 </a>
@@ -583,138 +672,6 @@ jaime@westeros:~/helloworld$ git push sae master:1
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/26/隐式动画/" itemprop="url">
-                  隐式动画
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-26T17:48:04+08:00" content="2016-03-26">
-              2016-03-26
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="http://img5.imgtn.bdimg.com/it/u=468612700,771848995&amp;fm=21&amp;gp=0.jpg" alt="image"></p>
-<h3 id="什么是隐式动画"><a href="#什么是隐式动画" class="headerlink" title="什么是隐式动画"></a>什么是隐式动画</h3><blockquote>
-<p>“所谓的隐式动画。之所以叫隐式是因为我们并没有指定任何动画的类型。我们仅仅改变了一个属性，然后Core Animation来决定如何并且何时去做动画”</p>
-</blockquote>
-<p>通俗的说，就是只需要改变layer的属性。CoreAnimation库自动帮你实现动画。相比于你考虑如何做一个动画，还不如考虑如何关闭动画。因为动画是不需要配置的，不要动画却需要配置。下面是一个简单的demo,点击按钮后，layer的颜色经过一定时间动画后从蓝色变为红色。</p>
-<pre><code>#import &quot;ZZViewController.h&quot;
-
-@interface ZZViewController ()
-@property (nonatomic, strong) CALayer *layer;
-@end
-
-@implementation ZZViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button addTarget:self action:@selector(buttonDidPressed:) forControlEvents:UIControlEventTouchUpInside];
-    button.frame = CGRectMake(40, 40, 80, 80);
-    button.backgroundColor = [UIColor redColor];
-    [self.view addSubview:button];
-
-    CALayer *layer = [CALayer layer];
-    self.layer = layer;
-    self.layer.backgroundColor = [UIColor blueColor].CGColor;
-    self.layer.frame = CGRectMake(120, 120, 120, 120);
-    [self.view.layer addSublayer:self.layer];
-
-}
-
-- (void)buttonDidPressed:(UIButton *)button {
-    self.layer.backgroundColor = [UIColor redColor].CGColor;
-
-}
-
-@end
-</code></pre><h3 id="决定隐式动画执行时间的事务-CATransaction"><a href="#决定隐式动画执行时间的事务-CATransaction" class="headerlink" title="决定隐式动画执行时间的事务 CATransaction"></a>决定隐式动画执行时间的事务 CATransaction</h3><blockquote>
-<p>“但当你改变一个属性，Core Animation是如何判断动画类型和持续时间的呢？实际上动画执行的时间取决于当前事务的设置，动画类型取决于图层行为”</p>
-</blockquote>
-<p>在上面那个Demo中，有一个从蓝色到红色过度的动画。但是这远远不够，我们需要能够设置动画的执行时间。事务类可以实现。</p>
-<blockquote>
-<p>“事务是通过CATransaction类来做管理，这个类的设计有些奇怪，不像你从它的命名预期的那样去管理一个简单的事务，而是管理了一叠你不能访问的事务。CATransaction没有属性或者实例方法，并且也不能用+alloc和-init方法创建它。但是可以用+begin和+commit分别来入栈或者出栈。”</p>
-</blockquote>
-<p>简单的说，就是我们不能创建一个CATransaction对象。也不能访问一个CATransaction对象。只能通过类方法来实现一个事务对象的入栈和出栈。当添加到栈顶的事务，可以通过<code>+setAnimationDuration:</code></p>
-<p>总结的说，在隐私动画的执行过程中，需要配置</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -761,7 +718,7 @@ jaime@westeros:~/helloworld$ git push sae master:1
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
