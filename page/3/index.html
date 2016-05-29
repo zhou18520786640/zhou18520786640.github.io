@@ -346,8 +346,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/20/使用UICollectionView/" itemprop="url">
-                  使用UICollectionView
+                <a class="post-title-link" href="/2016/03/20/UICollectionView Basic/" itemprop="url">
+                  UICollectionView Basic
                 </a>
               
             
@@ -390,12 +390,27 @@
         
           
             <p><img src="http://static.open-open.com/lib/uploadImg/20160126/20160126181554_540.gif" alt="image"></p>
-<h3 id="UICollectionView"><a href="#UICollectionView" class="headerlink" title="UICollectionView"></a>UICollectionView</h3><p>UICollectionView是增强版的UITableView,可以认为是方便实现一行多个cell的tableView。<br>和UITableView用法类似，一般使用起来和tableView类似。需要做下面三件事。</p>
-<ol>
-<li>自定义cell</li>
-<li>设置数据源和实现数据源方法</li>
-<li>设置委托和实现视图委托方法</li>
-</ol>
+<h3 id="UICollectionView-作用"><a href="#UICollectionView-作用" class="headerlink" title="UICollectionView 作用"></a>UICollectionView 作用</h3><p>UICollectionView是增强版的UITableView,可以认为是方便实现一行多个cell的tableView。另外利用自定义布局的配置，可以实现更加灵活的布局展示。</p>
+<h3 id="UICollectionView的组成"><a href="#UICollectionView的组成" class="headerlink" title="UICollectionView的组成"></a>UICollectionView的组成</h3><p>UICollectionView其实不单单指的UICollectionView的类。而是一系列类和协议的总称。下面我们分标题一一介绍。</p>
+<h3 id="1-cells"><a href="#1-cells" class="headerlink" title="1.cells"></a>1.cells</h3><p>类似UITableViewCell,不过在collectionview中一行可以显示多个collectionviewcell,要定制化它，最佳实践也和UITableViewCell一样，子类化collectionviewcell.这个cell的是数据驱动的，即要展示什么内容并不是由自己负责，而是提供数据的类。要创建多少cell也是根据数据决定，数据item的个数决定了view的个数。在UITableView中，这个类就是遵从UITableViewDataSource的类。在UICollectionView中这个类就是遵从UICollectionViewDataSource的类。对于UICollectionViewDataSource 协议，我会在2中对其功能做详细的介绍。另外和tableview一样。对于用户操作cell产生的一些行为，我们也移交给遵从另外一个协议的类。也许你也猜到了。这个类就是UICollectionViewDelegate.实际来说，学习UICollectionView最基本的元素就是UICollectionViewCell。而cell的数据来源于UICollectionViewDataSource,其UICollectionViewDataSource协议的实现才是我们的关注重点。如果用户还需要操作cell后的一些反馈，那么就依靠UICollectionViewDelegate来了。从设计思想来说。我们把内容逻辑的处理，展示内容，cell的反馈处理。分别由三个类来承担了。达到了去耦的目的。这对于比较复杂视图是需要的。而普通的UILabel,UIButton就不需要这样复杂的设计了。</p>
+<h3 id="2-supplementary-views"><a href="#2-supplementary-views" class="headerlink" title="2.supplementary views"></a>2.supplementary views</h3><p>和collectionviewcell类似，supplementary views是数据驱动的。和collectionviewcell，不同这个对象并不是必须的。collectionviewcell的创建多少个和要显示的数据内容也依然依靠的是遵从UICollectionViewDataSource的类。在UICollectionViewDataSource协议中，<br><code>- collectionView:viewForSupplementaryElementOfKind:atIndexPath:</code>是个可选方法。其实通俗的讲。supplementary views就是tableview的header和footer.一个section可以配置一个section或者footer。至于标示header或者footer就依靠的是viewForSupplementaryElementOfKind的参数值</p>
+<h3 id="3-Decoration-views"><a href="#3-Decoration-views" class="headerlink" title="3.Decoration views"></a>3.Decoration views</h3><p>Decoration并不是数据驱动的，和UICollectionViewDataSource毫无关联</p>
+<h3 id="4-UICollectionViewDataSource"><a href="#4-UICollectionViewDataSource" class="headerlink" title="4.UICollectionViewDataSource"></a>4.UICollectionViewDataSource</h3><p>数据源协议回到了三个问题</p>
+<ul>
+<li>How many sections does the collection view contain?</li>
+<li>For a given section, how many items does a section contain?</li>
+<li>For a given section or item, what views should be used to display the corresponding content?</li>
+</ul>
+<p>UICollectionViewDataSource的实现是UICollectionView的核心。无论从设计思维上来看，和实际应用的角度。<br>其中有两个协议</p>
+<h3 id="5-UICollectionViewDelegate"><a href="#5-UICollectionViewDelegate" class="headerlink" title="5.UICollectionViewDelegate"></a>5.UICollectionViewDelegate</h3><h3 id="6-UICollectionViewFlowLayout"><a href="#6-UICollectionViewFlowLayout" class="headerlink" title="6.UICollectionViewFlowLayout"></a>6.UICollectionViewFlowLayout</h3><p>UITableView中，UITableViewCell都是单一的排布顺序。即从上到下。顺序排布。而UICollectionView中，可以实现非常灵活的排布。依靠的类就是UICollectionViewFlowLayout类。它的任务就是1.配置滚动方向。2.配置cell间隔。3.配置supplementary尺寸。其实使用UICollectionViewFlowLayout方法十分简单。</p>
+<ul>
+<li>Create a flow layout object and assign it to your collection view.</li>
+<li>Configure the width and height of cells.</li>
+<li>Set the spacing options (as needed) for the lines and items.</li>
+<li>If you want section headers or section footers, specify their size.<br>Set the scroll direction for the layout.</li>
+</ul>
+<h3 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h3><p>实现一个collectionview，最少意义上要做这些步骤。<br>1.创建UICollectionview对象<br>2.创建UICollectionViewFlowLayout对象。并将其赋值给UICollectionview对象<br>3.设定UICollectionview对象的数据源委托，如有需要，设定视图委托，和布局委托<br>4.实现UICollectionview对象的数据委托协议方法。如有需要，设定视图委托，和布局委托方法。</p>
+<p>在basic一节中，我打算实现两个例子</p>
 
           
         
