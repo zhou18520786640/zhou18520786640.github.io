@@ -59,22 +59,22 @@
 
 <meta name="description" content="UICollectionView 作用UICollectionView是增强版的UITableView,可以认为是方便实现一行多个cell的tableView。另外利用自定义布局的配置，可以实现更加灵活的布局展示。
 UICollectionView的组成UICollectionView其实不单单指的UICollectionView的类。而是一系列类和协议的总称。下面我们分标题一一介绍。
-1.ce">
+cell">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UICollectionView Basic">
 <meta property="og:url" content="http://yoursite.com/2016/03/20/UICollectionView Basic/index.html">
 <meta property="og:site_name" content="周明的技术博客">
 <meta property="og:description" content="UICollectionView 作用UICollectionView是增强版的UITableView,可以认为是方便实现一行多个cell的tableView。另外利用自定义布局的配置，可以实现更加灵活的布局展示。
 UICollectionView的组成UICollectionView其实不单单指的UICollectionView的类。而是一系列类和协议的总称。下面我们分标题一一介绍。
-1.ce">
+cell">
 <meta property="og:image" content="http://static.open-open.com/lib/uploadImg/20160126/20160126181554_540.gif">
 <meta property="og:image" content="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/CollectionViewPGforIOS/Art/flow_horiz_headers_2x.png">
-<meta property="og:updated_time" content="2016-05-29T05:44:27.000Z">
+<meta property="og:updated_time" content="2016-05-29T05:45:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UICollectionView Basic">
 <meta name="twitter:description" content="UICollectionView 作用UICollectionView是增强版的UITableView,可以认为是方便实现一行多个cell的tableView。另外利用自定义布局的配置，可以实现更加灵活的布局展示。
 UICollectionView的组成UICollectionView其实不单单指的UICollectionView的类。而是一系列类和协议的总称。下面我们分标题一一介绍。
-1.ce">
+cell">
 <meta name="twitter:image" content="http://static.open-open.com/lib/uploadImg/20160126/20160126181554_540.gif">
 
 
@@ -257,17 +257,17 @@ UICollectionView的组成UICollectionView其实不单单指的UICollectionView�
         <p><img src="http://static.open-open.com/lib/uploadImg/20160126/20160126181554_540.gif" alt="image"></p>
 <h2 id="UICollectionView-作用"><a href="#UICollectionView-作用" class="headerlink" title="UICollectionView 作用"></a>UICollectionView 作用</h2><p>UICollectionView是增强版的UITableView,可以认为是方便实现一行多个cell的tableView。另外利用自定义布局的配置，可以实现更加灵活的布局展示。</p>
 <h2 id="UICollectionView的组成"><a href="#UICollectionView的组成" class="headerlink" title="UICollectionView的组成"></a>UICollectionView的组成</h2><p>UICollectionView其实不单单指的UICollectionView的类。而是一系列类和协议的总称。下面我们分标题一一介绍。</p>
-<h3 id="1-cells"><a href="#1-cells" class="headerlink" title="1.cells"></a>1.cells</h3><p>类似UITableViewCell,不过在collectionview中一行可以显示多个collectionviewcell,要定制化它，最佳实践也和UITableViewCell一样，子类化collectionviewcell.这个cell的是数据驱动的，即要展示什么内容并不是由自己负责，而是提供数据的类。要创建多少cell也是根据数据决定，数据item的个数决定了view的个数。在UITableView中，这个类就是遵从UITableViewDataSource的类。在UICollectionView中这个类就是遵从UICollectionViewDataSource的类。对于UICollectionViewDataSource 协议，我会在UICollectionViewDataSource中对其功能做详细的介绍。另外和tableview一样。对于用户操作cell产生的一些行为，我们也移交给遵从另外一个协议的类。也许你也猜到了。这个类就是UICollectionViewDelegate.实际来说，学习UICollectionView最基本的元素就是UICollectionViewCell。而cell的数据来源于UICollectionViewDataSource,其UICollectionViewDataSource协议的实现才是我们的关注重点。如果用户还需要操作cell后的一些反馈，那么就依靠UICollectionViewDelegate来了。从设计思想来说。我们把内容逻辑的处理，展示内容，cell的反馈处理。分别由三个类来承担了。达到了去耦的目的。这对于比较复杂视图是需要的。而普通的UILabel,UIButton就不需要这样复杂的设计了。</p>
-<h3 id="2-supplementary-views"><a href="#2-supplementary-views" class="headerlink" title="2.supplementary views"></a>2.supplementary views</h3><p>和collectionviewcell类似，supplementary views是数据驱动的。和collectionviewcell，不同这个对象并不是必须的。collectionviewcell的创建多少个和要显示的数据内容也依然依靠的是遵从UICollectionViewDataSource的类。在UICollectionViewDataSource协议中，<br><code>- collectionView:viewForSupplementaryElementOfKind:atIndexPath:</code>是个可选方法。其实通俗的讲。supplementary views就是tableview的header和footer.一个section可以配置一个section或者footer。至于标示header或者footer就依靠的是viewForSupplementaryElementOfKind的参数值</p>
-<h3 id="3-Decoration-views"><a href="#3-Decoration-views" class="headerlink" title="3.Decoration views"></a>3.Decoration views</h3><p>Decoration并不是数据驱动的，和UICollectionViewDataSource毫无关联</p>
-<h3 id="4-UICollectionViewDataSource"><a href="#4-UICollectionViewDataSource" class="headerlink" title="4.UICollectionViewDataSource"></a>4.UICollectionViewDataSource</h3><p>数据源协议回到了三个问题</p>
+<h3 id="cells"><a href="#cells" class="headerlink" title="cells"></a>cells</h3><p>类似UITableViewCell,不过在collectionview中一行可以显示多个collectionviewcell,要定制化它，最佳实践也和UITableViewCell一样，子类化collectionviewcell.这个cell的是数据驱动的，即要展示什么内容并不是由自己负责，而是提供数据的类。要创建多少cell也是根据数据决定，数据item的个数决定了view的个数。在UITableView中，这个类就是遵从UITableViewDataSource的类。在UICollectionView中这个类就是遵从UICollectionViewDataSource的类。对于UICollectionViewDataSource 协议，我会在UICollectionViewDataSource中对其功能做详细的介绍。另外和tableview一样。对于用户操作cell产生的一些行为，我们也移交给遵从另外一个协议的类。也许你也猜到了。这个类就是UICollectionViewDelegate.实际来说，学习UICollectionView最基本的元素就是UICollectionViewCell。而cell的数据来源于UICollectionViewDataSource,其UICollectionViewDataSource协议的实现才是我们的关注重点。如果用户还需要操作cell后的一些反馈，那么就依靠UICollectionViewDelegate来了。从设计思想来说。我们把内容逻辑的处理，展示内容，cell的反馈处理。分别由三个类来承担了。达到了去耦的目的。这对于比较复杂视图是需要的。而普通的UILabel,UIButton就不需要这样复杂的设计了。</p>
+<h3 id="supplementary-views"><a href="#supplementary-views" class="headerlink" title="supplementary views"></a>supplementary views</h3><p>和collectionviewcell类似，supplementary views是数据驱动的。和collectionviewcell，不同这个对象并不是必须的。collectionviewcell的创建多少个和要显示的数据内容也依然依靠的是遵从UICollectionViewDataSource的类。在UICollectionViewDataSource协议中，<br><code>- collectionView:viewForSupplementaryElementOfKind:atIndexPath:</code>是个可选方法。其实通俗的讲。supplementary views就是tableview的header和footer.一个section可以配置一个section或者footer。至于标示header或者footer就依靠的是viewForSupplementaryElementOfKind的参数值</p>
+<h3 id="Decoration-views"><a href="#Decoration-views" class="headerlink" title="Decoration views"></a>Decoration views</h3><p>Decoration并不是数据驱动的，和UICollectionViewDataSource毫无关联</p>
+<h3 id="UICollectionViewDataSource"><a href="#UICollectionViewDataSource" class="headerlink" title="UICollectionViewDataSource"></a>UICollectionViewDataSource</h3><p>数据源协议回到了三个问题</p>
 <ul>
 <li>How many sections does the collection view contain?</li>
 <li>For a given section, how many items does a section contain?</li>
 <li>For a given section or item, what views should be used to display the corresponding content?</li>
 </ul>
 <p>UICollectionViewDataSource的实现是UICollectionView的核心。无论从设计思维上来看，和实际应用的角度。<br>其中有两个协议是必须实现的。它们是</p>
-<h3 id="5-UICollectionViewDelegate"><a href="#5-UICollectionViewDelegate" class="headerlink" title="5.UICollectionViewDelegate"></a>5.UICollectionViewDelegate</h3><h3 id="6-UICollectionViewFlowLayout"><a href="#6-UICollectionViewFlowLayout" class="headerlink" title="6.UICollectionViewFlowLayout"></a>6.UICollectionViewFlowLayout</h3><p>UITableView中，UITableViewCell都是单一的排布顺序。即从上到下。顺序排布。而UICollectionView中，可以实现非常灵活的排布。依靠的类就是UICollectionViewFlowLayout类。它的任务就是1.配置滚动方向。2.配置cell间隔。3.配置supplementary尺寸。其实使用UICollectionViewFlowLayout方法十分简单。<br>滚动方法有两种。一种是垂直的，一种是水平的。默认是垂直的。下面是垂直的时候的样子。</p>
+<h3 id="UICollectionViewDelegate"><a href="#UICollectionViewDelegate" class="headerlink" title="UICollectionViewDelegate"></a>UICollectionViewDelegate</h3><h3 id="UICollectionViewFlowLayout"><a href="#UICollectionViewFlowLayout" class="headerlink" title="UICollectionViewFlowLayout"></a>UICollectionViewFlowLayout</h3><p>UITableView中，UITableViewCell都是单一的排布顺序。即从上到下。顺序排布。而UICollectionView中，可以实现非常灵活的排布。依靠的类就是UICollectionViewFlowLayout类。它的任务就是1.配置滚动方向。2.配置cell间隔。3.配置supplementary尺寸。其实使用UICollectionViewFlowLayout方法十分简单。<br>滚动方法有两种。一种是垂直的，一种是水平的。默认是垂直的。下面是垂直的时候的样子。</p>
 <p><img src="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/CollectionViewPGforIOS/Art/flow_horiz_headers_2x.png" alt="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/CollectionViewPGforIOS/Art/flow_horiz_headers_2x.png
 "><br>FlowLayout流程</p>
 <ul>
@@ -427,7 +427,7 @@ UICollectionView的组成UICollectionView其实不单单指的UICollectionView�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#UICollectionView-作用"><span class="nav-number">1.</span> <span class="nav-text">UICollectionView 作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UICollectionView的组成"><span class="nav-number">2.</span> <span class="nav-text">UICollectionView的组成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-cells"><span class="nav-number">2.1.</span> <span class="nav-text">1.cells</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-supplementary-views"><span class="nav-number">2.2.</span> <span class="nav-text">2.supplementary views</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Decoration-views"><span class="nav-number">2.3.</span> <span class="nav-text">3.Decoration views</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-UICollectionViewDataSource"><span class="nav-number">2.4.</span> <span class="nav-text">4.UICollectionViewDataSource</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-UICollectionViewDelegate"><span class="nav-number">2.5.</span> <span class="nav-text">5.UICollectionViewDelegate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-UICollectionViewFlowLayout"><span class="nav-number">2.6.</span> <span class="nav-text">6.UICollectionViewFlowLayout</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#collectionview基本流程"><span class="nav-number">3.</span> <span class="nav-text">collectionview基本流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo"><span class="nav-number">4.</span> <span class="nav-text">Demo</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#UICollectionView-作用"><span class="nav-number">1.</span> <span class="nav-text">UICollectionView 作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UICollectionView的组成"><span class="nav-number">2.</span> <span class="nav-text">UICollectionView的组成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cells"><span class="nav-number">2.1.</span> <span class="nav-text">cells</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#supplementary-views"><span class="nav-number">2.2.</span> <span class="nav-text">supplementary views</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Decoration-views"><span class="nav-number">2.3.</span> <span class="nav-text">Decoration views</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UICollectionViewDataSource"><span class="nav-number">2.4.</span> <span class="nav-text">UICollectionViewDataSource</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UICollectionViewDelegate"><span class="nav-number">2.5.</span> <span class="nav-text">UICollectionViewDelegate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UICollectionViewFlowLayout"><span class="nav-number">2.6.</span> <span class="nav-text">UICollectionViewFlowLayout</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#collectionview基本流程"><span class="nav-number">3.</span> <span class="nav-text">collectionview基本流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo"><span class="nav-number">4.</span> <span class="nav-text">Demo</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
