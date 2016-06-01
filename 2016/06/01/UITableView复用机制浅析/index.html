@@ -57,25 +57,25 @@
 
 
 
-<meta name="description" content="##UITableViewCell的复用机制疑惑无论是刚接触iOS不久的新人，还是拥有几年从业经验的老司机，都写过下面的代码。
+<meta name="description" content="UITableViewCell的复用机制疑惑无论是刚接触iOS不久的新人，还是拥有几年从业经验的老司机，都写过下面的代码。
 // initTableView的时候
 [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@&amp;quot;cell&amp;quot;];
-// UITableViewDataS">
+// UITableViewDataSou">
 <meta property="og:type" content="article">
 <meta property="og:title" content="UITableView复用机制浅析">
 <meta property="og:url" content="http://yoursite.com/2016/06/01/UITableView复用机制浅析/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="##UITableViewCell的复用机制疑惑无论是刚接触iOS不久的新人，还是拥有几年从业经验的老司机，都写过下面的代码。
+<meta property="og:description" content="UITableViewCell的复用机制疑惑无论是刚接触iOS不久的新人，还是拥有几年从业经验的老司机，都写过下面的代码。
 // initTableView的时候
 [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@&amp;quot;cell&amp;quot;];
-// UITableViewDataS">
-<meta property="og:updated_time" content="2016-06-01T15:53:50.000Z">
+// UITableViewDataSou">
+<meta property="og:updated_time" content="2016-06-01T16:06:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UITableView复用机制浅析">
-<meta name="twitter:description" content="##UITableViewCell的复用机制疑惑无论是刚接触iOS不久的新人，还是拥有几年从业经验的老司机，都写过下面的代码。
+<meta name="twitter:description" content="UITableViewCell的复用机制疑惑无论是刚接触iOS不久的新人，还是拥有几年从业经验的老司机，都写过下面的代码。
 // initTableView的时候
 [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@&amp;quot;cell&amp;quot;];
-// UITableViewDataS">
+// UITableViewDataSou">
 
 
 
@@ -254,7 +254,7 @@
       
 
       
-        <p>##UITableViewCell的复用机制疑惑<br>无论是刚接触iOS不久的新人，还是拥有几年从业经验的老司机，都写过下面的代码。</p>
+        <h2 id="UITableViewCell的复用机制疑惑"><a href="#UITableViewCell的复用机制疑惑" class="headerlink" title="UITableViewCell的复用机制疑惑"></a>UITableViewCell的复用机制疑惑</h2><p>无论是刚接触iOS不久的新人，还是拥有几年从业经验的老司机，都写过下面的代码。</p>
 <pre><code>// initTableView的时候
 [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@&quot;cell&quot;];
 // UITableViewDataSource回调中
@@ -433,7 +433,7 @@ if (cell == nil) {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#隐藏的-reuseTableViewCells"><span class="nav-number">1.</span> <span class="nav-text">隐藏的_reuseTableViewCells</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cell在-reuseTableViewCells和visibleCells的相互迁移"><span class="nav-number">2.</span> <span class="nav-text">cell在_reuseTableViewCells和visibleCells的相互迁移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cell虽复用，数据常更新"><span class="nav-number">3.</span> <span class="nav-text">cell虽复用，数据常更新</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#UITableViewCell的复用机制疑惑"><span class="nav-number">1.</span> <span class="nav-text">UITableViewCell的复用机制疑惑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐藏的-reuseTableViewCells"><span class="nav-number">2.</span> <span class="nav-text">隐藏的_reuseTableViewCells</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cell在-reuseTableViewCells和visibleCells的相互迁移"><span class="nav-number">3.</span> <span class="nav-text">cell在_reuseTableViewCells和visibleCells的相互迁移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cell虽复用，数据常更新"><span class="nav-number">4.</span> <span class="nav-text">cell虽复用，数据常更新</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
