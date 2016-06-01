@@ -57,33 +57,25 @@
 
 
 
-<meta name="description" content="软件下载
-MySQL 下载
-MySQL workbenach (GUI工具) 下载
-
-连接数据库重置密码后,打开workbenach,连接本地数据库。注意端口号是3306.
-操作">
+<meta name="description" content="##UITableViewCell的复用机制疑惑无论是刚接触iOS不久的新人，还是拥有几年从业经验的老司机，都写过下面的代码。
+// initTableView的时候
+[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@&amp;quot;cell&amp;quot;];
+// UITableViewDataS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MySQL的安装与配置">
-<meta property="og:url" content="http://yoursite.com/2016/04/03/MySQL的安装与配置/index.html">
+<meta property="og:title" content="UITableView复用机制浅析">
+<meta property="og:url" content="http://yoursite.com/2016/06/01/UITableView复用机制浅析/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="软件下载
-MySQL 下载
-MySQL workbenach (GUI工具) 下载
-
-连接数据库重置密码后,打开workbenach,连接本地数据库。注意端口号是3306.
-操作">
-<meta property="og:image" content="http://images.51cto.com/files/uploadimg/20100601/1626140.jpg">
-<meta property="og:updated_time" content="2016-04-03T07:41:03.000Z">
+<meta property="og:description" content="##UITableViewCell的复用机制疑惑无论是刚接触iOS不久的新人，还是拥有几年从业经验的老司机，都写过下面的代码。
+// initTableView的时候
+[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@&amp;quot;cell&amp;quot;];
+// UITableViewDataS">
+<meta property="og:updated_time" content="2016-06-01T15:53:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL的安装与配置">
-<meta name="twitter:description" content="软件下载
-MySQL 下载
-MySQL workbenach (GUI工具) 下载
-
-连接数据库重置密码后,打开workbenach,连接本地数据库。注意端口号是3306.
-操作">
-<meta name="twitter:image" content="http://images.51cto.com/files/uploadimg/20100601/1626140.jpg">
+<meta name="twitter:title" content="UITableView复用机制浅析">
+<meta name="twitter:description" content="##UITableViewCell的复用机制疑惑无论是刚接触iOS不久的新人，还是拥有几年从业经验的老司机，都写过下面的代码。
+// initTableView的时候
+[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@&amp;quot;cell&amp;quot;];
+// UITableViewDataS">
 
 
 
@@ -101,7 +93,7 @@ MySQL workbenach (GUI工具) 下载
   };
 </script>
 
-  <title> MySQL的安装与配置 | 周明的技术博客 </title>
+  <title> UITableView复用机制浅析 | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -223,7 +215,7 @@ MySQL workbenach (GUI工具) 下载
             
             
               
-                MySQL的安装与配置
+                UITableView复用机制浅析
               
             
           </h1>
@@ -235,8 +227,8 @@ MySQL workbenach (GUI工具) 下载
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-03T13:14:47+08:00" content="2016-04-03">
-              2016-04-03
+            <time itemprop="dateCreated" datetime="2016-06-01T22:35:03+08:00" content="2016-06-01">
+              2016-06-01
             </time>
           </span>
 
@@ -262,13 +254,46 @@ MySQL workbenach (GUI工具) 下载
       
 
       
-        <p><img src="http://images.51cto.com/files/uploadimg/20100601/1626140.jpg" alt="image"></p>
-<h3 id="软件下载"><a href="#软件下载" class="headerlink" title="软件下载"></a>软件下载</h3><ol>
-<li>MySQL <a href="http://dev.mysql.com/downloads/mysql/" target="_blank" rel="external">下载</a></li>
-<li>MySQL workbenach (GUI工具) <a href="http://dev.mysql.com/downloads/workbench/" target="_blank" rel="external">下载</a></li>
+        <p>##UITableViewCell的复用机制疑惑<br>无论是刚接触iOS不久的新人，还是拥有几年从业经验的老司机，都写过下面的代码。</p>
+<pre><code>// initTableView的时候
+[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@&quot;cell&quot;];
+// UITableViewDataSource回调中
+static NSString *reuseIdentifier = @&quot;cell&quot;;
+UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+</code></pre><p>或者在iOS6更早的版本中。使用如下的代码</p>
+<pre><code>// UITableViewDataSource回调中
+static NSString *reuseIdentifier = @&quot;cell&quot;;
+UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+if (cell == nil) {
+        UITableViewCell *tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@&quot;cell&quot;];
+
+}
+</code></pre><p>上面两种方法，并明显区别。实现目的一样。只是换了不同的API而已。所谓复用，就体现在<code>UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];</code>。这里有一些概念。<code>identifier</code>每创建一个cell必须附带一个identifier标识自己。<code>ReusableCell</code>表示这个cell是复用的。那么何为复用。实际上就是反复循环使用呗。既然要反复循环使用。就必须将可复用的对象放在一个数据结构中。需要的时候取出来放在显示区域。所谓显示区域的cell.我们翻看UITableView的头文件，看到一个<code>@property (nonatomic, readonly) NSArray&lt;__kindof UITableViewCell *&gt; *visibleCells</code>.显示区域的cell全部放在这个数组中。有了显示区域的cells.<code>dequeue</code>表示苹果实现了一个队列的结构。既然有出队列。那么必然有入队列。何时入，何时出？</p>
+<p>总结来说。我们需要回到下面几个问题。<br>1.苹果是用什么数据结构来保存复用的cells.<br>2.何时将cell加入复用的数据结构。何时从这个复用结构中移除？</p>
+<h2 id="隐藏的-reuseTableViewCells"><a href="#隐藏的-reuseTableViewCells" class="headerlink" title="隐藏的_reuseTableViewCells"></a>隐藏的_reuseTableViewCells</h2><p>实际上,苹果将UITableView中有个私有变量叫做<code>_reuseTableViewCells</code>。利用运行时的api我们可以将其打印出来。</p>
+<pre><code>- (void)tryMember
+{
+    const char *cellName = &quot;_reusableTableCells&quot;;
+    Ivar var = class_getInstanceVariable([UITableView class], cellName);
+
+    const char *memberName = ivar_getName(var);
+    const char *memberType = ivar_getTypeEncoding(var);
+    NSLog(@&quot;%s----%s&quot;, memberName, memberType);
+
+}
+</code></pre><p>发现_reuseTableViewCells是一个cell为value的可变字典。它是作为reuseCell的<code>队列</code>结构的关键。</p>
+<h2 id="cell在-reuseTableViewCells和visibleCells的相互迁移"><a href="#cell在-reuseTableViewCells和visibleCells的相互迁移" class="headerlink" title="cell在_reuseTableViewCells和visibleCells的相互迁移"></a>cell在_reuseTableViewCells和visibleCells的相互迁移</h2><p>我有100条数据，屏幕可以显示17个cell.</p>
+<ol>
+<li><p>在tableView首次初始化并添加到其父视图后。会自动reloadData<br>实际上。UITableView只会调用<br><code>- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath</code>17次。同时每次调用这个方法都会调用<code>UITableViewCell *tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@&quot;cell&quot;];</code>这17个cell都是用户可以看到的。其实也都在visibleCells中。而执行[tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];都会为nil.即这个时候没有cell在<code>_reuseTableViewCells</code>中。所以出队列操作都是nil.</p>
+</li>
+<li><p>当向上滚动时候。这个时候会先出_reuseTableViewCells中去取。发现为nil.那么<strong>回再调用一次</strong><code>UITableViewCell *tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault</code>reuseIdentifier:@”cell”]。并自动将cell加入到visibleCells中。</p>
+</li>
+<li>继续往上滑动。第一个cell退出了显示区域。这个时候就从visibleCells中移除。同时将其放入_reuseTableViewCells。这个过程对_reuseTableViewCells而言。就是入队列了。</li>
+<li>再往上滑动。新出来的cell其实不再是alloc出来。而是从_reuseTableViewCells中出队列来的。一旦出队列。就显示到屏幕上。即加入到visibleCells中。</li>
 </ol>
-<h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><p>重置密码后,打开workbenach,连接本地数据库。注意端口号是3306.</p>
-<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3>
+<p>总结来说。任何一个时间点。cell要么在visibleCells中。要么在_reuseTableViewCells中。它们之间会因为隐藏和显示，有限个的cell（屏幕个数+1）不断的在这个两个对象中迁移。</p>
+<h2 id="cell虽复用，数据常更新"><a href="#cell虽复用，数据常更新" class="headerlink" title="cell虽复用，数据常更新"></a>cell虽复用，数据常更新</h2><p><code>- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath</code><br>cell虽然复用，但是新出来的cell的展示数据并不是以前的数据。是因为上述方法会更新显示出来的（实际是_reuseTableViewCells中的）显示数据。</p>
+
       
     </div>
 
@@ -291,17 +316,13 @@ MySQL workbenach (GUI工具) 下载
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/26/使用conrnerRadius主意点/" rel="next" title="使用conrnerRadius主意点">
-                <i class="fa fa-chevron-left"></i> 使用conrnerRadius主意点
+              <a href="/2016/05/30/UITableView的复用机制探究/" rel="next" title="UITableView的复用机制探究">
+                <i class="fa fa-chevron-left"></i> UITableView的复用机制探究
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/09/UITableView的一些注意事项/" rel="prev" title="UITableView的一些注意事项">
-                UITableView的一些注意事项 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -412,7 +433,7 @@ MySQL workbenach (GUI工具) 下载
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#软件下载"><span class="nav-number">1.</span> <span class="nav-text">软件下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接数据库"><span class="nav-number">2.</span> <span class="nav-text">连接数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#操作"><span class="nav-number">3.</span> <span class="nav-text">操作</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#隐藏的-reuseTableViewCells"><span class="nav-number">1.</span> <span class="nav-text">隐藏的_reuseTableViewCells</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cell在-reuseTableViewCells和visibleCells的相互迁移"><span class="nav-number">2.</span> <span class="nav-text">cell在_reuseTableViewCells和visibleCells的相互迁移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cell虽复用，数据常更新"><span class="nav-number">3.</span> <span class="nav-text">cell虽复用，数据常更新</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

@@ -59,23 +59,23 @@
 
 <meta name="description" content="概述
 CoreData是个框架，使得开发者把数据当做对象来操作。CoreData提供的数据对象叫做托管对象（managed object）.CoreData位于应用程序和持久化存储区(persisten store)之间.
-托管对象可能对应于数据库中某张数据表中的一行。
-可以将CoreData按照数据流动方向分为三层。分别是持久化存储协调器 托管对象模型 托管对象上下文。具体的是什么这里我还看不太">
+一个托管对象可能对应于数据库中某张数据表中的一行。
+可以将CoreData按照数据流动方向分为三层。分别是持久化存储协调器 托管对象模型 托管对象上下文。具体的是什么这里我还看">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Core Data应用开发实践指南读书笔记1">
 <meta property="og:url" content="http://yoursite.com/2016/05/30/Core-Data应用开发实践指南读书笔记1/index.html">
 <meta property="og:site_name" content="周明的技术博客">
 <meta property="og:description" content="概述
 CoreData是个框架，使得开发者把数据当做对象来操作。CoreData提供的数据对象叫做托管对象（managed object）.CoreData位于应用程序和持久化存储区(persisten store)之间.
-托管对象可能对应于数据库中某张数据表中的一行。
-可以将CoreData按照数据流动方向分为三层。分别是持久化存储协调器 托管对象模型 托管对象上下文。具体的是什么这里我还看不太">
-<meta property="og:updated_time" content="2016-05-29T16:44:53.000Z">
+一个托管对象可能对应于数据库中某张数据表中的一行。
+可以将CoreData按照数据流动方向分为三层。分别是持久化存储协调器 托管对象模型 托管对象上下文。具体的是什么这里我还看">
+<meta property="og:updated_time" content="2016-05-30T15:00:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Core Data应用开发实践指南读书笔记1">
 <meta name="twitter:description" content="概述
 CoreData是个框架，使得开发者把数据当做对象来操作。CoreData提供的数据对象叫做托管对象（managed object）.CoreData位于应用程序和持久化存储区(persisten store)之间.
-托管对象可能对应于数据库中某张数据表中的一行。
-可以将CoreData按照数据流动方向分为三层。分别是持久化存储协调器 托管对象模型 托管对象上下文。具体的是什么这里我还看不太">
+一个托管对象可能对应于数据库中某张数据表中的一行。
+可以将CoreData按照数据流动方向分为三层。分别是持久化存储协调器 托管对象模型 托管对象上下文。具体的是什么这里我还看">
 
 
 
@@ -255,13 +255,14 @@ CoreData是个框架，使得开发者把数据当做对象来操作。CoreData�
 
       
         <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
-<li>CoreData是个框架，使得开发者把数据当做对象来操作。CoreData提供的数据对象叫做托管对象（managed object）.CoreData位于应用程序和持久化存储区(persisten store)之间.</li>
-<li>托管对象可能对应于数据库中某张数据表中的一行。</li>
+<li>CoreData是个框架，使得开发者把<strong>数据</strong>当做<strong>对象</strong>来操作。CoreData提供的数据对象叫做托管对象（managed object）.CoreData位于应用程序和持久化存储区(persisten store)之间.</li>
+<li>一个<strong>托管对象</strong>可能对应于数据库中某张数据表中的一<strong>行</strong>。</li>
 <li>可以将CoreData按照数据流动方向分为三层。分别是持久化存储协调器 托管对象模型 托管对象上下文。具体的是什么这里我还看不太懂。等深入后再做研究。或者去问同事。</li>
 <li>持久化存储区可以是SQlite数据库,XML文件，Binary store等数据文件。</li>
 <li>注意托管对象模式和托管对象并不是同一个东西。</li>
 </ul>
-<h3 id="CoreDataHelper类"><a href="#CoreDataHelper类" class="headerlink" title="CoreDataHelper类"></a>CoreDataHelper类</h3>
+<h3 id="CoreDataHelper类"><a href="#CoreDataHelper类" class="headerlink" title="CoreDataHelper类"></a>CoreDataHelper类</h3><p>我们先写一个工具类CoreDataHelper，抽象成一个类而不是放在视图控制器中，这样便于移植。</p>
+
       
     </div>
 
@@ -291,6 +292,10 @@ CoreData是个框架，使得开发者把数据当做对象来操作。CoreData�
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/30/UITableView的复用机制探究/" rel="prev" title="UITableView的复用机制探究">
+                UITableView的复用机制探究 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -358,7 +363,7 @@ CoreData是个框架，使得开发者把数据当做对象来操作。CoreData�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-count">20</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
