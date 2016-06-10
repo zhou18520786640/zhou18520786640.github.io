@@ -69,7 +69,7 @@ UICollectionView的组成UICollectionView其实不单单指的UICollectionView�
 cell">
 <meta property="og:image" content="http://static.open-open.com/lib/uploadImg/20160126/20160126181554_540.gif">
 <meta property="og:image" content="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/CollectionViewPGforIOS/Art/flow_horiz_headers_2x.png">
-<meta property="og:updated_time" content="2016-05-29T06:08:47.000Z">
+<meta property="og:updated_time" content="2016-06-10T15:55:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UICollectionView Basic">
 <meta name="twitter:description" content="UICollectionView 作用UICollectionView是增强版的UITableView,可以认为是方便实现一行多个cell的tableView。另外利用自定义布局的配置，可以实现更加灵活的布局展示。
@@ -271,16 +271,16 @@ cell">
 <p><img src="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/CollectionViewPGforIOS/Art/flow_horiz_headers_2x.png" alt="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/CollectionViewPGforIOS/Art/flow_horiz_headers_2x.png
 "><br>FlowLayout流程</p>
 <ul>
-<li>创建flow layout对象和赋值给collectionview对象</li>
+<li>创建flow layout对象和赋值给collectionview对象（注意手写代码的时候，创建collectionview必须传入这个对象）</li>
 <li>配置cell的宽度和高度</li>
 <li>创建行间隔和item间隔</li>
 <li>如果需要设置headers和footers，指定它们的尺寸。</li>
 </ul>
 <h2 id="collectionview基本流程"><a href="#collectionview基本流程" class="headerlink" title="collectionview基本流程"></a>collectionview基本流程</h2><p>实现一个collectionview，最少意义上要做这些步骤。</p>
-<pre><code>1.创建UICollectionview对象
-2.创建UICollectionViewFlowLayout对象。并将其赋值给UICollectionview对象
-3.设定UICollectionview对象的数据源委托，如有需要，设定视图委托，和布局委托
-4.实现UICollectionview对象的数据委托协议方法。如有需要，设定视图委托，和布局委托方法。
+<pre><code>0.创建UICollectionViewFlowLayout对象
+1.创建UICollectionview对象        
+2.设定UICollectionview对象的数据源委托，如有需要，设定视图委托，和布局委托
+3.实现UICollectionview对象的数据委托协议方法。如有需要，设定视图委托，和布局委托方法。
 </code></pre><p>在basic一节中，我打算用两个例子,分别用sb和纯代码来展现这些流程。第一个demo是官方demo.</p>
 <h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p><a href="https://developer.apple.com/library/ios/samplecode/CollectionView-Simple/Introduction/Intro.html" target="_blank" rel="external">https://developer.apple.com/library/ios/samplecode/CollectionView-Simple/Introduction/Intro.html</a></p>
 
