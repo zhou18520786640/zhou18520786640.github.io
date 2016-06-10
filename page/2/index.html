@@ -214,6 +214,133 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/26/NSTextAttachMent实现图文混排/" itemprop="url">
+                  NSTextAttachment实现图文混排
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-26T23:12:14+08:00" content="2016-05-26">
+              2016-05-26
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="需求场景"><a href="#需求场景" class="headerlink" title="需求场景"></a>需求场景</h3><p>设计师希望在UILabel后面添加一个关于的图标。引导用户去点击这个Label.由于Label的文案接口返回，无法得知Label文案结束的位置，因此无法决定图标摆放在哪里。</p>
+<h3 id="NSAttributeString与NSTextAttachment"><a href="#NSAttributeString与NSTextAttachment" class="headerlink" title="NSAttributeString与NSTextAttachment"></a>NSAttributeString与NSTextAttachment</h3><p>NSTextAttachment，顾名思义，文本附件。<br>UILabel有一个attributeString属性，我们可以称为带属性的字符串。通过设置该属性值，可以实现文案不同颜色显示，文案带下划线或者带删除线等。在iOS7中，NSAttributeString甚至可以实现简单的图文混排，关键的核心是将文本附件转换为NSAttributeString.和一般的NSAttributeString拼接在一起。那么我们布局按钮的事情直接转换为布局一个简单的字符串了。说了那么多废话，让我们直接来代码演示一下。下面展示了不同长度的字符串下图文混排。</p>
+<pre><code>@interface ViewController ()
+
+@property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UILabel *label2;
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+   // 在变化的标签后添加图案
+    NSString *text = @&quot;我想实现简单的图文混排&quot;;
+    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:text];
+
+    NSTextAttachment *attachment = [[NSTextAttachment alloc] initWithData:nil ofType:nil];
+    attachment.image = [UIImage imageNamed:@&quot;about&quot;];
+    attachment.bounds = CGRectMake(10, -1, attachment.image.size.width, attachment.image.size.height);
+
+    NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attachment];
+    [attributeString insertAttributedString:string atIndex:text.length];
+    self.label.attributedText = attributeString;
+
+
+    // 在变化的标签后添加图案
+    NSString *text2 = @&quot;我想实现简单的图文混排我想实现简单的图文混排&quot;;
+    NSMutableAttributedString *attributeString2 = [[NSMutableAttributedString alloc] initWithString:text2];
+
+    NSTextAttachment *attachment2 = [[NSTextAttachment alloc] initWithData:nil ofType:nil];
+    attachment2.image = [UIImage imageNamed:@&quot;about&quot;];
+    attachment2.bounds = CGRectMake(10, -1, attachment2.image.size.width, attachment2.image.size.height);
+    NSAttributedString *string2 = [NSAttributedString attributedStringWithAttachment:attachment2];
+    [attributeString2 insertAttributedString:string2 atIndex:text2.length];
+    self.label2.attributedText = attributeString2;
+
+}
+</code></pre><p>最终展示效果如下:</p>
+<p><img src="http://i2.buimg.com/76405ce088476ad0.png" alt="http://i2.buimg.com/76405ce088476ad0.png"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/25/RunLoop之作用篇/" itemprop="url">
                   RunLoop之作用篇
                 </a>
@@ -725,125 +852,12 @@ tableView.rowHeight = UITableViewAutomaticDimension
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/10/使用新浪云来部署python应用/" itemprop="url">
-                  使用新浪云来部署python应用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-10T12:00:31+08:00" content="2016-04-10">
-              2016-04-10
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="注册新浪云和添加应用"><a href="#注册新浪云和添加应用" class="headerlink" title="注册新浪云和添加应用"></a>注册新浪云和添加应用</h3><p>进入<a href="http://www.sinacloud.com/" target="_blank" rel="external">http://www.sinacloud.com/</a>,使用sina帐号登录后，点击进入用户中心<br><img src="http://7xsf79.com1.z0.glb.clouddn.com/fff.png" alt="image">。选择云应用。<br><img src="http://7xsf79.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-04-10%2012.24.28.png" alt="image">。<br>然后进入控制台。添加应用即可。注意选择部署环境为python.配置如下<br><img src="http://7xsf79.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-04-10%2012.27.25.png" alt="image"></p>
-<h3 id="部署python代码"><a href="#部署python代码" class="headerlink" title="部署python代码"></a>部署python代码</h3><h4 id="编辑应用代码"><a href="#编辑应用代码" class="headerlink" title="编辑应用代码"></a>编辑应用代码</h4><p>进入我们的应用，使用git作为版本部署工具。实现一个简单的helloword程序。我们的思路是在本地创建我们的代码工程。然后push到新浪云应用中去。    这里本地我们只需要编写两个文件 config.yaml  index.wsgi。分别作为应用程序的配置文件和程序入口文件</p>
-<p>config.yaml文件内容如下</p>
-<pre><code>name: helloworld
-version: 1
-</code></pre><p>index.wsgi文件如下</p>
-<pre><code>import sae
-
-def app(environ, start_response):
-    status = &apos;200 OK&apos;
-    response_headers = [(&apos;Content-type&apos;, &apos;text/plain&apos;)]
-    start_response(status, response_headers)
-    return [&apos;Hello, world!&apos;]
-
-application = sae.create_wsgi_app(app)
-</code></pre><p>将这两个文件放在一个文件夹下（如helloword）.整个文件的编写就完成了。</p>
-<h4 id="部署应用"><a href="#部署应用" class="headerlink" title="部署应用"></a>部署应用</h4><p>我们选择Git作为部署工具。</p>
-<p>首先，创建一个Git代码仓库，将刚才的代码提交到Git仓库中。</p>
-<pre><code>jaime@westeros:~/helloworld$ git init
-jaime@westeros:~/helloworld$ git add .
-jaime@westeros:~/helloworld$ git commit -m &apos;Initial commit&apos;
-</code></pre><p>然后，添加一个新的Git远程仓库sae，地址为： <a href="https://git.sinacloud.com/应用名" target="_blank" rel="external">https://git.sinacloud.com/应用名</a> ，然后将刚才提交的代码推到远程Git仓库的分支1中。</p>
-<pre><code>jaime@westeros:~/helloworld$ git remote add sae https://git.sinacloud.com/helloworld
-jaime@westeros:~/helloworld$ git push sae master:1
-</code></pre><p>这时，需要输入帐号和密码，<b>千万注意不是输入</b>新浪的帐号和密码，而是<font color="red">安全帐号邮箱和安全帐号密码</font>,如果不知道，可以进入用户中心的自己的帐号下查询<br>至此，整个代码的部署就完成了，在浏览器中输入 <code>http://helloword.applinzi.com</code>,注意不是官网说的 <code>http://helloworld.sinaapp.com</code> ,就可以访问刚提交的应用了。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -884,7 +898,7 @@ jaime@westeros:~/helloworld$ git push sae master:1
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
