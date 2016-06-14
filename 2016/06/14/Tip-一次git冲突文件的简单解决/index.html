@@ -57,31 +57,16 @@
 
 
 
-<meta name="description" content="命令式执行与事件驱动首先我们来看看命令行代码  
-int main(int argc, char *argv[]) {
-    NSLog(@&amp;quot;hello world&amp;quot;);
-    return 0;
-}
-执行完了就程序结束。我们回想一下平时使用的手机应用程序，并非如此。可以不断的响应用户的操作，用户不做任何操作的时候，程序也不会终止。为了实现上面两个目标，实际的手机应用程序用">
+<meta name="description" content="project.pbxproj的文件冲突如何解决？今天使用pull代码的时候产生了project.pbxproj的文件冲突。按照惯常的方法打开project.pbxproj手动去搜索&amp;lt;&amp;lt;&amp;lt;&amp;lt;这样类似文本，删掉你不需要的，移动代码到需要的位置。但是实际过程中非常不理想。因为project.pbxproj的可读性比较差。因为记得自己本地的修改方法是创建了几个新的文件和目录。在同">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RunLoop之作用篇">
-<meta property="og:url" content="http://yoursite.com/2016/05/25/RunLoop之作用篇/index.html">
+<meta property="og:title" content="Tip:一次git冲突文件的简单解决">
+<meta property="og:url" content="http://yoursite.com/2016/06/14/Tip-一次git冲突文件的简单解决/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="命令式执行与事件驱动首先我们来看看命令行代码  
-int main(int argc, char *argv[]) {
-    NSLog(@&amp;quot;hello world&amp;quot;);
-    return 0;
-}
-执行完了就程序结束。我们回想一下平时使用的手机应用程序，并非如此。可以不断的响应用户的操作，用户不做任何操作的时候，程序也不会终止。为了实现上面两个目标，实际的手机应用程序用">
-<meta property="og:updated_time" content="2016-05-25T17:01:02.000Z">
+<meta property="og:description" content="project.pbxproj的文件冲突如何解决？今天使用pull代码的时候产生了project.pbxproj的文件冲突。按照惯常的方法打开project.pbxproj手动去搜索&amp;lt;&amp;lt;&amp;lt;&amp;lt;这样类似文本，删掉你不需要的，移动代码到需要的位置。但是实际过程中非常不理想。因为project.pbxproj的可读性比较差。因为记得自己本地的修改方法是创建了几个新的文件和目录。在同">
+<meta property="og:updated_time" content="2016-06-14T15:32:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RunLoop之作用篇">
-<meta name="twitter:description" content="命令式执行与事件驱动首先我们来看看命令行代码  
-int main(int argc, char *argv[]) {
-    NSLog(@&amp;quot;hello world&amp;quot;);
-    return 0;
-}
-执行完了就程序结束。我们回想一下平时使用的手机应用程序，并非如此。可以不断的响应用户的操作，用户不做任何操作的时候，程序也不会终止。为了实现上面两个目标，实际的手机应用程序用">
+<meta name="twitter:title" content="Tip:一次git冲突文件的简单解决">
+<meta name="twitter:description" content="project.pbxproj的文件冲突如何解决？今天使用pull代码的时候产生了project.pbxproj的文件冲突。按照惯常的方法打开project.pbxproj手动去搜索&amp;lt;&amp;lt;&amp;lt;&amp;lt;这样类似文本，删掉你不需要的，移动代码到需要的位置。但是实际过程中非常不理想。因为project.pbxproj的可读性比较差。因为记得自己本地的修改方法是创建了几个新的文件和目录。在同">
 
 
 
@@ -99,7 +84,7 @@ int main(int argc, char *argv[]) {
   };
 </script>
 
-  <title> RunLoop之作用篇 | 周明的技术博客 </title>
+  <title> Tip:一次git冲突文件的简单解决 | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -221,7 +206,7 @@ int main(int argc, char *argv[]) {
             
             
               
-                RunLoop之作用篇
+                Tip:一次git冲突文件的简单解决
               
             
           </h1>
@@ -233,8 +218,8 @@ int main(int argc, char *argv[]) {
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-25T00:29:36+08:00" content="2016-05-25">
-              2016-05-25
+            <time itemprop="dateCreated" datetime="2016-06-14T23:24:06+08:00" content="2016-06-14">
+              2016-06-14
             </time>
           </span>
 
@@ -260,35 +245,7 @@ int main(int argc, char *argv[]) {
       
 
       
-        <h2 id="命令式执行与事件驱动"><a href="#命令式执行与事件驱动" class="headerlink" title="命令式执行与事件驱动"></a>命令式执行与事件驱动</h2><p>首先我们来看看命令行代码  </p>
-<pre><code>int main(int argc, char *argv[]) {
-    NSLog(@&quot;hello world&quot;);
-    return 0;
-}
-</code></pre><p>执行完了就程序结束。我们回想一下平时使用的手机应用程序，并非如此。可以不断的响应用户的操作，用户不做任何操作的时候，程序也不会终止。为了实现上面两个目标，实际的手机应用程序用伪代码来表示基本可以认为是这样的</p>
-<pre><code>int main(int argc, char *argv[]) {
-    while(AppIsRunning) {
-        id whoWakeMe = SleepForWakingup();
-        id event = GetEvent(whoWakeMe);
-        Handle(event);
-    }
-    return 0;
-}
-</code></pre><p>通过死循环。如果没事的时候，就处于休眠状态。如果有事件，就将其唤醒，然后去处理这个事件。</p>
-<h3 id="为什么需要RunLoop"><a href="#为什么需要RunLoop" class="headerlink" title="为什么需要RunLoop"></a>为什么需要RunLoop</h3><ol>
-<li>让程序一直运行并接受用户输入</li>
-<li>决定何时处理哪些事件Event</li>
-<li>调用解耦？</li>
-<li>节省CPU时间，没事的时候闲着，不让cpu执行它。</li>
-</ol>
-<h3 id="RunLoop到底是什么？"><a href="#RunLoop到底是什么？" class="headerlink" title="RunLoop到底是什么？"></a>RunLoop到底是什么？</h3><blockquote>
-<p> RunLoop 实际上就是一个对象，这个对象管理了其需要处理的事件和消息，并提供了一个入口函数来执行上面 Event Loop 的逻辑。线程执行了这个函数后，就会一直处于这个函数内部 “接受消息-&gt;等待-&gt;处理” 的循环中，直到这个循环结束（比如传入 quit 的消息），函数返回。</p>
-<p>OSX/iOS 系统中，提供了两个这样的对象：NSRunLoop 和 CFRunLoopRef。<br>CFRunLoopRef 是在 CoreFoundation 框架内的，它提供了纯 C 函数的 API，所有这些 API 都是线程安全的。<br>NSRunLoop 是基于 CFRunLoopRef 的封装，属于Foundation框架。提供了面向对象的 API，但是这些 API 不是线程安全的。</p>
-</blockquote>
-<h3 id="RunLoop-与线程的关系"><a href="#RunLoop-与线程的关系" class="headerlink" title="RunLoop 与线程的关系"></a>RunLoop 与线程的关系</h3><blockquote>
-<p>首先，iOS 开发中能遇到两个线程对象: pthread_t 和 NSThread。过去苹果有份文档标明了 NSThread 只是 pthread_t 的封装，但那份文档已经失效了，现在它们也有可能都是直接包装自最底层的 mach thread。苹果并没有提供这两个对象相互转换的接口，但不管怎么样，可以肯定的是 pthread_t 和 NSThread 是一一对应的。比如，你可以通过 pthread_main_np() 或 [NSThread mainThread] 来获取主线程；也可以通过 pthread_self() 或 [NSThread currentThread] 来获取当前线程。<strong>CFRunLoop 是基于 pthread 来管理的</strong>。</p>
-<p>线程和 RunLoop 之间是一一对应的，其关系是保存在一个全局的 Dictionary 里。线程刚创建时并没有 RunLoop，如果你不主动获取，那它一直都不会有。RunLoop 的创建是发生在第一次获取时，RunLoop 的销毁是发生在线程结束时。你<strong>只能在一个线程的内部获取其 RunLoop</strong>（主线程除外）。</p>
-</blockquote>
+        <h3 id="project-pbxproj的文件冲突如何解决？"><a href="#project-pbxproj的文件冲突如何解决？" class="headerlink" title="project.pbxproj的文件冲突如何解决？"></a>project.pbxproj的文件冲突如何解决？</h3><p>今天使用pull代码的时候产生了project.pbxproj的文件冲突。按照惯常的方法打开project.pbxproj手动去搜索&lt;&lt;&lt;&lt;这样类似文本，删掉你不需要的，移动代码到需要的位置。但是实际过程中非常不理想。因为project.pbxproj的可读性比较差。因为记得自己本地的修改方法是创建了几个新的文件和目录。在同事的建议下，标记project.pbxproj为服务器的版本为准。然后这个时候再运行xcode,发现project.pbxproj不再报错。而是提醒找不到一些头文件。因为相关的头文件和实现文件虽然已经在了工程中。却没有被project.pbxproj所管理，这个时候只需要自己在工程所在的目录搜索后自己手动添加到xcode的管理中即可。</p>
 
       
     </div>
@@ -312,17 +269,13 @@ int main(int argc, char *argv[]) {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/24/Masonry手写约束之Demo篇/" rel="next" title="Masonry手写约束之Demo篇">
-                <i class="fa fa-chevron-left"></i> Masonry手写约束之Demo篇
+              <a href="/2016/06/11/Tip-UIButton的imageView的显示/" rel="next" title="Tip:UIButton的imageView的显示">
+                <i class="fa fa-chevron-left"></i> Tip:UIButton的imageView的显示
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/26/NSTextAttachMent实现图文混排/" rel="prev" title="NSTextAttachment实现图文混排">
-                NSTextAttachment实现图文混排 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -433,7 +386,7 @@ int main(int argc, char *argv[]) {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令式执行与事件驱动"><span class="nav-number">1.</span> <span class="nav-text">命令式执行与事件驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要RunLoop"><span class="nav-number">1.1.</span> <span class="nav-text">为什么需要RunLoop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RunLoop到底是什么？"><span class="nav-number">1.2.</span> <span class="nav-text">RunLoop到底是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RunLoop-与线程的关系"><span class="nav-number">1.3.</span> <span class="nav-text">RunLoop 与线程的关系</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#project-pbxproj的文件冲突如何解决？"><span class="nav-number">1.</span> <span class="nav-text">project.pbxproj的文件冲突如何解决？</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
