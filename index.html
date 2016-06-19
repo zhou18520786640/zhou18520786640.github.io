@@ -307,18 +307,17 @@
         return;
     }
     self.count++;
+
     CGPoint oldPoint = cell.frame.origin;
     CGPoint newPoint = oldPoint;
-    // 第一个偏移量是 0.1*[UIScreen mainScreen].bounds.size.width
-    // 第二个偏移量是 0.2*[UIScreen mainScreen].bounds.size.width
-    // 第i个偏移量是 i * 0.1 * [UIScreen mainScreen].bounds.size.width
-    // 保证速度相同 ，每一个的速度都是[UIScreen mainScreen].bounds.size.width /每点
     newPoint.x = - 80 -indexPath.row * 80 * 0.15;
+    // 设置开始位置
     cell.frame = CGRectMake(newPoint.x, newPoint.y, cell.frame.size.width, cell.frame.size.height);
+    // 核心思想是越下面的cell离cell最后位置越远。每一个cell的动画时间相同。每个cell速度相同
     [UIView animateWithDuration:(0.5 + 0.125 * indexPath.row) animations:^{
+     // 设置结束为止
         cell.frame = CGRectMake(oldPoint.x, oldPoint.y, cell.frame.size.width, cell.frame.size.height);
     }];
-//    NSLog(@&quot;ld&quot;, indexPath.row);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
