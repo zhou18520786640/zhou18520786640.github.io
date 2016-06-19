@@ -57,16 +57,27 @@
 
 
 
-<meta name="description" content="“CALayer有一个叫做conrnerRadius的属性控制着图层角的曲率。它是一个浮点数，默认为0（为0的时候就是直角），但是你可以把它设置成任意值。默认情况下，这个曲率值只影响背景颜色而不影响背景图片或是子图层。不过，如果把masksToBounds设置成YES的话，图层里面的所有东西都会被截取”">
+<meta name="description" content="目标与思路希望做如上图的动画。观察这个动画，每一个cell从左到右进入眼帘。下面的cell比上面的cell到底最终位置的时间更久。现在有两种思路。1.每个cell动画启动时间不同。动画的执行时间相同2.每个cell动画启动时间相同。后面的动画执行时间更久。
+方案2更简单，因为很难实现每一个动画的启动时间固定时间间隔
+执行动画的时机UITableView的委托方法来执行动画。
+- (void)t">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用conrnerRadius主意点">
-<meta property="og:url" content="http://yoursite.com/2016/03/26/使用conrnerRadius主意点/index.html">
+<meta property="og:title" content="UITableViewCell 动画">
+<meta property="og:url" content="http://yoursite.com/2016/06/19/UITableViewCell-动画/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="“CALayer有一个叫做conrnerRadius的属性控制着图层角的曲率。它是一个浮点数，默认为0（为0的时候就是直角），但是你可以把它设置成任意值。默认情况下，这个曲率值只影响背景颜色而不影响背景图片或是子图层。不过，如果把masksToBounds设置成YES的话，图层里面的所有东西都会被截取”">
-<meta property="og:updated_time" content="2016-03-26T10:47:18.000Z">
+<meta property="og:description" content="目标与思路希望做如上图的动画。观察这个动画，每一个cell从左到右进入眼帘。下面的cell比上面的cell到底最终位置的时间更久。现在有两种思路。1.每个cell动画启动时间不同。动画的执行时间相同2.每个cell动画启动时间相同。后面的动画执行时间更久。
+方案2更简单，因为很难实现每一个动画的启动时间固定时间间隔
+执行动画的时机UITableView的委托方法来执行动画。
+- (void)t">
+<meta property="og:image" content="http://7xsf79.com1.z0.glb.clouddn.com/1234.gif">
+<meta property="og:updated_time" content="2016-06-19T06:53:40.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用conrnerRadius主意点">
-<meta name="twitter:description" content="“CALayer有一个叫做conrnerRadius的属性控制着图层角的曲率。它是一个浮点数，默认为0（为0的时候就是直角），但是你可以把它设置成任意值。默认情况下，这个曲率值只影响背景颜色而不影响背景图片或是子图层。不过，如果把masksToBounds设置成YES的话，图层里面的所有东西都会被截取”">
+<meta name="twitter:title" content="UITableViewCell 动画">
+<meta name="twitter:description" content="目标与思路希望做如上图的动画。观察这个动画，每一个cell从左到右进入眼帘。下面的cell比上面的cell到底最终位置的时间更久。现在有两种思路。1.每个cell动画启动时间不同。动画的执行时间相同2.每个cell动画启动时间相同。后面的动画执行时间更久。
+方案2更简单，因为很难实现每一个动画的启动时间固定时间间隔
+执行动画的时机UITableView的委托方法来执行动画。
+- (void)t">
+<meta name="twitter:image" content="http://7xsf79.com1.z0.glb.clouddn.com/1234.gif">
 
 
 
@@ -84,7 +95,7 @@
   };
 </script>
 
-  <title> 使用conrnerRadius主意点 | 周明的技术博客 </title>
+  <title> UITableViewCell 动画 | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -206,7 +217,7 @@
             
             
               
-                使用conrnerRadius主意点
+                UITableViewCell 动画
               
             
           </h1>
@@ -218,8 +229,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-26T18:46:20+08:00" content="2016-03-26">
-              2016-03-26
+            <time itemprop="dateCreated" datetime="2016-06-19T09:30:21+08:00" content="2016-06-19">
+              2016-06-19
             </time>
           </span>
 
@@ -245,10 +256,82 @@
       
 
       
-        <blockquote>
-<p>“CALayer有一个叫做conrnerRadius的属性控制着图层角的曲率。它是一个浮点数，默认为0（为0的时候就是直角），但是你可以把它设置成任意值。默认情况下，这个曲率值只影响背景颜色而不影响背景图片或是子图层。不过，如果把masksToBounds设置成YES的话，图层里面的所有东西都会被截取”</p>
-</blockquote>
+        <p style="text-align:center"><img src="http://7xsf79.com1.z0.glb.clouddn.com/1234.gif"></p>
 
+<h2 id="目标与思路"><a href="#目标与思路" class="headerlink" title="目标与思路"></a>目标与思路</h2><p>希望做如上图的动画。观察这个动画，每一个cell从左到右进入眼帘。下面的cell比上面的cell到底最终位置的时间更久。现在有两种思路。<br>1.每个cell动画启动时间不同。动画的执行时间相同<br>2.每个cell动画启动时间相同。后面的动画执行时间更久。</p>
+<p>方案2更简单，因为很难实现每一个动画的启动时间固定时间间隔</p>
+<h2 id="执行动画的时机"><a href="#执行动画的时机" class="headerlink" title="执行动画的时机"></a>执行动画的时机</h2><p>UITableView的委托方法来执行动画。</p>
+<pre><code>- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath 
+</code></pre><p>是tableViewCell的动画的最佳时机</p>
+<p>该方法中可以使用<code>[UIView animateWithDuration:animations:]</code>。要注意的是，我们的动画只是在第一次cell出现在屏幕上的时候执行。在其他时候。如滑到上面后又滑下来的时候是不该被调用的。我们可以用一个全局变量。保证动画执行次数和屏幕的显示个数一致。</p>
+<h2 id="完整demo"><a href="#完整demo" class="headerlink" title="完整demo"></a>完整demo</h2><pre><code>//
+//  ViewController.m
+//  Animation
+//
+//  Created by zhou on 16/6/15.
+//  Copyright © 2016年 jeff.zhou. All rights reserved.
+//
+
+#import &quot;ViewController.h&quot;
+#import &quot;ZZCell.h&quot;
+
+@interface ViewController () &lt;UITableViewDelegate, UITableViewDataSource&gt;
+@property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, assign) NSInteger count;
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupTableView];
+}
+
+- (void)setupTableView {
+    CGRect rect = CGRectMake(0, 0, 80, [UIScreen mainScreen].bounds.size.height);
+    UITableView *tableView = [[UITableView alloc] initWithFrame:rect];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [tableView registerClass:[ZZCell class] forCellReuseIdentifier:@&quot;cell&quot;];
+    self.tableView = tableView;
+    self.count = 0;
+    [self.view addSubview:self.tableView];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    // 16是一屏显示的cell个数，这个方法是要保证第一次出现cell的时候动画
+    if (self.count &gt; 16) {
+        return;
+    }
+    self.count++;
+    CGPoint oldPoint = cell.frame.origin;
+    CGPoint newPoint = oldPoint;
+    // 第一个偏移量是 0.1*[UIScreen mainScreen].bounds.size.width
+    // 第二个偏移量是 0.2*[UIScreen mainScreen].bounds.size.width
+    // 第i个偏移量是 i * 0.1 * [UIScreen mainScreen].bounds.size.width
+    // 保证速度相同 ，每一个的速度都是[UIScreen mainScreen].bounds.size.width /每点
+    newPoint.x = - 80 -indexPath.row * 80 * 0.15;
+    cell.frame = CGRectMake(newPoint.x, newPoint.y, cell.frame.size.width, cell.frame.size.height);
+    [UIView animateWithDuration:(0.5 + 0.125 * indexPath.row) animations:^{
+        cell.frame = CGRectMake(oldPoint.x, oldPoint.y, cell.frame.size.width, cell.frame.size.height);
+    }];
+//    NSLog(@&quot;ld&quot;, indexPath.row);
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 20;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ZZCell *cell = [tableView dequeueReusableCellWithIdentifier:@&quot;cell&quot; forIndexPath:indexPath];
+    return cell;
+}
+
+
+@end
+</code></pre>
       
     </div>
 
@@ -271,17 +354,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/26/隐式动画/" rel="next" title="隐式动画">
-                <i class="fa fa-chevron-left"></i> 隐式动画
+              <a href="/2016/06/14/Tip-一次git冲突文件的简单解决/" rel="next" title="Tip:一次git冲突文件的简单解决">
+                <i class="fa fa-chevron-left"></i> Tip:一次git冲突文件的简单解决
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/03/MySQL的安装与配置/" rel="prev" title="MySQL的安装与配置">
-                MySQL的安装与配置 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -392,7 +471,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目标与思路"><span class="nav-number">1.</span> <span class="nav-text">目标与思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#执行动画的时机"><span class="nav-number">2.</span> <span class="nav-text">执行动画的时机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整demo"><span class="nav-number">3.</span> <span class="nav-text">完整demo</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
