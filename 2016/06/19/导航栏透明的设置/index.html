@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="读书笔记," />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -57,27 +57,22 @@
 
 
 
-<meta name="description" content="什么是隐式动画
-“所谓的隐式动画。之所以叫隐式是因为我们并没有指定任何动画的类型。我们仅仅改变了一个属性，然后Core Animation来决定如何并且何时去做动画”
-
-通俗的说，就是只需要改变layer的属性。CoreAnimation库自动帮你实现动画。相比于你考虑如何做一个动画，还不如考虑如何关闭动画。因为动画是不需要配置的，不要动画却需要配置。下面是一个简单的demo,点击按钮后，lay">
+<meta name="description" content="导航栏透明不能依靠alpha值viewController.navigationController.navigationBar.alpha = 0.0;
+一般视图都是利用alpha来设置透明度。这一套对于继承UIView的的navigationBar并不生效.设置后依然可以显示。实际上导航栏设置透明是只需设置NavigationBar的背景图片为一张空图片即可
+[self.navigationC">
 <meta property="og:type" content="article">
-<meta property="og:title" content="隐式动画">
-<meta property="og:url" content="http://yoursite.com/2016/03/26/隐式动画/index.html">
+<meta property="og:title" content="导航栏透明的设置">
+<meta property="og:url" content="http://yoursite.com/2016/06/19/导航栏透明的设置/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="什么是隐式动画
-“所谓的隐式动画。之所以叫隐式是因为我们并没有指定任何动画的类型。我们仅仅改变了一个属性，然后Core Animation来决定如何并且何时去做动画”
-
-通俗的说，就是只需要改变layer的属性。CoreAnimation库自动帮你实现动画。相比于你考虑如何做一个动画，还不如考虑如何关闭动画。因为动画是不需要配置的，不要动画却需要配置。下面是一个简单的demo,点击按钮后，lay">
-<meta property="og:image" content="http://img5.imgtn.bdimg.com/it/u=468612700,771848995&fm=21&gp=0.jpg">
-<meta property="og:updated_time" content="2016-03-26T10:30:38.000Z">
+<meta property="og:description" content="导航栏透明不能依靠alpha值viewController.navigationController.navigationBar.alpha = 0.0;
+一般视图都是利用alpha来设置透明度。这一套对于继承UIView的的navigationBar并不生效.设置后依然可以显示。实际上导航栏设置透明是只需设置NavigationBar的背景图片为一张空图片即可
+[self.navigationC">
+<meta property="og:updated_time" content="2016-06-19T12:40:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="隐式动画">
-<meta name="twitter:description" content="什么是隐式动画
-“所谓的隐式动画。之所以叫隐式是因为我们并没有指定任何动画的类型。我们仅仅改变了一个属性，然后Core Animation来决定如何并且何时去做动画”
-
-通俗的说，就是只需要改变layer的属性。CoreAnimation库自动帮你实现动画。相比于你考虑如何做一个动画，还不如考虑如何关闭动画。因为动画是不需要配置的，不要动画却需要配置。下面是一个简单的demo,点击按钮后，lay">
-<meta name="twitter:image" content="http://img5.imgtn.bdimg.com/it/u=468612700,771848995&fm=21&gp=0.jpg">
+<meta name="twitter:title" content="导航栏透明的设置">
+<meta name="twitter:description" content="导航栏透明不能依靠alpha值viewController.navigationController.navigationBar.alpha = 0.0;
+一般视图都是利用alpha来设置透明度。这一套对于继承UIView的的navigationBar并不生效.设置后依然可以显示。实际上导航栏设置透明是只需设置NavigationBar的背景图片为一张空图片即可
+[self.navigationC">
 
 
 
@@ -95,7 +90,7 @@
   };
 </script>
 
-  <title> 隐式动画 | 周明的技术博客 </title>
+  <title> 导航栏透明的设置 | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -217,7 +212,7 @@
             
             
               
-                隐式动画
+                导航栏透明的设置
               
             
           </h1>
@@ -229,8 +224,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-26T17:48:04+08:00" content="2016-03-26">
-              2016-03-26
+            <time itemprop="dateCreated" datetime="2016-06-19T15:00:31+08:00" content="2016-06-19">
+              2016-06-19
             </time>
           </span>
 
@@ -256,50 +251,10 @@
       
 
       
-        <p><img src="http://img5.imgtn.bdimg.com/it/u=468612700,771848995&amp;fm=21&amp;gp=0.jpg" alt="image"></p>
-<h3 id="什么是隐式动画"><a href="#什么是隐式动画" class="headerlink" title="什么是隐式动画"></a>什么是隐式动画</h3><blockquote>
-<p>“所谓的隐式动画。之所以叫隐式是因为我们并没有指定任何动画的类型。我们仅仅改变了一个属性，然后Core Animation来决定如何并且何时去做动画”</p>
-</blockquote>
-<p>通俗的说，就是只需要改变layer的属性。CoreAnimation库自动帮你实现动画。相比于你考虑如何做一个动画，还不如考虑如何关闭动画。因为动画是不需要配置的，不要动画却需要配置。下面是一个简单的demo,点击按钮后，layer的颜色经过一定时间动画后从蓝色变为红色。</p>
-<pre><code>#import &quot;ZZViewController.h&quot;
-
-@interface ZZViewController ()
-@property (nonatomic, strong) CALayer *layer;
-@end
-
-@implementation ZZViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button addTarget:self action:@selector(buttonDidPressed:) forControlEvents:UIControlEventTouchUpInside];
-    button.frame = CGRectMake(40, 40, 80, 80);
-    button.backgroundColor = [UIColor redColor];
-    [self.view addSubview:button];
-
-    CALayer *layer = [CALayer layer];
-    self.layer = layer;
-    self.layer.backgroundColor = [UIColor blueColor].CGColor;
-    self.layer.frame = CGRectMake(120, 120, 120, 120);
-    [self.view.layer addSublayer:self.layer];
-
-}
-
-- (void)buttonDidPressed:(UIButton *)button {
-    self.layer.backgroundColor = [UIColor redColor].CGColor;
-
-}
-
-@end
-</code></pre><h3 id="决定隐式动画执行时间的事务-CATransaction"><a href="#决定隐式动画执行时间的事务-CATransaction" class="headerlink" title="决定隐式动画执行时间的事务 CATransaction"></a>决定隐式动画执行时间的事务 CATransaction</h3><blockquote>
-<p>“但当你改变一个属性，Core Animation是如何判断动画类型和持续时间的呢？实际上动画执行的时间取决于当前事务的设置，动画类型取决于图层行为”</p>
-</blockquote>
-<p>在上面那个Demo中，有一个从蓝色到红色过度的动画。但是这远远不够，我们需要能够设置动画的执行时间。事务类可以实现。</p>
-<blockquote>
-<p>“事务是通过CATransaction类来做管理，这个类的设计有些奇怪，不像你从它的命名预期的那样去管理一个简单的事务，而是管理了一叠你不能访问的事务。CATransaction没有属性或者实例方法，并且也不能用+alloc和-init方法创建它。但是可以用+begin和+commit分别来入栈或者出栈。”</p>
-</blockquote>
-<p>简单的说，就是我们不能创建一个CATransaction对象。也不能访问一个CATransaction对象。只能通过类方法来实现一个事务对象的入栈和出栈。当添加到栈顶的事务，可以通过<code>+setAnimationDuration:</code></p>
-<p>总结的说，在隐私动画的执行过程中，需要配置</p>
+        <h2 id="导航栏透明不能依靠alpha值"><a href="#导航栏透明不能依靠alpha值" class="headerlink" title="导航栏透明不能依靠alpha值"></a>导航栏透明不能依靠alpha值</h2><pre><code>viewController.navigationController.navigationBar.alpha = 0.0;
+</code></pre><p>一般视图都是利用<code>alpha</code>来设置透明度。这一套对于继承<code>UIView</code>的的<code>navigationBar</code>并不生效.设置后依然可以显示。实际上导航栏设置透明是只需设置NavigationBar的背景图片为一张空图片即可</p>
+<pre><code>[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsCompact];
+</code></pre><h2 id="透明的导航栏还可以放置titleView-leftBarItem"><a href="#透明的导航栏还可以放置titleView-leftBarItem" class="headerlink" title="透明的导航栏还可以放置titleView leftBarItem"></a>透明的导航栏还可以放置<code>titleView</code> <code>leftBarItem</code></h2><p>在视图的概念中，如果设置<code>alpha</code> = 0后呈现透明效果后，其子视图也会透明。但是我们导航栏的透明并不是依赖｀<code>alpha</code> ＝ 0.而是依靠设置空白图片的方法。我们设置的titleView，leftBarItem依然可以显示。</p>
 
       
     </div>
@@ -314,7 +269,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/读书笔记/" rel="tag">#读书笔记</a>
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
           
         </div>
       
@@ -323,17 +278,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/20/UICollectionView Basic/" rel="next" title="UICollectionView Basic">
-                <i class="fa fa-chevron-left"></i> UICollectionView Basic
+              <a href="/2016/06/19/UITableViewCell-动画/" rel="next" title="UITableViewCell 动画">
+                <i class="fa fa-chevron-left"></i> UITableViewCell 动画
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/26/使用conrnerRadius主意点/" rel="prev" title="使用conrnerRadius主意点">
-                使用conrnerRadius主意点 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -444,7 +395,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是隐式动画"><span class="nav-number">1.</span> <span class="nav-text">什么是隐式动画</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#决定隐式动画执行时间的事务-CATransaction"><span class="nav-number">2.</span> <span class="nav-text">决定隐式动画执行时间的事务 CATransaction</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#导航栏透明不能依靠alpha值"><span class="nav-number">1.</span> <span class="nav-text">导航栏透明不能依靠alpha值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#透明的导航栏还可以放置titleView-leftBarItem"><span class="nav-number">2.</span> <span class="nav-text">透明的导航栏还可以放置titleView leftBarItem</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
