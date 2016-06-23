@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="iOS,视图使用，basic," />
+  <meta name="keywords" content="iOS," />
 
 
 
@@ -57,25 +57,25 @@
 
 
 
-<meta name="description" content="UICollectionView 作用UICollectionView是增强版的UITableView,可以认为是方便实现一行多个cell的tableView。另外利用自定义布局的配置，可以实现更加灵活的布局展示。
-UICollectionView的组成UICollectionView其实不单单指的UICollectionView的类。而是一系列类和协议的总称。下面我们分标题一一介绍。
-cell">
+<meta name="description" content="方法1 设置edgesForExtendedLayoutrootViewController.edgesForExtendedLayout = UIRectEdgeNone;
+viewController的左上角位置会在导航栏下面。
+方法2 设置导航栏不透明navigationController.navigationBar.translucent = NO;
+viewController的左上角">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UICollectionView Basic">
-<meta property="og:url" content="http://yoursite.com/2016/03/20/UICollectionView Basic/index.html">
+<meta property="og:title" content="让视图控制器的视图位置不要和导航栏重合的三种方法">
+<meta property="og:url" content="http://yoursite.com/2016/06/24/让视图控制器的视图位置不要和导航栏重合的三种方法/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="UICollectionView 作用UICollectionView是增强版的UITableView,可以认为是方便实现一行多个cell的tableView。另外利用自定义布局的配置，可以实现更加灵活的布局展示。
-UICollectionView的组成UICollectionView其实不单单指的UICollectionView的类。而是一系列类和协议的总称。下面我们分标题一一介绍。
-cell">
-<meta property="og:image" content="http://static.open-open.com/lib/uploadImg/20160126/20160126181554_540.gif">
-<meta property="og:image" content="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/CollectionViewPGforIOS/Art/flow_horiz_headers_2x.png">
-<meta property="og:updated_time" content="2016-06-10T16:16:12.000Z">
+<meta property="og:description" content="方法1 设置edgesForExtendedLayoutrootViewController.edgesForExtendedLayout = UIRectEdgeNone;
+viewController的左上角位置会在导航栏下面。
+方法2 设置导航栏不透明navigationController.navigationBar.translucent = NO;
+viewController的左上角">
+<meta property="og:updated_time" content="2016-06-23T16:56:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="UICollectionView Basic">
-<meta name="twitter:description" content="UICollectionView 作用UICollectionView是增强版的UITableView,可以认为是方便实现一行多个cell的tableView。另外利用自定义布局的配置，可以实现更加灵活的布局展示。
-UICollectionView的组成UICollectionView其实不单单指的UICollectionView的类。而是一系列类和协议的总称。下面我们分标题一一介绍。
-cell">
-<meta name="twitter:image" content="http://static.open-open.com/lib/uploadImg/20160126/20160126181554_540.gif">
+<meta name="twitter:title" content="让视图控制器的视图位置不要和导航栏重合的三种方法">
+<meta name="twitter:description" content="方法1 设置edgesForExtendedLayoutrootViewController.edgesForExtendedLayout = UIRectEdgeNone;
+viewController的左上角位置会在导航栏下面。
+方法2 设置导航栏不透明navigationController.navigationBar.translucent = NO;
+viewController的左上角">
 
 
 
@@ -93,7 +93,7 @@ cell">
   };
 </script>
 
-  <title> UICollectionView Basic | 周明的技术博客 </title>
+  <title> 让视图控制器的视图位置不要和导航栏重合的三种方法 | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -215,7 +215,7 @@ cell">
             
             
               
-                UICollectionView Basic
+                让视图控制器的视图位置不要和导航栏重合的三种方法
               
             
           </h1>
@@ -227,8 +227,8 @@ cell">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-20T13:06:15+08:00" content="2016-03-20">
-              2016-03-20
+            <time itemprop="dateCreated" datetime="2016-06-24T00:51:13+08:00" content="2016-06-24">
+              2016-06-24
             </time>
           </span>
 
@@ -254,35 +254,12 @@ cell">
       
 
       
-        <p><img src="http://static.open-open.com/lib/uploadImg/20160126/20160126181554_540.gif" alt="image"></p>
-<h2 id="UICollectionView-作用"><a href="#UICollectionView-作用" class="headerlink" title="UICollectionView 作用"></a>UICollectionView 作用</h2><p>UICollectionView是增强版的UITableView,可以认为是方便实现一行多个cell的tableView。另外利用自定义布局的配置，可以实现更加灵活的布局展示。</p>
-<h2 id="UICollectionView的组成"><a href="#UICollectionView的组成" class="headerlink" title="UICollectionView的组成"></a>UICollectionView的组成</h2><p>UICollectionView其实不单单指的UICollectionView的类。而是一系列类和协议的总称。下面我们分标题一一介绍。</p>
-<h3 id="cells"><a href="#cells" class="headerlink" title="cells"></a>cells</h3><p>类似UITableViewCell,不过在collectionview中一行可以显示多个collectionviewcell,要定制化它，最佳实践也和UITableViewCell一样，子类化collectionviewcell.这个cell的是数据驱动的，即要展示什么内容并不是由自己负责，而是提供数据的类。要创建多少cell也是根据数据决定，数据item的个数决定了view的个数。在UITableView中，这个类就是遵从UITableViewDataSource的类。在UICollectionView中这个类就是遵从UICollectionViewDataSource的类。对于UICollectionViewDataSource 协议，我会在UICollectionViewDataSource中对其功能做详细的介绍。另外和tableview一样。对于用户操作cell产生的一些行为，我们也移交给遵从另外一个协议的类。也许你也猜到了。这个类就是UICollectionViewDelegate.实际来说，学习UICollectionView最基本的元素就是UICollectionViewCell。而cell的数据来源于UICollectionViewDataSource,其UICollectionViewDataSource协议的实现才是我们的关注重点。如果用户还需要操作cell后的一些反馈，那么就依靠UICollectionViewDelegate来了。从设计思想来说。我们把内容逻辑的处理，展示内容，cell的反馈处理。分别由三个类来承担了。达到了去耦的目的。这对于比较复杂视图是需要的。而普通的UILabel,UIButton就不需要这样复杂的设计了。</p>
-<h3 id="supplementary-views"><a href="#supplementary-views" class="headerlink" title="supplementary views"></a>supplementary views</h3><p>和collectionviewcell类似，supplementary views是数据驱动的。和collectionviewcell，不同这个对象并不是必须的。collectionviewcell的创建多少个和要显示的数据内容也依然依靠的是遵从UICollectionViewDataSource的类。在UICollectionViewDataSource协议中，<br><code>- collectionView:viewForSupplementaryElementOfKind:atIndexPath:</code>是个可选方法。其实通俗的讲。supplementary views就是tableview的header和footer.一个section可以配置一个section或者footer。至于标示header或者footer就依靠的是viewForSupplementaryElementOfKind的参数值</p>
-<h3 id="Decoration-views"><a href="#Decoration-views" class="headerlink" title="Decoration views"></a>Decoration views</h3><p>Decoration并不是数据驱动的，和UICollectionViewDataSource毫无关联</p>
-<h3 id="UICollectionViewDataSource"><a href="#UICollectionViewDataSource" class="headerlink" title="UICollectionViewDataSource"></a>UICollectionViewDataSource</h3><p>数据源协议回到了三个问题</p>
-<ul>
-<li>How many sections does the collection view contain?</li>
-<li>For a given section, how many items does a section contain?</li>
-<li>For a given section or item, what views should be used to display the corresponding content?</li>
-</ul>
-<p>UICollectionViewDataSource的实现是UICollectionView的核心。无论从设计思维上来看，和实际应用的角度。<br>其中有两个协议是必须实现的。它们是</p>
-<h3 id="UICollectionViewDelegate"><a href="#UICollectionViewDelegate" class="headerlink" title="UICollectionViewDelegate"></a>UICollectionViewDelegate</h3><h3 id="UICollectionViewFlowLayout"><a href="#UICollectionViewFlowLayout" class="headerlink" title="UICollectionViewFlowLayout"></a>UICollectionViewFlowLayout</h3><p>UITableView中，UITableViewCell都是单一的排布顺序。即从上到下。顺序排布。而UICollectionView中，可以实现非常灵活的排布。依靠的类就是UICollectionViewFlowLayout类。它的任务就是1.配置滚动方向。2.配置cell间隔。3.配置supplementary尺寸。其实使用UICollectionViewFlowLayout方法十分简单。<br>滚动方法有两种。一种是垂直的，一种是水平的。默认是垂直的。下面是垂直的时候的样子。</p>
-<p><img src="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/CollectionViewPGforIOS/Art/flow_horiz_headers_2x.png" alt="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/CollectionViewPGforIOS/Art/flow_horiz_headers_2x.png
-"><br>FlowLayout流程</p>
-<ul>
-<li>创建flow layout对象和赋值给collectionview对象（注意手写代码的时候，创建collectionview必须传入这个对象）</li>
-<li>配置cell的宽度和高度</li>
-<li>创建行间隔和item间隔</li>
-<li>如果需要设置headers和footers，指定它们的尺寸。</li>
-</ul>
-<h2 id="collectionview基本流程"><a href="#collectionview基本流程" class="headerlink" title="collectionview基本流程"></a>collectionview基本流程</h2><p>实现一个collectionview，最少意义上要做这些步骤。</p>
-<pre><code>0.创建UICollectionViewFlowLayout对象
-1.创建UICollectionview对象        
-2.设定UICollectionview对象的数据源委托，如有需要，设定视图委托，和布局委托
-3.实现UICollectionview对象的数据委托协议方法。如有需要，设定视图委托，和布局委托方法。
-</code></pre><p>在basic一节中，我打算用两个例子,分别用sb和纯代码来展现这些流程。第一个demo是官方demo.</p>
-<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p><a href="https://developer.apple.com/library/ios/samplecode/CollectionView-Simple/Introduction/Intro.html" target="_blank" rel="external">https://developer.apple.com/library/ios/samplecode/CollectionView-Simple/Introduction/Intro.html</a></p>
+        <h2 id="方法1-设置edgesForExtendedLayout"><a href="#方法1-设置edgesForExtendedLayout" class="headerlink" title="方法1 设置edgesForExtendedLayout"></a>方法1 设置edgesForExtendedLayout</h2><pre><code>rootViewController.edgesForExtendedLayout = UIRectEdgeNone;
+</code></pre><p>viewController的左上角位置会在导航栏下面。</p>
+<h2 id="方法2-设置导航栏不透明"><a href="#方法2-设置导航栏不透明" class="headerlink" title="方法2 设置导航栏不透明"></a>方法2 设置导航栏不透明</h2><pre><code>navigationController.navigationBar.translucent = NO;
+</code></pre><p>viewController的左上角位置会在导航栏下面，会影响其导航控制器的其他子视图也下降。</p>
+<h2 id="方法3-所有的子视图都为viewController-view留白。"><a href="#方法3-所有的子视图都为viewController-view留白。" class="headerlink" title="方法3 所有的子视图都为viewController.view留白。"></a>方法3 所有的子视图都为viewController.view留白。</h2><p>所有子视图都从y＝64开始算起。不把子视图放在y = 64更小的位置.看起来viewController.view变小了</p>
+<p>这种方法最不可取。</p>
 
       
     </div>
@@ -297,7 +274,7 @@ cell">
       
         <div class="post-tags">
           
-            <a href="/tags/iOS-视图使用，basic/" rel="tag">#iOS,视图使用，basic</a>
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
           
         </div>
       
@@ -306,17 +283,13 @@ cell">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/20/侧边栏的实现/" rel="next" title="侧边栏的实现">
-                <i class="fa fa-chevron-left"></i> 侧边栏的实现
+              <a href="/2016/06/19/导航栏透明的设置/" rel="next" title="导航栏透明的设置">
+                <i class="fa fa-chevron-left"></i> 导航栏透明的设置
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/26/隐式动画/" rel="prev" title="隐式动画">
-                隐式动画 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -427,7 +400,7 @@ cell">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#UICollectionView-作用"><span class="nav-number">1.</span> <span class="nav-text">UICollectionView 作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UICollectionView的组成"><span class="nav-number">2.</span> <span class="nav-text">UICollectionView的组成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cells"><span class="nav-number">2.1.</span> <span class="nav-text">cells</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#supplementary-views"><span class="nav-number">2.2.</span> <span class="nav-text">supplementary views</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Decoration-views"><span class="nav-number">2.3.</span> <span class="nav-text">Decoration views</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UICollectionViewDataSource"><span class="nav-number">2.4.</span> <span class="nav-text">UICollectionViewDataSource</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UICollectionViewDelegate"><span class="nav-number">2.5.</span> <span class="nav-text">UICollectionViewDelegate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UICollectionViewFlowLayout"><span class="nav-number">2.6.</span> <span class="nav-text">UICollectionViewFlowLayout</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#collectionview基本流程"><span class="nav-number">3.</span> <span class="nav-text">collectionview基本流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demo"><span class="nav-number">4.</span> <span class="nav-text">Demo</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法1-设置edgesForExtendedLayout"><span class="nav-number">1.</span> <span class="nav-text">方法1 设置edgesForExtendedLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法2-设置导航栏不透明"><span class="nav-number">2.</span> <span class="nav-text">方法2 设置导航栏不透明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法3-所有的子视图都为viewController-view留白。"><span class="nav-number">3.</span> <span class="nav-text">方法3 所有的子视图都为viewController.view留白。</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

@@ -214,6 +214,123 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/25/RunLoop之作用篇/" itemprop="url">
+                  RunLoop之作用篇
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-25T00:29:36+08:00" content="2016-05-25">
+              2016-05-25
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="命令式执行与事件驱动"><a href="#命令式执行与事件驱动" class="headerlink" title="命令式执行与事件驱动"></a>命令式执行与事件驱动</h2><p>首先我们来看看命令行代码  </p>
+<pre><code>int main(int argc, char *argv[]) {
+    NSLog(@&quot;hello world&quot;);
+    return 0;
+}
+</code></pre><p>执行完了就程序结束。我们回想一下平时使用的手机应用程序，并非如此。可以不断的响应用户的操作，用户不做任何操作的时候，程序也不会终止。为了实现上面两个目标，实际的手机应用程序用伪代码来表示基本可以认为是这样的</p>
+<pre><code>int main(int argc, char *argv[]) {
+    while(AppIsRunning) {
+        id whoWakeMe = SleepForWakingup();
+        id event = GetEvent(whoWakeMe);
+        Handle(event);
+    }
+    return 0;
+}
+</code></pre><p>通过死循环。如果没事的时候，就处于休眠状态。如果有事件，就将其唤醒，然后去处理这个事件。</p>
+<h3 id="为什么需要RunLoop"><a href="#为什么需要RunLoop" class="headerlink" title="为什么需要RunLoop"></a>为什么需要RunLoop</h3><ol>
+<li>让程序一直运行并接受用户输入</li>
+<li>决定何时处理哪些事件Event</li>
+<li>调用解耦？</li>
+<li>节省CPU时间，没事的时候闲着，不让cpu执行它。</li>
+</ol>
+<h3 id="RunLoop到底是什么？"><a href="#RunLoop到底是什么？" class="headerlink" title="RunLoop到底是什么？"></a>RunLoop到底是什么？</h3><blockquote>
+<p> RunLoop 实际上就是一个对象，这个对象管理了其需要处理的事件和消息，并提供了一个入口函数来执行上面 Event Loop 的逻辑。线程执行了这个函数后，就会一直处于这个函数内部 “接受消息-&gt;等待-&gt;处理” 的循环中，直到这个循环结束（比如传入 quit 的消息），函数返回。</p>
+<p>OSX/iOS 系统中，提供了两个这样的对象：NSRunLoop 和 CFRunLoopRef。<br>CFRunLoopRef 是在 CoreFoundation 框架内的，它提供了纯 C 函数的 API，所有这些 API 都是线程安全的。<br>NSRunLoop 是基于 CFRunLoopRef 的封装，属于Foundation框架。提供了面向对象的 API，但是这些 API 不是线程安全的。</p>
+</blockquote>
+<h3 id="RunLoop-与线程的关系"><a href="#RunLoop-与线程的关系" class="headerlink" title="RunLoop 与线程的关系"></a>RunLoop 与线程的关系</h3><blockquote>
+<p>首先，iOS 开发中能遇到两个线程对象: pthread_t 和 NSThread。过去苹果有份文档标明了 NSThread 只是 pthread_t 的封装，但那份文档已经失效了，现在它们也有可能都是直接包装自最底层的 mach thread。苹果并没有提供这两个对象相互转换的接口，但不管怎么样，可以肯定的是 pthread_t 和 NSThread 是一一对应的。比如，你可以通过 pthread_main_np() 或 [NSThread mainThread] 来获取主线程；也可以通过 pthread_self() 或 [NSThread currentThread] 来获取当前线程。<strong>CFRunLoop 是基于 pthread 来管理的</strong>。</p>
+<p>线程和 RunLoop 之间是一一对应的，其关系是保存在一个全局的 Dictionary 里。线程刚创建时并没有 RunLoop，如果你不主动获取，那它一直都不会有。RunLoop 的创建是发生在第一次获取时，RunLoop 的销毁是发生在线程结束时。你<strong>只能在一个线程的内部获取其 RunLoop</strong>（主线程除外）。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/24/Masonry手写约束之Demo篇/" itemprop="url">
                   Masonry手写约束之Demo篇
                 </a>
@@ -721,98 +838,6 @@ jaime@westeros:~/helloworld$ git push sae master:1
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/09/UITableView的一些注意事项/" itemprop="url">
-                  UITableView的一些注意事项
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-09T23:19:55+08:00" content="2016-04-09">
-              2016-04-09
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="实现cell之间的间距"><a href="#实现cell之间的间距" class="headerlink" title="实现cell之间的间距"></a>实现cell之间的间距</h3><p>有两种常见的方案。<br>1.利用section.不同的section之间可以设置footerView和headerView。通过设置footerView和headerView来实现间距<br>2.将cell的背景色设置比要展示的内容高。那样看起来就有部分间距。</p>
-<h3 id="不要在UITableView中嵌套UITableView。"><a href="#不要在UITableView中嵌套UITableView。" class="headerlink" title="不要在UITableView中嵌套UITableView。"></a>不要在UITableView中嵌套UITableView。</h3><p>理论上说，UITableView中是可以嵌套UITableView的。但是实际上这样做会产生很多问题。</p>
-<h3 id="TableView的Header不滚动出显示区域"><a href="#TableView的Header不滚动出显示区域" class="headerlink" title="TableView的Header不滚动出显示区域"></a>TableView的Header不滚动出显示区域</h3><p>当设置plain风格的时候，Header不会和cell一样滚出屏幕显示区域。设置group风格即可。</p>
-<pre><code>self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -859,7 +884,7 @@ jaime@westeros:~/helloworld$ git push sae master:1
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

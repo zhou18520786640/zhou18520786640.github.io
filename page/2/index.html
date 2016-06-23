@@ -214,6 +214,104 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/04/一周技术小结/" itemprop="url">
+                  一周实践小结
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-04T08:23:09+08:00" content="2016-06-04">
+              2016-06-04
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="主动实践的被动学习"><a href="#主动实践的被动学习" class="headerlink" title="主动实践的被动学习"></a>主动实践的被动学习</h3><pre><code>在实际工作中会遇到一些知识的盲点和积累一些经验，这里做一点简单的总结。
+</code></pre><h3 id="不要试图使用button-titleLabel-text来读写button的显示内容？"><a href="#不要试图使用button-titleLabel-text来读写button的显示内容？" class="headerlink" title="不要试图使用button.titleLabel.text来读写button的显示内容？"></a>不要试图使用<code>button.titleLabel.text</code>来读写button的显示内容？</h3><p>我们都知道使用button要显示一个值的时候。不能类似cell一样调用<code>cell.textLabel.text = @&quot;123123&quot;;</code>来调用<br><code>button.titleLabel.text = @&quot;rrr&quot;</code>(虽然有时候有效),正确的写的方法应该是 <code>[button setTitle:@&quot;我是按钮&quot; forState:UIControlStateNormal];</code>.</p>
+<p><strong>同时读的操作也不该使用<code>button.titleLabel.text</code>来获取其显示内容。<code>[button titleForState:UIControlStateNormal]</code>是更加稳妥的方案。
+</strong><code>button.titleLabel.&lt;#property#&gt;</code>是用于设置title的颜色和字体大小等。如<code>button.titleLabel.textColor</code>等。</p>
+<h3 id="手写collectionview一定要在初始化对象的时候传入UICollectionViewFlowLayout对象"><a href="#手写collectionview一定要在初始化对象的时候传入UICollectionViewFlowLayout对象" class="headerlink" title="手写collectionview一定要在初始化对象的时候传入UICollectionViewFlowLayout对象"></a>手写<code>collectionview</code>一定要在初始化对象的时候传入<code>UICollectionViewFlowLayout</code>对象</h3><h3 id="只有在iOS8下才可以使用自动布局-xib下来自动布局tableViewcell"><a href="#只有在iOS8下才可以使用自动布局-xib下来自动布局tableViewcell" class="headerlink" title="只有在iOS8下才可以使用自动布局+xib下来自动布局tableViewcell"></a>只有在iOS8下才可以使用自动布局+xib下来自动布局tableViewcell</h3><h3 id="拖入xib后的控件视图宽度不一定等于屏幕宽度？"><a href="#拖入xib后的控件视图宽度不一定等于屏幕宽度？" class="headerlink" title="拖入xib后的控件视图宽度不一定等于屏幕宽度？"></a>拖入xib后的控件视图宽度不一定等于屏幕宽度？</h3><p>拖入xib后的视图控件的宽度不一定等于当前屏幕的宽度。<br>需求场景如下。我现在有一个ImageView 几个UILabel.放置顺序是从上到下。imageView对齐。其他Label和imageView左对齐。我设定UIImageView居中后。只是把Label放在和uiimageview同样x的位置。然后设定它们与父视图的位置的约束。因为屏幕的宽度和xib view宽度不一致。程序运行后，label还是保持原来的位置。uiimageview为了居中，会向左偏移。实际上uiimageview的位置才是我真正需要的位置。我应该设定uiimageview后。其他label都和uiimageview左对齐才对。并且保险的方案是将xib中的根视图的宽度调节到一致。</p>
+<h3 id="为什么RAC中叫做双向绑定而不是双向赋值？"><a href="#为什么RAC中叫做双向绑定而不是双向赋值？" class="headerlink" title="为什么RAC中叫做双向绑定而不是双向赋值？"></a>为什么RAC中叫做双向绑定而不是双向赋值？</h3><p>因为rac中有一个响应式概念。对一个对象的属性做持续的观察而并不是简简单单的只是一次赋值操作<br>如命令式编程中<br><code>label.text = model.text;</code> // model的text再赋予新的值不会影响label的显示值。<br>rac中对model的属性进行监听。然后将信号的输出反馈给<code>label</code>，就是绑定model的属性。因为model的text在model生命周期内任何一次变化都会反馈给<code>label</code>.而双向绑定就是说身为视图角色的view的属性也可以被监听。</p>
+<h3 id="xib和自动布局不适用一些场景？"><a href="#xib和自动布局不适用一些场景？" class="headerlink" title="xib和自动布局不适用一些场景？"></a>xib和自动布局不适用一些场景？</h3><p>复杂的动画不适用于。cell的高度计算在iOS8以下。UITableViewCell,UICollectionViewCell的变动很剧烈的场景。复杂的布局场景不太适用于。复杂的视图层次也不利于调试。</p>
+<h3 id="如果工时的估计还缺乏必要的关键条件。可以给PMO说一下要等会儿再给他答复。"><a href="#如果工时的估计还缺乏必要的关键条件。可以给PMO说一下要等会儿再给他答复。" class="headerlink" title="如果工时的估计还缺乏必要的关键条件。可以给PMO说一下要等会儿再给他答复。"></a>如果工时的估计还缺乏必要的关键条件。可以给PMO说一下要等会儿再给他答复。</h3><h3 id="自定义导航条的一些方法？"><a href="#自定义导航条的一些方法？" class="headerlink" title="自定义导航条的一些方法？"></a>自定义导航条的一些方法？</h3><p>1.可以隐藏系统的导航条。然后贴一个自己的view,注意要在合适的时机隐藏或者显示导航条。<br>2.使用运行时。这个专门写一篇文章分析</p>
+<h3 id="简单的东西一学就会，复杂的东西一学不会？"><a href="#简单的东西一学就会，复杂的东西一学不会？" class="headerlink" title="简单的东西一学就会，复杂的东西一学不会？"></a>简单的东西一学就会，复杂的东西一学不会？</h3><p>简单的东西我一学就会，一些小技巧，小tips用的得心应手。但是这些都是<code>术</code>的范畴。对于复杂的东西，如架构设计 运行时之类的每一次只是浅尝一下就放在一边了。这种可以上升到<code>艺</code>的东西还是按照学习小tip的方法来实践显然是没有效果的的。要花时间来实践提高我自己<code>艺</code>的学习方法。现在暂时想到的方法步骤是1.看国内demo 2.看国内教程 3.实践写玩具应用，同时不断google 4.看官方文档 5.在1，2，3，4过程中不断问老司机。6.在1，2，3，4，5中不断写个人技术文档 7.把任务或者分阶段来设定目标</p>
+<h3 id="向别人学习学习其学习方法比学习知识更能受益"><a href="#向别人学习学习其学习方法比学习知识更能受益" class="headerlink" title="向别人学习学习其学习方法比学习知识更能受益"></a>向别人学习学习其学习方法比学习知识更能受益</h3><p>学习别人的学习方法，如果适用自己，就果断使用。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/01/UITableView复用机制浅析/" itemprop="url">
                   UITableView复用机制浅析
                 </a>
@@ -706,123 +804,6 @@ if (cell == nil) {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/25/RunLoop之作用篇/" itemprop="url">
-                  RunLoop之作用篇
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-25T00:29:36+08:00" content="2016-05-25">
-              2016-05-25
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="命令式执行与事件驱动"><a href="#命令式执行与事件驱动" class="headerlink" title="命令式执行与事件驱动"></a>命令式执行与事件驱动</h2><p>首先我们来看看命令行代码  </p>
-<pre><code>int main(int argc, char *argv[]) {
-    NSLog(@&quot;hello world&quot;);
-    return 0;
-}
-</code></pre><p>执行完了就程序结束。我们回想一下平时使用的手机应用程序，并非如此。可以不断的响应用户的操作，用户不做任何操作的时候，程序也不会终止。为了实现上面两个目标，实际的手机应用程序用伪代码来表示基本可以认为是这样的</p>
-<pre><code>int main(int argc, char *argv[]) {
-    while(AppIsRunning) {
-        id whoWakeMe = SleepForWakingup();
-        id event = GetEvent(whoWakeMe);
-        Handle(event);
-    }
-    return 0;
-}
-</code></pre><p>通过死循环。如果没事的时候，就处于休眠状态。如果有事件，就将其唤醒，然后去处理这个事件。</p>
-<h3 id="为什么需要RunLoop"><a href="#为什么需要RunLoop" class="headerlink" title="为什么需要RunLoop"></a>为什么需要RunLoop</h3><ol>
-<li>让程序一直运行并接受用户输入</li>
-<li>决定何时处理哪些事件Event</li>
-<li>调用解耦？</li>
-<li>节省CPU时间，没事的时候闲着，不让cpu执行它。</li>
-</ol>
-<h3 id="RunLoop到底是什么？"><a href="#RunLoop到底是什么？" class="headerlink" title="RunLoop到底是什么？"></a>RunLoop到底是什么？</h3><blockquote>
-<p> RunLoop 实际上就是一个对象，这个对象管理了其需要处理的事件和消息，并提供了一个入口函数来执行上面 Event Loop 的逻辑。线程执行了这个函数后，就会一直处于这个函数内部 “接受消息-&gt;等待-&gt;处理” 的循环中，直到这个循环结束（比如传入 quit 的消息），函数返回。</p>
-<p>OSX/iOS 系统中，提供了两个这样的对象：NSRunLoop 和 CFRunLoopRef。<br>CFRunLoopRef 是在 CoreFoundation 框架内的，它提供了纯 C 函数的 API，所有这些 API 都是线程安全的。<br>NSRunLoop 是基于 CFRunLoopRef 的封装，属于Foundation框架。提供了面向对象的 API，但是这些 API 不是线程安全的。</p>
-</blockquote>
-<h3 id="RunLoop-与线程的关系"><a href="#RunLoop-与线程的关系" class="headerlink" title="RunLoop 与线程的关系"></a>RunLoop 与线程的关系</h3><blockquote>
-<p>首先，iOS 开发中能遇到两个线程对象: pthread_t 和 NSThread。过去苹果有份文档标明了 NSThread 只是 pthread_t 的封装，但那份文档已经失效了，现在它们也有可能都是直接包装自最底层的 mach thread。苹果并没有提供这两个对象相互转换的接口，但不管怎么样，可以肯定的是 pthread_t 和 NSThread 是一一对应的。比如，你可以通过 pthread_main_np() 或 [NSThread mainThread] 来获取主线程；也可以通过 pthread_self() 或 [NSThread currentThread] 来获取当前线程。<strong>CFRunLoop 是基于 pthread 来管理的</strong>。</p>
-<p>线程和 RunLoop 之间是一一对应的，其关系是保存在一个全局的 Dictionary 里。线程刚创建时并没有 RunLoop，如果你不主动获取，那它一直都不会有。RunLoop 的创建是发生在第一次获取时，RunLoop 的销毁是发生在线程结束时。你<strong>只能在一个线程的内部获取其 RunLoop</strong>（主线程除外）。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -869,7 +850,7 @@ if (cell == nil) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
