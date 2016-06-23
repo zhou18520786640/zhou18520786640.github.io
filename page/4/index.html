@@ -214,6 +214,119 @@
             
               
                 
+                <a class="post-title-link" href="/2016/04/10/使用新浪云来部署python应用/" itemprop="url">
+                  使用新浪云来部署python应用
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-10T12:00:31+08:00" content="2016-04-10">
+              2016-04-10
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="注册新浪云和添加应用"><a href="#注册新浪云和添加应用" class="headerlink" title="注册新浪云和添加应用"></a>注册新浪云和添加应用</h3><p>进入<a href="http://www.sinacloud.com/" target="_blank" rel="external">http://www.sinacloud.com/</a>,使用sina帐号登录后，点击进入用户中心<br><img src="http://7xsf79.com1.z0.glb.clouddn.com/fff.png" alt="image">。选择云应用。<br><img src="http://7xsf79.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-04-10%2012.24.28.png" alt="image">。<br>然后进入控制台。添加应用即可。注意选择部署环境为python.配置如下<br><img src="http://7xsf79.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-04-10%2012.27.25.png" alt="image"></p>
+<h3 id="部署python代码"><a href="#部署python代码" class="headerlink" title="部署python代码"></a>部署python代码</h3><h4 id="编辑应用代码"><a href="#编辑应用代码" class="headerlink" title="编辑应用代码"></a>编辑应用代码</h4><p>进入我们的应用，使用git作为版本部署工具。实现一个简单的helloword程序。我们的思路是在本地创建我们的代码工程。然后push到新浪云应用中去。    这里本地我们只需要编写两个文件 config.yaml  index.wsgi。分别作为应用程序的配置文件和程序入口文件</p>
+<p>config.yaml文件内容如下</p>
+<pre><code>name: helloworld
+version: 1
+</code></pre><p>index.wsgi文件如下</p>
+<pre><code>import sae
+
+def app(environ, start_response):
+    status = &apos;200 OK&apos;
+    response_headers = [(&apos;Content-type&apos;, &apos;text/plain&apos;)]
+    start_response(status, response_headers)
+    return [&apos;Hello, world!&apos;]
+
+application = sae.create_wsgi_app(app)
+</code></pre><p>将这两个文件放在一个文件夹下（如helloword）.整个文件的编写就完成了。</p>
+<h4 id="部署应用"><a href="#部署应用" class="headerlink" title="部署应用"></a>部署应用</h4><p>我们选择Git作为部署工具。</p>
+<p>首先，创建一个Git代码仓库，将刚才的代码提交到Git仓库中。</p>
+<pre><code>jaime@westeros:~/helloworld$ git init
+jaime@westeros:~/helloworld$ git add .
+jaime@westeros:~/helloworld$ git commit -m &apos;Initial commit&apos;
+</code></pre><p>然后，添加一个新的Git远程仓库sae，地址为： <a href="https://git.sinacloud.com/应用名" target="_blank" rel="external">https://git.sinacloud.com/应用名</a> ，然后将刚才提交的代码推到远程Git仓库的分支1中。</p>
+<pre><code>jaime@westeros:~/helloworld$ git remote add sae https://git.sinacloud.com/helloworld
+jaime@westeros:~/helloworld$ git push sae master:1
+</code></pre><p>这时，需要输入帐号和密码，<b>千万注意不是输入</b>新浪的帐号和密码，而是<font color="red">安全帐号邮箱和安全帐号密码</font>,如果不知道，可以进入用户中心的自己的帐号下查询<br>至此，整个代码的部署就完成了，在浏览器中输入 <code>http://helloword.applinzi.com</code>,注意不是官网说的 <code>http://helloworld.sinaapp.com</code> ,就可以访问刚提交的应用了。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/04/09/UITableView的一些注意事项/" itemprop="url">
                   UITableView的一些注意事项
                 </a>
@@ -602,129 +715,12 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/20/UICollectionView Basic/" itemprop="url">
-                  UICollectionView Basic
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-20T13:06:15+08:00" content="2016-03-20">
-              2016-03-20
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="http://static.open-open.com/lib/uploadImg/20160126/20160126181554_540.gif" alt="image"></p>
-<h2 id="UICollectionView-作用"><a href="#UICollectionView-作用" class="headerlink" title="UICollectionView 作用"></a>UICollectionView 作用</h2><p>UICollectionView是增强版的UITableView,可以认为是方便实现一行多个cell的tableView。另外利用自定义布局的配置，可以实现更加灵活的布局展示。</p>
-<h2 id="UICollectionView的组成"><a href="#UICollectionView的组成" class="headerlink" title="UICollectionView的组成"></a>UICollectionView的组成</h2><p>UICollectionView其实不单单指的UICollectionView的类。而是一系列类和协议的总称。下面我们分标题一一介绍。</p>
-<h3 id="cells"><a href="#cells" class="headerlink" title="cells"></a>cells</h3><p>类似UITableViewCell,不过在collectionview中一行可以显示多个collectionviewcell,要定制化它，最佳实践也和UITableViewCell一样，子类化collectionviewcell.这个cell的是数据驱动的，即要展示什么内容并不是由自己负责，而是提供数据的类。要创建多少cell也是根据数据决定，数据item的个数决定了view的个数。在UITableView中，这个类就是遵从UITableViewDataSource的类。在UICollectionView中这个类就是遵从UICollectionViewDataSource的类。对于UICollectionViewDataSource 协议，我会在UICollectionViewDataSource中对其功能做详细的介绍。另外和tableview一样。对于用户操作cell产生的一些行为，我们也移交给遵从另外一个协议的类。也许你也猜到了。这个类就是UICollectionViewDelegate.实际来说，学习UICollectionView最基本的元素就是UICollectionViewCell。而cell的数据来源于UICollectionViewDataSource,其UICollectionViewDataSource协议的实现才是我们的关注重点。如果用户还需要操作cell后的一些反馈，那么就依靠UICollectionViewDelegate来了。从设计思想来说。我们把内容逻辑的处理，展示内容，cell的反馈处理。分别由三个类来承担了。达到了去耦的目的。这对于比较复杂视图是需要的。而普通的UILabel,UIButton就不需要这样复杂的设计了。</p>
-<h3 id="supplementary-views"><a href="#supplementary-views" class="headerlink" title="supplementary views"></a>supplementary views</h3><p>和collectionviewcell类似，supplementary views是数据驱动的。和collectionviewcell，不同这个对象并不是必须的。collectionviewcell的创建多少个和要显示的数据内容也依然依靠的是遵从UICollectionViewDataSource的类。在UICollectionViewDataSource协议中，<br><code>- collectionView:viewForSupplementaryElementOfKind:atIndexPath:</code>是个可选方法。其实通俗的讲。supplementary views就是tableview的header和footer.一个section可以配置一个section或者footer。至于标示header或者footer就依靠的是viewForSupplementaryElementOfKind的参数值</p>
-<h3 id="Decoration-views"><a href="#Decoration-views" class="headerlink" title="Decoration views"></a>Decoration views</h3><p>Decoration并不是数据驱动的，和UICollectionViewDataSource毫无关联</p>
-<h3 id="UICollectionViewDataSource"><a href="#UICollectionViewDataSource" class="headerlink" title="UICollectionViewDataSource"></a>UICollectionViewDataSource</h3><p>数据源协议回到了三个问题</p>
-<ul>
-<li>How many sections does the collection view contain?</li>
-<li>For a given section, how many items does a section contain?</li>
-<li>For a given section or item, what views should be used to display the corresponding content?</li>
-</ul>
-<p>UICollectionViewDataSource的实现是UICollectionView的核心。无论从设计思维上来看，和实际应用的角度。<br>其中有两个协议是必须实现的。它们是</p>
-<h3 id="UICollectionViewDelegate"><a href="#UICollectionViewDelegate" class="headerlink" title="UICollectionViewDelegate"></a>UICollectionViewDelegate</h3><h3 id="UICollectionViewFlowLayout"><a href="#UICollectionViewFlowLayout" class="headerlink" title="UICollectionViewFlowLayout"></a>UICollectionViewFlowLayout</h3><p>UITableView中，UITableViewCell都是单一的排布顺序。即从上到下。顺序排布。而UICollectionView中，可以实现非常灵活的排布。依靠的类就是UICollectionViewFlowLayout类。它的任务就是1.配置滚动方向。2.配置cell间隔。3.配置supplementary尺寸。其实使用UICollectionViewFlowLayout方法十分简单。<br>滚动方法有两种。一种是垂直的，一种是水平的。默认是垂直的。下面是垂直的时候的样子。</p>
-<p><img src="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/CollectionViewPGforIOS/Art/flow_horiz_headers_2x.png" alt="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/CollectionViewPGforIOS/Art/flow_horiz_headers_2x.png
-"><br>FlowLayout流程</p>
-<ul>
-<li>创建flow layout对象和赋值给collectionview对象（注意手写代码的时候，创建collectionview必须传入这个对象）</li>
-<li>配置cell的宽度和高度</li>
-<li>创建行间隔和item间隔</li>
-<li>如果需要设置headers和footers，指定它们的尺寸。</li>
-</ul>
-<h2 id="collectionview基本流程"><a href="#collectionview基本流程" class="headerlink" title="collectionview基本流程"></a>collectionview基本流程</h2><p>实现一个collectionview，最少意义上要做这些步骤。</p>
-<pre><code>0.创建UICollectionViewFlowLayout对象
-1.创建UICollectionview对象        
-2.设定UICollectionview对象的数据源委托，如有需要，设定视图委托，和布局委托
-3.实现UICollectionview对象的数据委托协议方法。如有需要，设定视图委托，和布局委托方法。
-</code></pre><p>在basic一节中，我打算用两个例子,分别用sb和纯代码来展现这些流程。第一个demo是官方demo.</p>
-<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p><a href="https://developer.apple.com/library/ios/samplecode/CollectionView-Simple/Introduction/Intro.html" target="_blank" rel="external">https://developer.apple.com/library/ios/samplecode/CollectionView-Simple/Introduction/Intro.html</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -765,7 +761,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">26</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
