@@ -214,6 +214,265 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/30/Core-Data应用开发实践指南读书笔记1/" itemprop="url">
+                  Core Data应用开发实践指南读书笔记1
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-30T00:30:58+08:00" content="2016-05-30">
+              2016-05-30
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
+<li>CoreData是个框架，使得开发者把<strong>数据</strong>当做<strong>对象</strong>来操作。CoreData提供的数据对象叫做托管对象（managed object）.CoreData位于应用程序和持久化存储区(persisten store)之间.</li>
+<li>一个<strong>托管对象</strong>可能对应于数据库中某张数据表中的一<strong>行</strong>。</li>
+<li>可以将CoreData按照数据流动方向分为三层。分别是持久化存储协调器 托管对象模型 托管对象上下文。具体的是什么这里我还看不太懂。等深入后再做研究。或者去问同事。</li>
+<li>持久化存储区可以是SQlite数据库,XML文件，Binary store等数据文件。</li>
+<li>注意托管对象模式和托管对象并不是同一个东西。</li>
+</ul>
+<h3 id="CoreDataHelper类"><a href="#CoreDataHelper类" class="headerlink" title="CoreDataHelper类"></a>CoreDataHelper类</h3><p>我们先写一个工具类CoreDataHelper，抽象成一个类而不是放在视图控制器中，这样便于移植。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/28/load-与-initialize方法小记/" itemprop="url">
+                  load 与 initialize方法小记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-28T22:38:36+08:00" content="2016-05-28">
+              2016-05-28
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="iOS程序启动后会加载所有的类"><a href="#iOS程序启动后会加载所有的类" class="headerlink" title="iOS程序启动后会加载所有的类"></a>iOS程序启动后会加载所有的类</h3><p>程序经过编译，链接之后以二进制的形式存在，一旦点击运行，所有的类对象会加载到内存中。</p>
+<h3 id="load与initialize到底是属于谁的方法"><a href="#load与initialize到底是属于谁的方法" class="headerlink" title="load与initialize到底是属于谁的方法"></a>load与initialize到底是属于谁的方法</h3><p>它们都是NSObject的类方法。</p>
+<h3 id="load方法的调用时机"><a href="#load方法的调用时机" class="headerlink" title="load方法的调用时机"></a>load方法的调用时机</h3><p>load方法是在类加载后被调用，因此它比系统的main方法还早。load方法仅仅会调用一次。<br>load方法是系统来调用，而不应该是自己显式调用。</p>
+<h3 id="initialize方法的调用时机"><a href="#initialize方法的调用时机" class="headerlink" title="initialize方法的调用时机"></a>initialize方法的调用时机</h3><p>在runtime向类发送第一个方法前，会调用一下initialize方法。如果始终不调用类的任何方法，initialize方法也不会执行。</p>
+<h3 id="load，initialize方法都只会调用一次"><a href="#load，initialize方法都只会调用一次" class="headerlink" title="load，initialize方法都只会调用一次"></a>load，initialize方法都只会调用一次</h3><p>load调用且只调用一次。<br>initialize在第一个类的方法前也只会调用一次。如果从来不使用这个类。不会调用initialize方法</p>
+<h3 id="load，initialize方法的使用场景"><a href="#load，initialize方法的使用场景" class="headerlink" title="load，initialize方法的使用场景"></a>load，initialize方法的使用场景</h3><p>load是程序加载到内存后就马上调用的，它适合做方法交换<br>initialize是在类第一个方法被使用的时候调用，它适合做全局配置。如统一导航栏的颜色。</p>
+<h3 id="superview-subview-category"><a href="#superview-subview-category" class="headerlink" title="superview subview category"></a>superview subview category</h3><p>load方法调用的顺序：父类(Superclass)的方法优先于子类(Subclass)的方法，类中的方法优先于类别(Category)中的方法</p>
+<h3 id="Demo验证"><a href="#Demo验证" class="headerlink" title="Demo验证"></a>Demo验证</h3><p>viewController</p>
+<pre><code>#import &quot;ViewController.h&quot;
+
+
+@interface ViewController ()
+
+@end
+
+
+@implementation ViewController
+
++ (void)load {
+    NSLog(@&quot;%sViewController&quot;,__func__  );
+}
+
++ (void)initialize {
+    NSLog(@&quot;%sViewController&quot;,__func__ );
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+@end
+</code></pre><p>AppDelegate</p>
+<pre><code>#import &quot;AppDelegate.h&quot;
+
+@interface AppDelegate ()
+
+@end
+
+@implementation AppDelegate
+
++ (void)load {
+    NSLog(@&quot;%sAppDelegate&quot;,__func__  );
+}
+
++ (void)initialize {
+    NSLog(@&quot;%sAppDelegate&quot;,__func__  );
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    NSLog(@&quot;%s%@&quot;,__func__ ,NSStringFromClass([self class]) );
+    return YES;
+}
+
+
+@end
+</code></pre><p>main</p>
+<pre><code>int main(int argc, char * argv[]) {
+    NSLog(@&quot;%s&quot;,__func__ );
+    @autoreleasepool {
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+    }
+}
+</code></pre><p>输出结果</p>
+<pre><code>2016-05-29 00:09:19.386 test[17819:1041383] +[ViewController load]ViewController
+2016-05-29 00:09:19.388 test[17819:1041383] +[AppDelegate load]AppDelegate
+2016-05-29 00:09:19.388 test[17819:1041383] main
+2016-05-29 00:09:19.389 test[17819:1041383] +[AppDelegate initialize]AppDelegate
+2016-05-29 00:09:19.477 test[17819:1041383] +[ViewController initialize]ViewController
+2016-05-29 00:09:19.482 test[17819:1041383] -[AppDelegate application:didFinishLaunchingWithOptions:]AppDelegate
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/26/NSTextAttachMent实现图文混排/" itemprop="url">
                   NSTextAttachment实现图文混排
                 </a>
@@ -622,236 +881,6 @@ tableView.rowHeight = UITableViewAutomaticDimension
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/24/Masonry手写约束原理篇/" itemprop="url">
-                  Masonry手写约束原理篇
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-24T00:47:37+08:00" content="2016-05-24">
-              2016-05-24
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="1-Masonry是什么"><a href="#1-Masonry是什么" class="headerlink" title="1.Masonry是什么"></a>1.Masonry是什么</h3><ul>
-<li>Masonry是一个轻量级的布局框架</li>
-<li>Masonry是对AutoLayout的封装，用链式语法实现了比NSLayoutConstraints更准确和可读性更好的接口</li>
-<li>Masonry 同时支持 iOS 和 Mac OS X两个平台</li>
-</ul>
-<h3 id="2-AutoLayout公式与Masonry的等价形式"><a href="#2-AutoLayout公式与Masonry的等价形式" class="headerlink" title="2.AutoLayout公式与Masonry的等价形式"></a>2.AutoLayout公式与Masonry的等价形式</h3><p>在真正学习Masonry前，我们先退后一步 想一想，Masonry是AutoLayout的封装，那么为什么iOS要引入AutoLayout了，即AutoLayout想解决什么问题？</p>
-<ul>
-<li>更容易适配不同分辨率设备的屏幕(iPhone 6 Plus, iPhone 6, iPhone 5s/5, iPhone 4s/4)</li>
-<li>当设备旋转时不需要做额外处理</li>
-<li>使用constraint来描述布局逻辑，更利于理解和清晰</li>
-</ul>
-<p>我们就要追本述源，看看AutoLayout是怎么样布局的。实际上AutoLayout对布局仅仅记住一个公式就很明了了。</p>
-<p><img src="https://developer.apple.com/library/mac/documentation/UserExperience/Conceptual/AutolayoutPG/Art/view_formula_2x.png" alt="image"></p>
-<pre><code>item1.attribute1 = item2.attribute2 * mutilplier + constant;
-</code></pre><p>上图中为了布局BlueView和RedView用了一个简单的公式，推广来说，在autolayout中。item1和item2总是分别表示视图1和视图2.。attribute1,attribute2表示视图属性。这些视图属性可以是表示视图的top,left,bottom,right.也可以表示尺寸的width,height.表示中心点的CenterX,CenterY等等，我们没有必要一一记住他们。当使用的时候查询就好了。mutilplier是系数。这个常常使用在需要等分子视图的场景。constant可以认为是偏移量。=表示关系,这里的关系是equal,实际上还有&gt;=, &lt;=。在Masonry中，我们可以一个简单的例子来看看它是如何体现AutoLayout公式的。</p>
-<pre><code>UIEdgeInsets padding = UIEdgeInsetsMake(10, 10, 10, 10);
-
-[view1 mas_makeConstraints:^(MASConstraintMaker *make) {
-    make.top.equalTo(superview.mas_top).with.offset(padding.top);         make.left.equalTo(superview.mas_left).with.offset(padding.left);
-    make.bottom.equalTo(superview.mas_bottom).with.offset(-padding.bottom);
-    make.right.equalTo(superview.mas_right).with.offset(-padding.right);
-}];
-</code></pre><p>这个Demo中，<code>make.top.equalTo(superview.mas_top).with.offset(padding.top)</code>; 其实是</p>
-<pre><code>view1.top = superview.top * 1 + padding.top（即constant);
-</code></pre><h3 id="3-Masonry常用的方法和属性"><a href="#3-Masonry常用的方法和属性" class="headerlink" title="3.Masonry常用的方法和属性"></a>3.Masonry常用的方法和属性</h3><p>当我们使用Masonry的时候，几乎总是以这三个方法打交道。它们都是UIView的category方法，这种category的实现方式对于第三方库十分常见。如SDWebImageView中也会对UImageView UIButton写分类方法。它们的声明和实现都在<br><code>View+MASAdditions.h</code>中.即下面这三个方法</p>
-<pre><code>// 添加约束
-- (NSArray *)makeConstraints:(void(^)(MASConstraintMaker *make))block;
-// 更新约束
-- (NSArray *)updateConstraints:(void(^)(MASConstraintMaker *make))block;
-// 重设约束，清空约束后再添加
-- (NSArray *)remakeConstraints:(void(^)(MASConstraintMaker *make))block;
-</code></pre><p>那么这三个方法是使用场景又是什么了？<br>谈到场景的时候，首先要明确几点。什么是不合理的约束</p>
-<ul>
-<li>Unsatisfiable Layouts. Your layout has no valid solution。<br>可能是缺少约束。导致iOS无法判断UIView到底该显示在哪里。或者两种或者多个约束冲突。</li>
-<li>Ambiguous Layouts. Your layout has two or more possible solutions<br>两种或者多种有效的解决方案。</li>
-<li>Logical Errors. There is a bug in your layout logic<br>约束建立成功，但是解决方案不是你想要的结果。</li>
-</ul>
-<p>方法确定了到底使用哪个约束，实际上每个方法都接受一个block变量。block变量的定义中操作约束的attribute来完成约束，Masonry支持下面的一些属性</p>
-<pre><code>@property (nonatomic, strong, readonly) MASConstraint *left;
-@property (nonatomic, strong, readonly) MASConstraint *top;
-@property (nonatomic, strong, readonly) MASConstraint *right;
-@property (nonatomic, strong, readonly) MASConstraint *bottom;
-@property (nonatomic, strong, readonly) MASConstraint *leading;
-@property (nonatomic, strong, readonly) MASConstraint *trailing
-@property (nonatomic, strong, readonly) MASConstraint *width;
-@property (nonatomic, strong, readonly) MASConstraint *height;
-@property (nonatomic, strong, readonly) MASConstraint *centerX;
-@property (nonatomic, strong, readonly) MASConstraint *centerY;
-@property (nonatomic, strong, readonly) MASConstraint *baseline;
-</code></pre><p>我们建立的约束一旦建立后不再有变化，且并不会出现Unsatisfiable Layouts，Ambiguous Layouts，Logical Errors。仅仅使用makeConstraints就好了。</p>
-<p>当我们使用makeConstraints建立的约束是有效的，用户的某个事件需要更改UIView的位置，此时需要做到两步。</p>
-<p>1.调用     [self setNeedsUpdateConstraints];<br>2.重写   updateConstraints方法（结尾添加[super updateConstraints]）,并且在这个方法的实现中调用updateConstraints或者remakeConstraints。前者是保持原来约束情况下，更新约束的关系。后者是清空约束后重新添加约束.还要注意的是remakeConstraints的调用并不意味着你必须先调用updateConstraints方法。实际上,remakeConstraints也可以单独调用。</p>
-<h3 id="4-Masonry链式语法"><a href="#4-Masonry链式语法" class="headerlink" title="4.Masonry链式语法"></a>4.Masonry链式语法</h3><p>链式语法的核心是A.fun1.fun2.fun3…funN.每个fun的输出返回的对象依然是A本身。<br>在Masonry中,MASConstraintMaker类充当一个工厂的角色。以<code>make.top.equalTo(superview.mas_top).with.offset(padding.top);</code>为例，make.top返回的是MASConstraint对象。此后的equalTo(superview.mas_top)，依然返回MASConstraint对象。所有的.fun都返回MASConstraint对象。显然这样的写法非常紧凑，易读。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/17/HTTP相关/" itemprop="url">
-                  HTTP相关123
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-17T22:45:35+08:00" content="2016-05-17">
-              2016-05-17
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="请求头关键字段"><a href="#请求头关键字段" class="headerlink" title="请求头关键字段"></a>请求头关键字段</h3><p>host：  同一个ip可能有多个网站，需要确定是哪个网站<br>cookie：使用了cookie之后，同一个网站不用重复登录<br>user-agent:浏览器，操作系统</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -898,7 +927,7 @@ tableView.rowHeight = UITableViewAutomaticDimension
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">26</span>
+              <span class="site-state-item-count">28</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

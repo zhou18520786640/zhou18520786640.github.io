@@ -57,28 +57,31 @@
 
 
 
-<meta name="description" content="Basic实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        UI">
+<meta name="description" content="基本流程// 1. 找目录
+- (NSString *)applicationDocumentsDirectory {
+    if (debug==1) {
+        NSLog(@&amp;quot;Running %@ &amp;apos;%@&amp;apos;&amp;quot;, self.class,NSStringFromSelector(_cmd));
+    }
+    return [NSSearch">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Masonry手写约束之Demo篇">
-<meta property="og:url" content="http://yoursite.com/2016/05/24/Masonry手写约束之Demo篇/index.html">
+<meta property="og:title" content="Learning CoreData:建立sqlite文件">
+<meta property="og:url" content="http://yoursite.com/2016/06/24/Learning-CoreData-建立sqlite文件/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="Basic实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        UI">
-<meta property="og:updated_time" content="2016-05-26T15:11:34.000Z">
+<meta property="og:description" content="基本流程// 1. 找目录
+- (NSString *)applicationDocumentsDirectory {
+    if (debug==1) {
+        NSLog(@&amp;quot;Running %@ &amp;apos;%@&amp;apos;&amp;quot;, self.class,NSStringFromSelector(_cmd));
+    }
+    return [NSSearch">
+<meta property="og:updated_time" content="2016-06-23T18:55:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Masonry手写约束之Demo篇">
-<meta name="twitter:description" content="Basic实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        UI">
+<meta name="twitter:title" content="Learning CoreData:建立sqlite文件">
+<meta name="twitter:description" content="基本流程// 1. 找目录
+- (NSString *)applicationDocumentsDirectory {
+    if (debug==1) {
+        NSLog(@&amp;quot;Running %@ &amp;apos;%@&amp;apos;&amp;quot;, self.class,NSStringFromSelector(_cmd));
+    }
+    return [NSSearch">
 
 
 
@@ -96,7 +99,7 @@
   };
 </script>
 
-  <title> Masonry手写约束之Demo篇 | 周明的技术博客 </title>
+  <title> Learning CoreData:建立sqlite文件 | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -218,7 +221,7 @@
             
             
               
-                Masonry手写约束之Demo篇
+                Learning CoreData:建立sqlite文件
               
             
           </h1>
@@ -230,8 +233,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-24T21:49:00+08:00" content="2016-05-24">
-              2016-05-24
+            <time itemprop="dateCreated" datetime="2016-06-24T01:31:59+08:00" content="2016-06-24">
+              2016-06-24
             </time>
           </span>
 
@@ -257,103 +260,62 @@
       
 
       
-        <h3 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h3><p>实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.</p>
-<pre><code>- (instancetype)init {
-    self = [super init];
-    if (self) {
-        UIView *greenView = UIView.new;
-        greenView.backgroundColor = UIColor.greenColor;
-        greenView.layer.borderColor = UIColor.blackColor.CGColor;
-        greenView.layer.borderWidth = 2;
-        [self addSubview:greenView];
-        self.greenView = greenView;
-
-        UIView *redView = UIView.new;
-        redView.backgroundColor = UIColor.redColor;
-        redView.layer.borderColor = UIColor.blackColor.CGColor;
-        redView.layer.borderWidth = 2;
-        [self addSubview:redView];
-        self.redView = redView;
-
-        UIView *blueView = UIView.new;
-        blueView.backgroundColor = UIColor.blueColor;
-        blueView.layer.borderColor = UIColor.blackColor.CGColor;
-        blueView.layer.borderWidth = 2;
-        [self addSubview:blueView];
-        self.blueView = blueView;
-
-        UIView *superview = self;
-
-        [greenView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(superview).offset(10);
-            make.top.equalTo(superview).offset(10);
-            make.width.equalTo(redView);
-            make.height.equalTo(@[redView, blueView]);
-        }];
-
-        [redView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(greenView.right).offset(10);
-            make.top.equalTo(greenView);
-            make.width.equalTo(greenView);
-            make.right.equalTo(superview).offset(-10);
-        }];
-
-        [blueView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(redView.bottom).offset(10);
-            make.left.equalTo(superview).offset(10);
-            make.right.equalTo(superview).offset(-10);
-            make.bottom.equalTo(superview).offset(-10);
-        }];
-//        [self setNeedsUpdateConstraints];
+        <h3 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h3><pre><code>// 1. 找目录
+- (NSString *)applicationDocumentsDirectory {
+    if (debug==1) {
+        NSLog(@&quot;Running %@ &apos;%@&apos;&quot;, self.class,NSStringFromSelector(_cmd));
     }
-    return self;
+    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask,YES) lastObject];
 }
 
-//- (void)updateConstraints {
-//    [self.blueView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.redView.bottom).offset(10);
-//        make.left.equalTo(self).offset(20);
-//        make.right.equalTo(self).offset(-20);
-//        make.bottom.equalTo(self).offset(-10);
-//    }];
-//    [super updateConstraints];
-//}
-@end
-</code></pre><p>我们建立的约束只需要建立一次。并且不再需要修改。因此调用<code>mas_makeConstraints</code>。这个例子十分简单。要注意的是equalTo的参数可以是视图数组。</p>
-<h3 id="equalTo的参数可以是常量"><a href="#equalTo的参数可以是常量" class="headerlink" title="equalTo的参数可以是常量"></a>equalTo的参数可以是常量</h3><p>实际上,三种约束参数都可以被equal所接收。他们分别是MASViewAttribute，UIView，NSNumber。当你传NSNumber的时候。实际是相对于其父视图的constant.</p>
-<pre><code>UIView *purpleView = UIView.new;
-[ purpleView.backgroundColor = UIColor.purpleColor;
-purpleView.layer.borderColor = UIColor.blackColor.CGColor;
-purpleView.layer.borderWidth = 2;
-[self addSubview:purpleView];
 
-UIView *orangeView = UIView.new;
-orangeView.backgroundColor = UIColor.orangeColor;
-orangeView.layer.borderColor = UIColor.blackColor.CGColor;
-orangeView.layer.borderWidth = 2;
-[self addSubview:orangeView];
+// 2. 建新目录
+- (NSURL *)applicationStoresDirectory {
+    if (debug==1) {
+        NSLog(@&quot;Running %@ &apos;%@&apos;&quot;, self.class, NSStringFromSelector(_cmd));
+    }
 
-//example of using constants
+    NSURL *storesDirectory =
+    [[NSURL fileURLWithPath:[self applicationDocumentsDirectory]]
+     URLByAppendingPathComponent:@&quot;Stores&quot;];
 
-[purpleView mas_makeConstraints:^(MASConstraintMaker *make) {
-    make.top.equalTo(@20);
-    make.left.equalTo(@20);
-    make.bottom.equalTo(@-20);
-    make.right.equalTo(@-20);
-}];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:[storesDirectory path]]) {
+        NSError *error = nil;
+        if ([fileManager createDirectoryAtURL:storesDirectory
+                  withIntermediateDirectories:YES
+                                   attributes:nil
+                                        error:&amp;error]) {
+            if (debug==1) {
+                NSLog(@&quot;Successfully created Stores directory&quot;);}
+        }
+        else {NSLog(@&quot;FAILED to create Stores directory: %@&quot;, error);}
+    }
+    return storesDirectory;
+}
 
-// auto-boxing macros allow you to simply use scalars and structs, they will be wrapped automatically
-
-[orangeView mas_makeConstraints:^(MASConstraintMaker *make) {
-    make.center.equalTo(CGPointMake(0, 50));
-    make.size.equalTo(CGSizeMake(200, 100));
-}];]
-</code></pre><h3 id="masonry可以结合xib一起使用"><a href="#masonry可以结合xib一起使用" class="headerlink" title="masonry可以结合xib一起使用"></a>masonry可以结合xib一起使用</h3><p>如果我在xib中已经布局了UI，而且建立了autolayout，当程序运行中需要动态修改autolayout，可以直接使用autolayout的API来修改和删除，更极端的，也可以直接使用masonry来删除</p>
-<h3 id="masonry-UITableView与autolayout"><a href="#masonry-UITableView与autolayout" class="headerlink" title="masonry,UITableView与autolayout"></a>masonry,UITableView与autolayout</h3><p>iOS8以上，对于autolayout，不可以根据子视图的约束动态计算tableViewCell的高度.(注意一般情况下的autolayout的子视图对父视图的约束不会影响父视图，只能影响子视图).tableViewCell通过一定的设置可以开启这个功能。<br>而iOS8以下的系统。autolayout就无能为例了。<br>我们先给出iOS8下的解决方案。这种子视图改变，动态改变自身tableViewCell高度的苹果叫做 Self-Sizing Table View Cell。</p>
-<pre><code>tableView.estimatedRowHeight = 85.0
-tableView.rowHeight = UITableViewAutomaticDimension
-</code></pre><p>首先第一句话，给一个预估高度，等会儿自动布局的会在这个值的基础上再进行调整。第二句话，是开启autolayout的自动布局功能。甚至连高度回调都不需要，完成了整个布局控件的实现。</p>
-<p>如果要适配iOS7，那么这种方法就不奏效了。我们依然可以对子视图使用autolayout来约束子视图和父视图之间位置。而对于tableViewCell本身。可以用frame算出高度后再返回。比较常规的实现是写一个类方法。</p>
+// 3.新目录下建新文件 `Grocery-Dude.sqlite`
+- (NSURL *)storeURL {
+    if (debug==1) {
+        NSLog(@&quot;Running %@ &apos;%@&apos;&quot;, self.class, NSStringFromSelector(_cmd));
+    }
+    return [[self applicationStoresDirectory]
+            URLByAppendingPathComponent:storeFilename];
+}
+</code></pre><h3 id="API详解"><a href="#API详解" class="headerlink" title="API详解"></a>API详解</h3><ol>
+<li><p>[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask,YES) lastObject]</p>
+<p> NSUserDomainMask: mask domain. mask 就是~<br> NSDocumentDirectory: document目录。<br> YES:将波浪形展开。</p>
+</li>
+<li><p>stringByAppendingPathComponent和stringByAppendingString的区别</p>
+<p> 自我理解，不保证正确，但亲自试验确实可行：若用 stringByAppendingString  则需要手动在名称前加 “/”符号，而stringByAppendingPathComponent则不需要，它会自动添加</p>
+</li>
+<li><p><code>NSURL *storesDirectory = [NSURL fileURLWithPath:[documentPath stringByAppendingPathComponent:@&quot;Store&quot;]];</code>不会创建新目录，只是给出一个链接。真正创建目录的是<br>`[fileManager createDirectoryAtURL:storesDirectory</p>
+<pre><code>withIntermediateDirectories:YES
+                 attributes:nil
+                      error:&amp;error]`
+</code></pre><h3 id="持久化存储区"><a href="#持久化存储区" class="headerlink" title="持久化存储区"></a>持久化存储区</h3><p>就是保存数据的文件。可以是SQLite数据库Binary store等。重启后还存在，所以是持久化的</p>
+</li>
+</ol>
 
       
     </div>
@@ -377,16 +339,16 @@ tableView.rowHeight = UITableViewAutomaticDimension
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/24/Masonry手写约束原理篇/" rel="next" title="Masonry手写约束原理篇">
-                <i class="fa fa-chevron-left"></i> Masonry手写约束原理篇
+              <a href="/2016/06/24/Tip-cmd是什么/" rel="next" title="Tip:_cmd是什么?">
+                <i class="fa fa-chevron-left"></i> Tip:_cmd是什么?
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/05/25/RunLoop之作用篇/" rel="prev" title="RunLoop之作用篇">
-                RunLoop之作用篇 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/06/24/Learning-CoreData-托管对象模型基本知识/" rel="prev" title="Learning CoreData:托管对象模型基本知识">
+                Learning CoreData:托管对象模型基本知识 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -498,7 +460,7 @@ tableView.rowHeight = UITableViewAutomaticDimension
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equalTo的参数可以是常量"><span class="nav-number">2.</span> <span class="nav-text">equalTo的参数可以是常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#masonry可以结合xib一起使用"><span class="nav-number">3.</span> <span class="nav-text">masonry可以结合xib一起使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#masonry-UITableView与autolayout"><span class="nav-number">4.</span> <span class="nav-text">masonry,UITableView与autolayout</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本流程"><span class="nav-number">1.</span> <span class="nav-text">基本流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#API详解"><span class="nav-number">2.</span> <span class="nav-text">API详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#持久化存储区"><span class="nav-number">3.</span> <span class="nav-text">持久化存储区</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
