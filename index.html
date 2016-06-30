@@ -214,6 +214,365 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/01/CAGradientLayer-basic/" itemprop="url">
+                  CAGradientLayer basic
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-01T01:11:49+08:00" content="2016-07-01">
+              2016-07-01
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>CAGradientLayer是用来生成两种或更多颜色平滑渐变的。</p>
+</blockquote>
+<ol>
+<li>基础渐变</li>
+</ol>
+<p>我们将从一个简单的红变蓝的对角线渐变开始，渐变色彩放在一个数组中，并赋给colors属性。这个数组成员接受CGColorRef类型的值（<strong>并不是从NSObject派生而来</strong> ?），所以我们要用通过bridge转换以确保编译正常。<br>CAGradientLayer也有startPoint和endPoint属性，他们决定了渐变的方向。这两个参数是以<strong>单位坐标系</strong>进行的定义，所以左上角坐标是{0, 0}，右下角坐标是{1, 1}。</p>
+<p><code>单位坐标系</code>:无论frame大小多少，（0，0）表示左上角，（1，1）表示左下角，（1，0）表示左上角，（0，1）表示左下角。</p>
+<p>完整demo<br>    //<br>    //  ViewController.m<br>    //  天天听<br>    //<br>    //  Created by zhou on 16/7/1.<br>    //  Copyright © 2016年 jeff.zhou. All rights reserved.<br>    //</p>
+<pre><code>#import &quot;ViewController.h&quot;
+
+@interface ViewController ()
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    self.edgesForExtendedLayout = UIRectEdgeAll;
+
+//  垂直渐变
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = CGRectMake(0, 20, 100, 100);
+    gradientLayer.colors = @[(__bridge id)[UIColor redColor].CGColor, (__bridge  id)[UIColor yellowColor].CGColor];
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(0, 1);
+    [self.view.layer addSublayer:gradientLayer];
+
+
+//    水平渐变
+    CAGradientLayer *gradientLayer2 = [CAGradientLayer layer];
+    gradientLayer2.frame = CGRectMake(0, 140, 100, 100);
+    gradientLayer2.colors = @[(__bridge id)[UIColor redColor].CGColor, (__bridge  id)[UIColor yellowColor].CGColor];
+    gradientLayer2.startPoint = CGPointMake(0, 0);
+    gradientLayer2.endPoint = CGPointMake(1, 0);
+
+    [self.view.layer addSublayer:gradientLayer2];
+
+//  对角线渐变
+    CAGradientLayer *gradientLayer3 = [CAGradientLayer layer];
+    gradientLayer3.frame = CGRectMake(0, 260, 100, 100);
+    gradientLayer3.colors = @[(__bridge id)[UIColor redColor].CGColor, (__bridge  id)[UIColor yellowColor].CGColor];
+    gradientLayer3.startPoint = CGPointMake(0, 0);
+    gradientLayer3.endPoint = CGPointMake(1, 1);
+
+    [self.view.layer addSublayer:gradientLayer3];
+
+    //  对角线渐变
+    CAGradientLayer *gradientLayer4 = [CAGradientLayer layer];
+    gradientLayer4.frame = CGRectMake(0, 380, 100, 100);
+    gradientLayer4.colors = @[(__bridge id)[UIColor redColor].CGColor, (__bridge  id)[UIColor yellowColor].CGColor];
+    gradientLayer4.startPoint = CGPointMake(0, 1);
+    gradientLayer4.endPoint = CGPointMake(1, 0);
+    [self.view.layer addSublayer:gradientLayer4];
+
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/25/iOS动画小结-UIView属性动画/" itemprop="url">
+                  iOS动画小结---UIView属性动画
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-25T22:09:36+08:00" content="2016-06-25">
+              2016-06-25
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="UIView的动画与Core-Animation动画的关系"><a href="#UIView的动画与Core-Animation动画的关系" class="headerlink" title="UIView的动画与Core Animation动画的关系"></a>UIView的动画与Core Animation动画的关系</h3><p><img src="http://images.cnitblog.com/blog/374539/201501/261752558947877.png" alt="image"></p>
+<blockquote>
+<p>在iOS中，图形可分为以上几个层次：<br>越上层，封装程度越高，动画实现越简洁越简单，但是自由度越低；反之亦然。</p>
+</blockquote>
+<p>UIKit的动画是最高层的动画，API最简单，实现自由度也最低。实现UIKit层的动画，一般流程需要通过以下两个条件。</p>
+<pre><code>1.可以被改变的动画属性
+2.几个动画执行的类方法
+</code></pre><p>Core Animation的动画一般通过类似<code>[shapeLayer addAnimation:[CABasicAnimation animationWithKeyPath:@&quot;....&quot;] forKey:@&quot;name&quot;];</code>，UIkit的动画实质是Core Animation的动画的封装。</p>
+<h3 id="可被执行的动画属性"><a href="#可被执行的动画属性" class="headerlink" title="可被执行的动画属性"></a>可被执行的动画属性</h3><p>我们先来看看可以被动画的属性，进入UIView的头文件。搜索<code>animatable</code>,可以看到下面这些属性被注释为<code>animatable</code></p>
+<pre><code>alpha 透明度
+frame 父视图坐标系统的位置
+bounds 自身坐标系统的位置
+center 中心点位置
+transform 仿射变换
+</code></pre><h3 id="几个动画执行的类方法"><a href="#几个动画执行的类方法" class="headerlink" title="几个动画执行的类方法"></a>几个动画执行的类方法</h3><p>动画的实现并不是在任何地方给可动画的属性进行赋值就可以了。只有将那些赋值方法作为动画类方法中的block传递过去才能实现动画。</p>
+<h3 id="起始点，终点，持续时间"><a href="#起始点，终点，持续时间" class="headerlink" title="起始点，终点，持续时间"></a>起始点，终点，持续时间</h3><p>执行动画基本流程。</p>
+<ol>
+<li>对可动画的一个属性赋一个值。即设置可动画的属性的</li>
+<li>在实现动画的视图类方法的block中给可动画的属性</li>
+</ol>
+<h3 id="Demo-1-改变透明度"><a href="#Demo-1-改变透明度" class="headerlink" title="Demo 1 改变透明度"></a>Demo 1 改变透明度</h3><h3 id="Demo-2-改变位置"><a href="#Demo-2-改变位置" class="headerlink" title="Demo 2 改变位置"></a>Demo 2 改变位置</h3><h3 id="Demo-3-改变尺寸"><a href="#Demo-3-改变尺寸" class="headerlink" title="Demo 3 改变尺寸"></a>Demo 3 改变尺寸</h3>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/25/使用定时器和CAShapeLayer画圆/" itemprop="url">
+                  使用定时器和CAShapeLayer画圆
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-25T17:11:37+08:00" content="2016-06-25">
+              2016-06-25
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/24/Learning-CoreData-托管对象模型基本知识/" itemprop="url">
                   Learning CoreData:托管对象模型基本知识
                 </a>
@@ -400,289 +759,10 @@
 <pre><code>withIntermediateDirectories:YES
                  attributes:nil
                       error:&amp;error]`
-</code></pre><h3 id="持久化存储区"><a href="#持久化存储区" class="headerlink" title="持久化存储区"></a>持久化存储区</h3><p>就是保存数据的文件。可以是SQLite数据库Binary store等。重启后还存在，所以是持久化的</p>
-</li>
+</code></pre></li>
 </ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/24/Tip-cmd是什么/" itemprop="url">
-                  Tip:_cmd是什么?
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-24T01:24:26+08:00" content="2016-06-24">
-              2016-06-24
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="cmd-是什么？"><a href="#cmd-是什么？" class="headerlink" title="_cmd 是什么？"></a>_cmd 是什么？</h2><blockquote>
-<p>The _cmd variable is a hidden argument passed to every method that is the current selector</p>
-</blockquote>
-<p>_cmd在Objective-C的方法中表示当前方法的selector，正如同self表示当前方法调用的对象实例一样</p>
-<h2 id="cmd来打印当前方法名"><a href="#cmd来打印当前方法名" class="headerlink" title="_cmd来打印当前方法名"></a>_cmd来打印当前方法名</h2><pre><code>NSStringFromSelector(_cmd)
+<h3 id="持久化存储区"><a href="#持久化存储区" class="headerlink" title="持久化存储区"></a>持久化存储区</h3><pre><code>就是保存数据的文件。可以是SQLite数据库Binary store等。重启后还存在，所以是持久化的
 </code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/24/让视图控制器的视图位置不要和导航栏重合的三种方法/" itemprop="url">
-                  让视图控制器的视图位置不要和导航栏重合的三种方法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-24T00:51:13+08:00" content="2016-06-24">
-              2016-06-24
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="方法1-设置edgesForExtendedLayout"><a href="#方法1-设置edgesForExtendedLayout" class="headerlink" title="方法1 设置edgesForExtendedLayout"></a>方法1 设置edgesForExtendedLayout</h2><pre><code>rootViewController.edgesForExtendedLayout = UIRectEdgeNone;
-</code></pre><p>viewController的左上角位置会在导航栏下面。</p>
-<h2 id="方法2-设置导航栏不透明"><a href="#方法2-设置导航栏不透明" class="headerlink" title="方法2 设置导航栏不透明"></a>方法2 设置导航栏不透明</h2><pre><code>navigationController.navigationBar.translucent = NO;
-</code></pre><p>viewController的左上角位置会在导航栏下面，会影响其导航控制器的其他子视图也下降。</p>
-<h2 id="方法3-所有的子视图都为viewController-view留白。"><a href="#方法3-所有的子视图都为viewController-view留白。" class="headerlink" title="方法3 所有的子视图都为viewController.view留白。"></a>方法3 所有的子视图都为viewController.view留白。</h2><p>所有子视图都从y＝64开始算起。不把子视图放在y = 64更小的位置.看起来viewController.view变小了</p>
-<p>这种方法最不可取。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/19/导航栏透明的设置/" itemprop="url">
-                  导航栏透明的设置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-19T15:00:31+08:00" content="2016-06-19">
-              2016-06-19
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="导航栏透明不能依靠alpha值"><a href="#导航栏透明不能依靠alpha值" class="headerlink" title="导航栏透明不能依靠alpha值"></a>导航栏透明不能依靠alpha值</h2><pre><code>viewController.navigationController.navigationBar.alpha = 0.0;
-</code></pre><p>一般视图都是利用<code>alpha</code>来设置透明度。这一套对于继承<code>UIView</code>的的<code>navigationBar</code>并不生效.设置后依然可以显示。实际上导航栏设置透明是只需设置NavigationBar的背景图片为一张空图片即可</p>
-<pre><code>[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsCompact];
-</code></pre><h2 id="透明的导航栏还可以放置titleView-leftBarItem"><a href="#透明的导航栏还可以放置titleView-leftBarItem" class="headerlink" title="透明的导航栏还可以放置titleView leftBarItem"></a>透明的导航栏还可以放置<code>titleView</code> <code>leftBarItem</code></h2><p>在视图的概念中，如果设置<code>alpha</code> = 0后呈现透明效果后，其子视图也会透明。但是我们导航栏的透明并不是依赖｀<code>alpha</code> ＝ 0.而是依靠设置空白图片的方法。我们设置的titleView，leftBarItem依然可以显示。</p>
-
           
         
       
@@ -711,7 +791,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -752,7 +832,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
