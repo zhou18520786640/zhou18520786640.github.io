@@ -68,7 +68,8 @@
 
  CALayer有一个属性叫做mask可以解决这个问题。这个属性本身就是个CALayer类型，有和其他图层一样的绘制和布局属性。它类似于一个子图层，相对于父图层（即拥有该属性的图层）布局，但是它却不是一个普通的子图层。不同于那些绘制在父图层中的子图层，mask图层定义了父图层的部分可见区域。    mask图层的Color属性是无关紧要的，真正重要的是图层的轮廓。mask属性就像">
 <meta property="og:image" content="https://zsisme.gitbooks.io/ios-/content/chapter4/4.12.png">
-<meta property="og:updated_time" content="2016-07-02T03:51:45.000Z">
+<meta property="og:image" content="http://7xsf79.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-07-02%2011.52.47.png">
+<meta property="og:updated_time" content="2016-07-02T03:58:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Layer的mask属性">
 <meta name="twitter:description" content="图层蒙版的理解
@@ -291,7 +292,9 @@
 }
 
 @end
-</code></pre>
+</code></pre><h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="http://7xsf79.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-07-02%2011.52.47.png" alt="image"></p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>shapeLayer作为mask Layer,使用clearColor镂空gradientLayer.strokeColor无论什么颜色都不会影响gradientLayer的颜色。但是不能是透明色。</p>
+
       
     </div>
 
@@ -431,7 +434,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#图层蒙版的理解"><span class="nav-number">1.</span> <span class="nav-text">图层蒙版的理解</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#图层蒙版的理解"><span class="nav-number">1.</span> <span class="nav-text">图层蒙版的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#效果"><span class="nav-number">2.</span> <span class="nav-text">效果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">3.</span> <span class="nav-text">分析</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
