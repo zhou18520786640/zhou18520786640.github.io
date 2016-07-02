@@ -57,21 +57,24 @@
 
 
 
-<meta name="description" content="场景考虑一个电子商品app的商品展示页面。需要展示一个商品三部分的信息。分别是商品的领券入口，商品的优惠信息。商品是一个海淘商品。这三部分信息分别
-初版">
+<meta name="description" content="图层蒙版的理解
+
+ CALayer有一个属性叫做mask可以解决这个问题。这个属性本身就是个CALayer类型，有和其他图层一样的绘制和布局属性。它类似于一个子图层，相对于父图层（即拥有该属性的图层）布局，但是它却不是一个普通的子图层。不同于那些绘制在父图层中的子图层，mask图层定义了父图层的部分可见区域。    mask图层的Color属性是无关紧要的，真正重要的是图层的轮廓。mask属性就像">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用TableView布局UI控件">
-<meta property="og:url" content="http://yoursite.com/2016/03/12/使用TableView布局UI控件/index.html">
+<meta property="og:title" content="Layer的mask属性">
+<meta property="og:url" content="http://yoursite.com/2016/07/02/Layer的mask属性/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="场景考虑一个电子商品app的商品展示页面。需要展示一个商品三部分的信息。分别是商品的领券入口，商品的优惠信息。商品是一个海淘商品。这三部分信息分别
-初版">
-<meta property="og:image" content="http://pic2.ooopic.com/11/39/38/20bOOOPIC97.jpg">
-<meta property="og:updated_time" content="2016-03-11T16:45:34.000Z">
+<meta property="og:description" content="图层蒙版的理解
+
+ CALayer有一个属性叫做mask可以解决这个问题。这个属性本身就是个CALayer类型，有和其他图层一样的绘制和布局属性。它类似于一个子图层，相对于父图层（即拥有该属性的图层）布局，但是它却不是一个普通的子图层。不同于那些绘制在父图层中的子图层，mask图层定义了父图层的部分可见区域。    mask图层的Color属性是无关紧要的，真正重要的是图层的轮廓。mask属性就像">
+<meta property="og:image" content="https://zsisme.gitbooks.io/ios-/content/chapter4/4.12.png">
+<meta property="og:updated_time" content="2016-07-02T03:51:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用TableView布局UI控件">
-<meta name="twitter:description" content="场景考虑一个电子商品app的商品展示页面。需要展示一个商品三部分的信息。分别是商品的领券入口，商品的优惠信息。商品是一个海淘商品。这三部分信息分别
-初版">
-<meta name="twitter:image" content="http://pic2.ooopic.com/11/39/38/20bOOOPIC97.jpg">
+<meta name="twitter:title" content="Layer的mask属性">
+<meta name="twitter:description" content="图层蒙版的理解
+
+ CALayer有一个属性叫做mask可以解决这个问题。这个属性本身就是个CALayer类型，有和其他图层一样的绘制和布局属性。它类似于一个子图层，相对于父图层（即拥有该属性的图层）布局，但是它却不是一个普通的子图层。不同于那些绘制在父图层中的子图层，mask图层定义了父图层的部分可见区域。    mask图层的Color属性是无关紧要的，真正重要的是图层的轮廓。mask属性就像">
+<meta name="twitter:image" content="https://zsisme.gitbooks.io/ios-/content/chapter4/4.12.png">
 
 
 
@@ -89,7 +92,7 @@
   };
 </script>
 
-  <title> 使用TableView布局UI控件 | 周明的技术博客 </title>
+  <title> Layer的mask属性 | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -211,7 +214,7 @@
             
             
               
-                使用TableView布局UI控件
+                Layer的mask属性
               
             
           </h1>
@@ -223,8 +226,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-12T00:32:54+08:00" content="2016-03-12">
-              2016-03-12
+            <time itemprop="dateCreated" datetime="2016-07-02T10:57:02+08:00" content="2016-07-02">
+              2016-07-02
             </time>
           </span>
 
@@ -250,9 +253,45 @@
       
 
       
-        <p><img src="http://pic2.ooopic.com/11/39/38/20bOOOPIC97.jpg" alt="image"></p>
-<h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>考虑一个电子商品app的商品展示页面。需要展示一个商品三部分的信息。分别是商品的领券入口，商品的优惠信息。商品是一个海淘商品。这三部分信息分别</p>
-<h3 id="初版"><a href="#初版" class="headerlink" title="初版"></a>初版</h3>
+        <h3 id="图层蒙版的理解"><a href="#图层蒙版的理解" class="headerlink" title="图层蒙版的理解"></a>图层蒙版的理解</h3><p><img src="https://zsisme.gitbooks.io/ios-/content/chapter4/4.12.png" alt="CALayer"></p>
+<blockquote>
+<p> CALayer有一个属性叫做mask可以解决这个问题。这个属性本身就是个CALayer类型，有和其他图层一样的绘制和布局属性。它类似于一个子图层，相对于父图层（即拥有该属性的图层）布局，但是它却不是一个普通的子图层。不同于那些绘制在父图层中的子图层，mask图层定义了父图层的部分可见区域。<br>    mask图层的Color属性是无关紧要的，真正重要的是图层的轮廓。mask属性就像是一个饼干切割机，mask<strong>图层实心的部分</strong>会被保留下来，其他的则会被抛弃。</p>
+</blockquote>
+<p>以上都摘自ios核心动画高级技巧,关键是对实心部分理解。所谓实心部分。就是非透明部分。透明部分会被挖空，不透明部分会保留。场景一个使用场景是镂空的渐变的loading图。</p>
+<pre><code>// Demo
+#import &quot;VSCustomView.h&quot;
+
+@implementation VSCustomView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setupSubView];
+    }
+    return self;
+}
+
+- (void)setupSubView {
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = self.layer.bounds;
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(0, 1);
+    gradientLayer.colors = @[(__bridge id)[UIColor redColor].CGColor, (__bridge id)[UIColor yellowColor].CGColor];
+    [self.layer addSublayer:gradientLayer];
+
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+
+    shapeLayer.fillColor = [UIColor clearColor].CGColor;
+    shapeLayer.strokeColor = [UIColor blackColor].CGColor;
+    CGPoint center = CGPointMake(self.layer.bounds.size.width * 0.5, self.layer.bounds.size.height * 0.5);
+    shapeLayer.path = [UIBezierPath bezierPathWithArcCenter:center radius:(self.layer.bounds.size.width * 0.5 - 2) startAngle:0 endAngle:M_PI * 2 clockwise:YES].CGPath;
+    shapeLayer.lineWidth = 2;
+
+    [gradientLayer setMask:shapeLayer];
+}
+
+@end
+</code></pre>
       
     </div>
 
@@ -275,17 +314,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/05/oc设计模式之简单工厂模式/" rel="next" title="OC设计模式之简单工厂模式">
-                <i class="fa fa-chevron-left"></i> OC设计模式之简单工厂模式
+              <a href="/2016/07/01/CAGradientLayer-basic/" rel="next" title="CAGradientLayer basic">
+                <i class="fa fa-chevron-left"></i> CAGradientLayer basic
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/12/hexo-github部署静态blog/" rel="prev" title="hexo github部署静态blog">
-                hexo github部署静态blog <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -396,7 +431,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#场景"><span class="nav-number">1.</span> <span class="nav-text">场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初版"><span class="nav-number">2.</span> <span class="nav-text">初版</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#图层蒙版的理解"><span class="nav-number">1.</span> <span class="nav-text">图层蒙版的理解</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

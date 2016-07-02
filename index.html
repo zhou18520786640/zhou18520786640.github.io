@@ -214,6 +214,132 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/02/Layer的mask属性/" itemprop="url">
+                  Layer的mask属性
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-02T10:57:02+08:00" content="2016-07-02">
+              2016-07-02
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="图层蒙版的理解"><a href="#图层蒙版的理解" class="headerlink" title="图层蒙版的理解"></a>图层蒙版的理解</h3><p><img src="https://zsisme.gitbooks.io/ios-/content/chapter4/4.12.png" alt="CALayer"></p>
+<blockquote>
+<p> CALayer有一个属性叫做mask可以解决这个问题。这个属性本身就是个CALayer类型，有和其他图层一样的绘制和布局属性。它类似于一个子图层，相对于父图层（即拥有该属性的图层）布局，但是它却不是一个普通的子图层。不同于那些绘制在父图层中的子图层，mask图层定义了父图层的部分可见区域。<br>    mask图层的Color属性是无关紧要的，真正重要的是图层的轮廓。mask属性就像是一个饼干切割机，mask<strong>图层实心的部分</strong>会被保留下来，其他的则会被抛弃。</p>
+</blockquote>
+<p>以上都摘自ios核心动画高级技巧,关键是对实心部分理解。所谓实心部分。就是非透明部分。透明部分会被挖空，不透明部分会保留。场景一个使用场景是镂空的渐变的loading图。</p>
+<pre><code>// Demo
+#import &quot;VSCustomView.h&quot;
+
+@implementation VSCustomView
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self setupSubView];
+    }
+    return self;
+}
+
+- (void)setupSubView {
+    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
+    gradientLayer.frame = self.layer.bounds;
+    gradientLayer.startPoint = CGPointMake(0, 0);
+    gradientLayer.endPoint = CGPointMake(0, 1);
+    gradientLayer.colors = @[(__bridge id)[UIColor redColor].CGColor, (__bridge id)[UIColor yellowColor].CGColor];
+    [self.layer addSublayer:gradientLayer];
+
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+
+    shapeLayer.fillColor = [UIColor clearColor].CGColor;
+    shapeLayer.strokeColor = [UIColor blackColor].CGColor;
+    CGPoint center = CGPointMake(self.layer.bounds.size.width * 0.5, self.layer.bounds.size.height * 0.5);
+    shapeLayer.path = [UIBezierPath bezierPathWithArcCenter:center radius:(self.layer.bounds.size.width * 0.5 - 2) startAngle:0 endAngle:M_PI * 2 clockwise:YES].CGPath;
+    shapeLayer.lineWidth = 2;
+
+    [gradientLayer setMask:shapeLayer];
+}
+
+@end
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/01/CAGradientLayer-basic/" itemprop="url">
                   CAGradientLayer basic
                 </a>
@@ -265,8 +391,16 @@
 </ol>
 <p>我们将从一个简单的红变蓝的对角线渐变开始，渐变色彩放在一个数组中，并赋给colors属性。这个数组成员接受CGColorRef类型的值（<strong>并不是从NSObject派生而来</strong> ?），所以我们要用通过bridge转换以确保编译正常。<br>CAGradientLayer也有startPoint和endPoint属性，他们决定了渐变的方向。这两个参数是以<strong>单位坐标系</strong>进行的定义，所以左上角坐标是{0, 0}，右下角坐标是{1, 1}。</p>
 <p><code>单位坐标系</code>:无论frame大小多少，（0，0）表示左上角，（1，1）表示左下角，（1，0）表示左上角，（0，1）表示左下角。</p>
-<p>完整demo<br>    //<br>    //  ViewController.m<br>    //  天天听<br>    //<br>    //  Created by zhou on 16/7/1.<br>    //  Copyright © 2016年 jeff.zhou. All rights reserved.<br>    //</p>
-<pre><code>#import &quot;ViewController.h&quot;
+<p>完整demo</p>
+<pre><code>//
+//  ViewController.m
+//  天天听
+//
+//  Created by zhou on 16/7/1.
+//  Copyright © 2016年 jeff.zhou. All rights reserved.
+//
+
+#import &quot;ViewController.h&quot;
 
 @interface ViewController ()
 
@@ -642,150 +776,6 @@ transform 仿射变换
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/24/Learning-CoreData-建立sqlite文件/" itemprop="url">
-                  Learning CoreData:建立sqlite文件
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-24T01:31:59+08:00" content="2016-06-24">
-              2016-06-24
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h3><pre><code>// 1. 找目录
-- (NSString *)applicationDocumentsDirectory {
-    if (debug==1) {
-        NSLog(@&quot;Running %@ &apos;%@&apos;&quot;, self.class,NSStringFromSelector(_cmd));
-    }
-    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask,YES) lastObject];
-}
-
-
-// 2. 建新目录
-- (NSURL *)applicationStoresDirectory {
-    if (debug==1) {
-        NSLog(@&quot;Running %@ &apos;%@&apos;&quot;, self.class, NSStringFromSelector(_cmd));
-    }
-
-    NSURL *storesDirectory =
-    [[NSURL fileURLWithPath:[self applicationDocumentsDirectory]]
-     URLByAppendingPathComponent:@&quot;Stores&quot;];
-
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    if (![fileManager fileExistsAtPath:[storesDirectory path]]) {
-        NSError *error = nil;
-        if ([fileManager createDirectoryAtURL:storesDirectory
-                  withIntermediateDirectories:YES
-                                   attributes:nil
-                                        error:&amp;error]) {
-            if (debug==1) {
-                NSLog(@&quot;Successfully created Stores directory&quot;);}
-        }
-        else {NSLog(@&quot;FAILED to create Stores directory: %@&quot;, error);}
-    }
-    return storesDirectory;
-}
-
-// 3.新目录下建新文件 `Grocery-Dude.sqlite`
-- (NSURL *)storeURL {
-    if (debug==1) {
-        NSLog(@&quot;Running %@ &apos;%@&apos;&quot;, self.class, NSStringFromSelector(_cmd));
-    }
-    return [[self applicationStoresDirectory]
-            URLByAppendingPathComponent:storeFilename];
-}
-</code></pre><h3 id="API详解"><a href="#API详解" class="headerlink" title="API详解"></a>API详解</h3><ol>
-<li><p>[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask,YES) lastObject]</p>
-<p> NSUserDomainMask: mask domain. mask 就是~<br> NSDocumentDirectory: document目录。<br> YES:将波浪形展开。</p>
-</li>
-<li><p>stringByAppendingPathComponent和stringByAppendingString的区别</p>
-<p> 自我理解，不保证正确，但亲自试验确实可行：若用 stringByAppendingString  则需要手动在名称前加 “/”符号，而stringByAppendingPathComponent则不需要，它会自动添加</p>
-</li>
-<li><p><code>NSURL *storesDirectory = [NSURL fileURLWithPath:[documentPath stringByAppendingPathComponent:@&quot;Store&quot;]];</code>不会创建新目录，只是给出一个链接。真正创建目录的是<br>`[fileManager createDirectoryAtURL:storesDirectory</p>
-<pre><code>withIntermediateDirectories:YES
-                 attributes:nil
-                      error:&amp;error]`
-</code></pre></li>
-</ol>
-<h3 id="持久化存储区"><a href="#持久化存储区" class="headerlink" title="持久化存储区"></a>持久化存储区</h3><pre><code>就是保存数据的文件。可以是SQLite数据库Binary store等。重启后还存在，所以是持久化的
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -832,7 +822,7 @@ transform 仿射变换
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

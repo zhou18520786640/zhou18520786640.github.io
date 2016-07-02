@@ -214,6 +214,95 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/14/Tip-一次git冲突文件的简单解决/" itemprop="url">
+                  Tip:一次git冲突文件的简单解决
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-14T23:24:06+08:00" content="2016-06-14">
+              2016-06-14
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="project-pbxproj的文件冲突如何解决？"><a href="#project-pbxproj的文件冲突如何解决？" class="headerlink" title="project.pbxproj的文件冲突如何解决？"></a>project.pbxproj的文件冲突如何解决？</h3><p>今天使用pull代码的时候产生了project.pbxproj的文件冲突。按照惯常的方法打开project.pbxproj手动去搜索&lt;&lt;&lt;&lt;这样类似文本，删掉你不需要的，移动代码到需要的位置。但是实际过程中非常不理想。因为project.pbxproj的可读性比较差。因为记得自己本地的修改方法是创建了几个新的文件和目录。在同事的建议下，标记project.pbxproj为服务器的版本为准。然后这个时候再运行xcode,发现project.pbxproj不再报错。而是提醒找不到一些头文件。因为相关的头文件和实现文件虽然已经在了工程中。却没有被project.pbxproj所管理，这个时候只需要自己在工程所在的目录搜索后自己手动添加到xcode的管理中即可。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/11/Tip-UIButton的imageView的显示/" itemprop="url">
                   Tip:UIButton的imageView的显示
                 </a>
@@ -678,169 +767,6 @@ if (cell == nil) {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/28/load-与-initialize方法小记/" itemprop="url">
-                  load 与 initialize方法小记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-28T22:38:36+08:00" content="2016-05-28">
-              2016-05-28
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="iOS程序启动后会加载所有的类"><a href="#iOS程序启动后会加载所有的类" class="headerlink" title="iOS程序启动后会加载所有的类"></a>iOS程序启动后会加载所有的类</h3><p>程序经过编译，链接之后以二进制的形式存在，一旦点击运行，所有的类对象会加载到内存中。</p>
-<h3 id="load与initialize到底是属于谁的方法"><a href="#load与initialize到底是属于谁的方法" class="headerlink" title="load与initialize到底是属于谁的方法"></a>load与initialize到底是属于谁的方法</h3><p>它们都是NSObject的类方法。</p>
-<h3 id="load方法的调用时机"><a href="#load方法的调用时机" class="headerlink" title="load方法的调用时机"></a>load方法的调用时机</h3><p>load方法是在类加载后被调用，因此它比系统的main方法还早。load方法仅仅会调用一次。<br>load方法是系统来调用，而不应该是自己显式调用。</p>
-<h3 id="initialize方法的调用时机"><a href="#initialize方法的调用时机" class="headerlink" title="initialize方法的调用时机"></a>initialize方法的调用时机</h3><p>在runtime向类发送第一个方法前，会调用一下initialize方法。如果始终不调用类的任何方法，initialize方法也不会执行。</p>
-<h3 id="load，initialize方法都只会调用一次"><a href="#load，initialize方法都只会调用一次" class="headerlink" title="load，initialize方法都只会调用一次"></a>load，initialize方法都只会调用一次</h3><p>load调用且只调用一次。<br>initialize在第一个类的方法前也只会调用一次。如果从来不使用这个类。不会调用initialize方法</p>
-<h3 id="load，initialize方法的使用场景"><a href="#load，initialize方法的使用场景" class="headerlink" title="load，initialize方法的使用场景"></a>load，initialize方法的使用场景</h3><p>load是程序加载到内存后就马上调用的，它适合做方法交换<br>initialize是在类第一个方法被使用的时候调用，它适合做全局配置。如统一导航栏的颜色。</p>
-<h3 id="superview-subview-category"><a href="#superview-subview-category" class="headerlink" title="superview subview category"></a>superview subview category</h3><p>load方法调用的顺序：父类(Superclass)的方法优先于子类(Subclass)的方法，类中的方法优先于类别(Category)中的方法</p>
-<h3 id="Demo验证"><a href="#Demo验证" class="headerlink" title="Demo验证"></a>Demo验证</h3><p>viewController</p>
-<pre><code>#import &quot;ViewController.h&quot;
-
-
-@interface ViewController ()
-
-@end
-
-
-@implementation ViewController
-
-+ (void)load {
-    NSLog(@&quot;%sViewController&quot;,__func__  );
-}
-
-+ (void)initialize {
-    NSLog(@&quot;%sViewController&quot;,__func__ );
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-@end
-</code></pre><p>AppDelegate</p>
-<pre><code>#import &quot;AppDelegate.h&quot;
-
-@interface AppDelegate ()
-
-@end
-
-@implementation AppDelegate
-
-+ (void)load {
-    NSLog(@&quot;%sAppDelegate&quot;,__func__  );
-}
-
-+ (void)initialize {
-    NSLog(@&quot;%sAppDelegate&quot;,__func__  );
-}
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    NSLog(@&quot;%s%@&quot;,__func__ ,NSStringFromClass([self class]) );
-    return YES;
-}
-
-
-@end
-</code></pre><p>main</p>
-<pre><code>int main(int argc, char * argv[]) {
-    NSLog(@&quot;%s&quot;,__func__ );
-    @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
-    }
-}
-</code></pre><p>输出结果</p>
-<pre><code>2016-05-29 00:09:19.386 test[17819:1041383] +[ViewController load]ViewController
-2016-05-29 00:09:19.388 test[17819:1041383] +[AppDelegate load]AppDelegate
-2016-05-29 00:09:19.388 test[17819:1041383] main
-2016-05-29 00:09:19.389 test[17819:1041383] +[AppDelegate initialize]AppDelegate
-2016-05-29 00:09:19.477 test[17819:1041383] +[ViewController initialize]ViewController
-2016-05-29 00:09:19.482 test[17819:1041383] -[AppDelegate application:didFinishLaunchingWithOptions:]AppDelegate
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -887,7 +813,7 @@ if (cell == nil) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">31</span>
+              <span class="site-state-item-count">32</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
