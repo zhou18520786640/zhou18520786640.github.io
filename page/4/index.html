@@ -214,6 +214,133 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/01/UITableView复用机制浅析/" itemprop="url">
+                  UITableView复用机制浅析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-01T22:35:03+08:00" content="2016-06-01">
+              2016-06-01
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="UITableViewCell的复用机制疑惑"><a href="#UITableViewCell的复用机制疑惑" class="headerlink" title="UITableViewCell的复用机制疑惑"></a>UITableViewCell的复用机制疑惑</h2><p>无论是刚接触iOS不久的新人，还是拥有几年从业经验的老司机，都写过下面的代码。</p>
+<pre><code>// initTableView的时候
+[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@&quot;cell&quot;];
+// UITableViewDataSource回调中
+static NSString *reuseIdentifier = @&quot;cell&quot;;
+UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+</code></pre><p>或者在iOS6更早的版本中。使用如下的代码</p>
+<pre><code>// UITableViewDataSource回调中
+static NSString *reuseIdentifier = @&quot;cell&quot;;
+UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+if (cell == nil) {
+        UITableViewCell *tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@&quot;cell&quot;];
+
+}
+</code></pre><p>上面两种方法，并明显区别。实现目的一样。只是换了不同的API而已。所谓复用，就体现在<code>UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];</code>。这里有一些概念。<code>identifier</code>每创建一个cell必须附带一个identifier标识自己。<code>ReusableCell</code>表示这个cell是复用的。那么何为复用。实际上就是反复循环使用呗。既然要反复循环使用。就必须将可复用的对象放在一个数据结构中。需要的时候取出来放在显示区域。所谓显示区域的cell.我们翻看UITableView的头文件，看到一个<code>@property (nonatomic, readonly) NSArray&lt;__kindof UITableViewCell *&gt; *visibleCells</code>.显示区域的cell全部放在这个数组中。有了显示区域的cells.<code>dequeue</code>表示苹果实现了一个队列的结构。既然有出队列。那么必然有入队列。何时入，何时出？</p>
+<p>总结来说。我们需要回到下面几个问题。<br>1.苹果是用什么数据结构来保存复用的cells.<br>2.何时将cell加入复用的数据结构。何时从这个复用结构中移除？</p>
+<h2 id="隐藏的-reuseTableViewCells"><a href="#隐藏的-reuseTableViewCells" class="headerlink" title="隐藏的_reuseTableViewCells"></a>隐藏的_reuseTableViewCells</h2><p>实际上,苹果将UITableView中有个私有变量叫做<code>_reuseTableViewCells</code>。利用运行时的api我们可以将其打印出来。</p>
+<pre><code>- (void)tryMember
+{
+    const char *cellName = &quot;_reusableTableCells&quot;;
+    Ivar var = class_getInstanceVariable([UITableView class], cellName);
+
+    const char *memberName = ivar_getName(var);
+    const char *memberType = ivar_getTypeEncoding(var);
+    NSLog(@&quot;%s----%s&quot;, memberName, memberType);
+
+}
+</code></pre><p>发现_reuseTableViewCells是一个cell为value的可变字典。它是作为reuseCell的<code>队列</code>结构的关键。</p>
+<h2 id="cell在-reuseTableViewCells和visibleCells的相互迁移"><a href="#cell在-reuseTableViewCells和visibleCells的相互迁移" class="headerlink" title="cell在_reuseTableViewCells和visibleCells的相互迁移"></a>cell在_reuseTableViewCells和visibleCells的相互迁移</h2><p>我有100条数据，屏幕可以显示17个cell.</p>
+<ol>
+<li><p>在tableView首次初始化并添加到其父视图后。会自动reloadData<br>实际上。UITableView只会调用<br><code>- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath</code>17次。同时每次调用这个方法都会调用<code>UITableViewCell *tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@&quot;cell&quot;];</code>这17个cell都是用户可以看到的。其实也都在visibleCells中。而执行[tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];都会为nil.即这个时候没有cell在<code>_reuseTableViewCells</code>中。所以出队列操作都是nil.</p>
+</li>
+<li><p>当向上滚动时候。这个时候会先出_reuseTableViewCells中去取。发现为nil.那么<strong>回再调用一次</strong><code>UITableViewCell *tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault</code>reuseIdentifier:@”cell”]。并自动将cell加入到visibleCells中。</p>
+</li>
+<li>继续往上滑动。第一个cell退出了显示区域。这个时候就从visibleCells中移除。同时将其放入_reuseTableViewCells。这个过程对_reuseTableViewCells而言。就是入队列了。</li>
+<li>再往上滑动。新出来的cell其实不再是alloc出来。而是从_reuseTableViewCells中出队列来的。一旦出队列。就显示到屏幕上。即加入到visibleCells中。</li>
+</ol>
+<p>总结来说。任何一个时间点。cell要么在visibleCells中。要么在_reuseTableViewCells中。它们之间会因为隐藏和显示，有限个的cell（屏幕个数+1）不断的在这个两个对象中迁移。</p>
+<h2 id="cell虽复用，数据常更新"><a href="#cell虽复用，数据常更新" class="headerlink" title="cell虽复用，数据常更新"></a>cell虽复用，数据常更新</h2><p><code>- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath</code><br>cell虽然复用，但是新出来的cell的展示数据并不是以前的数据。是因为上述方法会更新显示出来的（实际是_reuseTableViewCells中的）显示数据。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/30/Core-Data应用开发实践指南读书笔记1/" itemprop="url">
                   Core Data应用开发实践指南读书笔记1
                 </a>
@@ -696,191 +823,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/24/Masonry手写约束之Demo篇/" itemprop="url">
-                  Masonry手写约束之Demo篇
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-24T21:49:00+08:00" content="2016-05-24">
-              2016-05-24
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h3><p>实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.</p>
-<pre><code>- (instancetype)init {
-    self = [super init];
-    if (self) {
-        UIView *greenView = UIView.new;
-        greenView.backgroundColor = UIColor.greenColor;
-        greenView.layer.borderColor = UIColor.blackColor.CGColor;
-        greenView.layer.borderWidth = 2;
-        [self addSubview:greenView];
-        self.greenView = greenView;
-
-        UIView *redView = UIView.new;
-        redView.backgroundColor = UIColor.redColor;
-        redView.layer.borderColor = UIColor.blackColor.CGColor;
-        redView.layer.borderWidth = 2;
-        [self addSubview:redView];
-        self.redView = redView;
-
-        UIView *blueView = UIView.new;
-        blueView.backgroundColor = UIColor.blueColor;
-        blueView.layer.borderColor = UIColor.blackColor.CGColor;
-        blueView.layer.borderWidth = 2;
-        [self addSubview:blueView];
-        self.blueView = blueView;
-
-        UIView *superview = self;
-
-        [greenView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(superview).offset(10);
-            make.top.equalTo(superview).offset(10);
-            make.width.equalTo(redView);
-            make.height.equalTo(@[redView, blueView]);
-        }];
-
-        [redView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(greenView.right).offset(10);
-            make.top.equalTo(greenView);
-            make.width.equalTo(greenView);
-            make.right.equalTo(superview).offset(-10);
-        }];
-
-        [blueView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(redView.bottom).offset(10);
-            make.left.equalTo(superview).offset(10);
-            make.right.equalTo(superview).offset(-10);
-            make.bottom.equalTo(superview).offset(-10);
-        }];
-//        [self setNeedsUpdateConstraints];
-    }
-    return self;
-}
-
-//- (void)updateConstraints {
-//    [self.blueView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.redView.bottom).offset(10);
-//        make.left.equalTo(self).offset(20);
-//        make.right.equalTo(self).offset(-20);
-//        make.bottom.equalTo(self).offset(-10);
-//    }];
-//    [super updateConstraints];
-//}
-@end
-</code></pre><p>我们建立的约束只需要建立一次。并且不再需要修改。因此调用<code>mas_makeConstraints</code>。这个例子十分简单。要注意的是equalTo的参数可以是视图数组。</p>
-<h3 id="equalTo的参数可以是常量"><a href="#equalTo的参数可以是常量" class="headerlink" title="equalTo的参数可以是常量"></a>equalTo的参数可以是常量</h3><p>实际上,三种约束参数都可以被equal所接收。他们分别是MASViewAttribute，UIView，NSNumber。当你传NSNumber的时候。实际是相对于其父视图的constant.</p>
-<pre><code>UIView *purpleView = UIView.new;
-[ purpleView.backgroundColor = UIColor.purpleColor;
-purpleView.layer.borderColor = UIColor.blackColor.CGColor;
-purpleView.layer.borderWidth = 2;
-[self addSubview:purpleView];
-
-UIView *orangeView = UIView.new;
-orangeView.backgroundColor = UIColor.orangeColor;
-orangeView.layer.borderColor = UIColor.blackColor.CGColor;
-orangeView.layer.borderWidth = 2;
-[self addSubview:orangeView];
-
-//example of using constants
-
-[purpleView mas_makeConstraints:^(MASConstraintMaker *make) {
-    make.top.equalTo(@20);
-    make.left.equalTo(@20);
-    make.bottom.equalTo(@-20);
-    make.right.equalTo(@-20);
-}];
-
-// auto-boxing macros allow you to simply use scalars and structs, they will be wrapped automatically
-
-[orangeView mas_makeConstraints:^(MASConstraintMaker *make) {
-    make.center.equalTo(CGPointMake(0, 50));
-    make.size.equalTo(CGSizeMake(200, 100));
-}];]
-</code></pre><h3 id="masonry可以结合xib一起使用"><a href="#masonry可以结合xib一起使用" class="headerlink" title="masonry可以结合xib一起使用"></a>masonry可以结合xib一起使用</h3><p>如果我在xib中已经布局了UI，而且建立了autolayout，当程序运行中需要动态修改autolayout，可以直接使用autolayout的API来修改和删除，更极端的，也可以直接使用masonry来删除</p>
-<h3 id="masonry-UITableView与autolayout"><a href="#masonry-UITableView与autolayout" class="headerlink" title="masonry,UITableView与autolayout"></a>masonry,UITableView与autolayout</h3><p>iOS8以上，对于autolayout，不可以根据子视图的约束动态计算tableViewCell的高度.(注意一般情况下的autolayout的子视图对父视图的约束不会影响父视图，只能影响子视图).tableViewCell通过一定的设置可以开启这个功能。<br>而iOS8以下的系统。autolayout就无能为例了。<br>我们先给出iOS8下的解决方案。这种子视图改变，动态改变自身tableViewCell高度的苹果叫做 Self-Sizing Table View Cell。</p>
-<pre><code>tableView.estimatedRowHeight = 85.0
-tableView.rowHeight = UITableViewAutomaticDimension
-</code></pre><p>首先第一句话，给一个预估高度，等会儿自动布局的会在这个值的基础上再进行调整。第二句话，是开启autolayout的自动布局功能。甚至连高度回调都不需要，完成了整个布局控件的实现。</p>
-<p>如果要适配iOS7，那么这种方法就不奏效了。我们依然可以对子视图使用autolayout来约束子视图和父视图之间位置。而对于tableViewCell本身。可以用frame算出高度后再返回。比较常规的实现是写一个类方法。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -927,7 +869,7 @@ tableView.rowHeight = UITableViewAutomaticDimension
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-count">34</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

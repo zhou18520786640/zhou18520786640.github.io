@@ -214,6 +214,94 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/25/使用定时器和CAShapeLayer画圆/" itemprop="url">
+                  使用定时器和CAShapeLayer画圆
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-25T17:11:37+08:00" content="2016-06-25">
+              2016-06-25
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/24/Learning-CoreData-托管对象模型基本知识/" itemprop="url">
                   Learning CoreData:托管对象模型基本知识
                 </a>
@@ -614,98 +702,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/19/导航栏透明的设置/" itemprop="url">
-                  导航栏透明的设置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-19T15:00:31+08:00" content="2016-06-19">
-              2016-06-19
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="导航栏透明不能依靠alpha值"><a href="#导航栏透明不能依靠alpha值" class="headerlink" title="导航栏透明不能依靠alpha值"></a>导航栏透明不能依靠alpha值</h2><pre><code>viewController.navigationController.navigationBar.alpha = 0.0;
-</code></pre><p>一般视图都是利用<code>alpha</code>来设置透明度。这一套对于继承<code>UIView</code>的的<code>navigationBar</code>并不生效.设置后依然可以显示。实际上导航栏设置透明是只需设置NavigationBar的背景图片为一张空图片即可</p>
-<pre><code>[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsCompact];
-</code></pre><h2 id="透明的导航栏还可以放置titleView-leftBarItem"><a href="#透明的导航栏还可以放置titleView-leftBarItem" class="headerlink" title="透明的导航栏还可以放置titleView leftBarItem"></a>透明的导航栏还可以放置<code>titleView</code> <code>leftBarItem</code></h2><p>在视图的概念中，如果设置<code>alpha</code> = 0后呈现透明效果后，其子视图也会透明。但是我们导航栏的透明并不是依赖｀<code>alpha</code> ＝ 0.而是依靠设置空白图片的方法。我们设置的titleView，leftBarItem依然可以显示。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -752,7 +748,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-count">34</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

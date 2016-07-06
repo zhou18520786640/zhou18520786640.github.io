@@ -57,25 +57,31 @@
 
 
 
-<meta name="description" content="概述
-CoreData是个框架，使得开发者把数据当做对象来操作。CoreData提供的数据对象叫做托管对象（managed object）.CoreData位于应用程序和持久化存储区(persisten store)之间.
-一个托管对象可能对应于数据库中某张数据表中的一行。
-可以将CoreData按照数据流动方向分为三层。分别是持久化存储协调器 托管对象模型 托管对象上下文。具体的是什么这里我还看">
+<meta name="description" content="宏的缺陷使用宏是有缺陷的，无类型安全，长度和格式的具体限制，而且不便于调试
+
+如果你的.m文件需要频繁调用一个函数,可以用static inline来声明,这相当于把函数体当做一个大号的宏定义.不过这也不是百分之百有效,到底能不能把函数体转换为大号宏定义来用要看编译器心情,它要是觉得你的方法太复杂,他就不转了.他直接调用函数.
+
+内联函数格式必须是 c function,所以是c的格式类似这样
+s">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Core Data应用开发实践指南读书笔记1">
-<meta property="og:url" content="http://yoursite.com/2016/05/30/Core-Data应用开发实践指南读书笔记1/index.html">
+<meta property="og:title" content="使用内联函数代替宏定义">
+<meta property="og:url" content="http://yoursite.com/2016/07/07/使用内联函数代替宏定义/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="概述
-CoreData是个框架，使得开发者把数据当做对象来操作。CoreData提供的数据对象叫做托管对象（managed object）.CoreData位于应用程序和持久化存储区(persisten store)之间.
-一个托管对象可能对应于数据库中某张数据表中的一行。
-可以将CoreData按照数据流动方向分为三层。分别是持久化存储协调器 托管对象模型 托管对象上下文。具体的是什么这里我还看">
-<meta property="og:updated_time" content="2016-05-30T15:00:20.000Z">
+<meta property="og:description" content="宏的缺陷使用宏是有缺陷的，无类型安全，长度和格式的具体限制，而且不便于调试
+
+如果你的.m文件需要频繁调用一个函数,可以用static inline来声明,这相当于把函数体当做一个大号的宏定义.不过这也不是百分之百有效,到底能不能把函数体转换为大号宏定义来用要看编译器心情,它要是觉得你的方法太复杂,他就不转了.他直接调用函数.
+
+内联函数格式必须是 c function,所以是c的格式类似这样
+s">
+<meta property="og:updated_time" content="2016-07-06T17:47:13.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Core Data应用开发实践指南读书笔记1">
-<meta name="twitter:description" content="概述
-CoreData是个框架，使得开发者把数据当做对象来操作。CoreData提供的数据对象叫做托管对象（managed object）.CoreData位于应用程序和持久化存储区(persisten store)之间.
-一个托管对象可能对应于数据库中某张数据表中的一行。
-可以将CoreData按照数据流动方向分为三层。分别是持久化存储协调器 托管对象模型 托管对象上下文。具体的是什么这里我还看">
+<meta name="twitter:title" content="使用内联函数代替宏定义">
+<meta name="twitter:description" content="宏的缺陷使用宏是有缺陷的，无类型安全，长度和格式的具体限制，而且不便于调试
+
+如果你的.m文件需要频繁调用一个函数,可以用static inline来声明,这相当于把函数体当做一个大号的宏定义.不过这也不是百分之百有效,到底能不能把函数体转换为大号宏定义来用要看编译器心情,它要是觉得你的方法太复杂,他就不转了.他直接调用函数.
+
+内联函数格式必须是 c function,所以是c的格式类似这样
+s">
 
 
 
@@ -93,7 +99,7 @@ CoreData是个框架，使得开发者把数据当做对象来操作。CoreData�
   };
 </script>
 
-  <title> Core Data应用开发实践指南读书笔记1 | 周明的技术博客 </title>
+  <title> 使用内联函数代替宏定义 | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -215,7 +221,7 @@ CoreData是个框架，使得开发者把数据当做对象来操作。CoreData�
             
             
               
-                Core Data应用开发实践指南读书笔记1
+                使用内联函数代替宏定义
               
             
           </h1>
@@ -227,8 +233,8 @@ CoreData是个框架，使得开发者把数据当做对象来操作。CoreData�
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-30T00:30:58+08:00" content="2016-05-30">
-              2016-05-30
+            <time itemprop="dateCreated" datetime="2016-07-07T01:35:14+08:00" content="2016-07-07">
+              2016-07-07
             </time>
           </span>
 
@@ -254,14 +260,18 @@ CoreData是个框架，使得开发者把数据当做对象来操作。CoreData�
       
 
       
-        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
-<li>CoreData是个框架，使得开发者把<strong>数据</strong>当做<strong>对象</strong>来操作。CoreData提供的数据对象叫做托管对象（managed object）.CoreData位于应用程序和持久化存储区(persisten store)之间.</li>
-<li>一个<strong>托管对象</strong>可能对应于数据库中某张数据表中的一<strong>行</strong>。</li>
-<li>可以将CoreData按照数据流动方向分为三层。分别是持久化存储协调器 托管对象模型 托管对象上下文。具体的是什么这里我还看不太懂。等深入后再做研究。或者去问同事。</li>
-<li>持久化存储区可以是SQlite数据库,XML文件，Binary store等数据文件。</li>
-<li>注意托管对象模式和托管对象并不是同一个东西。</li>
-</ul>
-<h3 id="CoreDataHelper类"><a href="#CoreDataHelper类" class="headerlink" title="CoreDataHelper类"></a>CoreDataHelper类</h3><p>我们先写一个工具类CoreDataHelper，抽象成一个类而不是放在视图控制器中，这样便于移植。</p>
+        <h3 id="宏的缺陷"><a href="#宏的缺陷" class="headerlink" title="宏的缺陷"></a>宏的缺陷</h3><p>使用宏是有缺陷的，无类型安全，长度和格式的具体限制，而且不便于调试</p>
+<blockquote>
+<p>如果你的.m文件需要频繁调用一个函数,可以用static inline来声明,这相当于把函数体<strong>当做一个大号的宏定义</strong>.不过这也不是百分之百有效,到底能不能把函数体转换为大号宏定义来用要看编译器心情,它要是觉得你的方法太复杂,他就不转了.他直接调用函数.</p>
+</blockquote>
+<h3 id="内联函数格式"><a href="#内联函数格式" class="headerlink" title="内联函数格式"></a>内联函数格式</h3><p>必须是 c function,所以是c的格式类似这样</p>
+<pre><code>static inline fun_returnType  Fun_name(param...){}
+</code></pre><h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><pre><code>static inline CGFloat kWidth() {return [UIScreen mainScreen].bounds.size.width;}
+
+kWidth() // call
+</code></pre><p>调用 Fun_name（param…）.因为是c function,是该文件全局可见，不需要调用self.Fun_name（）</p>
+<h3 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h3><p><strong>不能写太复杂的语句。不能递归。
+</strong></p>
 
       
     </div>
@@ -285,17 +295,13 @@ CoreData是个框架，使得开发者把数据当做对象来操作。CoreData�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/28/load-与-initialize方法小记/" rel="next" title="load 与 initialize方法小记">
-                <i class="fa fa-chevron-left"></i> load 与 initialize方法小记
+              <a href="/2016/07/07/使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView/" rel="next" title="使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView">
+                <i class="fa fa-chevron-left"></i> 使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/01/UITableView复用机制浅析/" rel="prev" title="UITableView复用机制浅析">
-                UITableView复用机制浅析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -406,7 +412,7 @@ CoreData是个框架，使得开发者把数据当做对象来操作。CoreData�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CoreDataHelper类"><span class="nav-number">2.</span> <span class="nav-text">CoreDataHelper类</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#宏的缺陷"><span class="nav-number">1.</span> <span class="nav-text">宏的缺陷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内联函数格式"><span class="nav-number">2.</span> <span class="nav-text">内联函数格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo"><span class="nav-number">3.</span> <span class="nav-text">Demo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局限性"><span class="nav-number">4.</span> <span class="nav-text">局限性</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
