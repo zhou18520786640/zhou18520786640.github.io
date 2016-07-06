@@ -57,28 +57,19 @@
 
 
 
-<meta name="description" content="Basic实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        UI">
+<meta name="description" content="UICollectionViewFlowLayout与UICollectionViewLayout一般我们要使用简单的类似多排UITableView的效果的时候，UICollectionView是最便利的方法，UICollectionView的创建
+- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollect">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Masonry手写约束之Demo篇">
-<meta property="og:url" content="http://yoursite.com/2016/05/24/Masonry手写约束之Demo篇/index.html">
+<meta property="og:title" content="使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView">
+<meta property="og:url" content="http://yoursite.com/2016/07/07/使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="Basic实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        UI">
-<meta property="og:updated_time" content="2016-05-26T15:11:34.000Z">
+<meta property="og:description" content="UICollectionViewFlowLayout与UICollectionViewLayout一般我们要使用简单的类似多排UITableView的效果的时候，UICollectionView是最便利的方法，UICollectionView的创建
+- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollect">
+<meta property="og:updated_time" content="2016-07-06T17:27:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Masonry手写约束之Demo篇">
-<meta name="twitter:description" content="Basic实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-        UI">
+<meta name="twitter:title" content="使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView">
+<meta name="twitter:description" content="UICollectionViewFlowLayout与UICollectionViewLayout一般我们要使用简单的类似多排UITableView的效果的时候，UICollectionView是最便利的方法，UICollectionView的创建
+- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollect">
 
 
 
@@ -96,7 +87,7 @@
   };
 </script>
 
-  <title> Masonry手写约束之Demo篇 | 周明的技术博客 </title>
+  <title> 使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -218,7 +209,7 @@
             
             
               
-                Masonry手写约束之Demo篇
+                使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView
               
             
           </h1>
@@ -230,8 +221,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-24T21:49:00+08:00" content="2016-05-24">
-              2016-05-24
+            <time itemprop="dateCreated" datetime="2016-07-07T01:16:58+08:00" content="2016-07-07">
+              2016-07-07
             </time>
           </span>
 
@@ -257,103 +248,11 @@
       
 
       
-        <h3 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h3><p>实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.</p>
-<pre><code>- (instancetype)init {
-    self = [super init];
-    if (self) {
-        UIView *greenView = UIView.new;
-        greenView.backgroundColor = UIColor.greenColor;
-        greenView.layer.borderColor = UIColor.blackColor.CGColor;
-        greenView.layer.borderWidth = 2;
-        [self addSubview:greenView];
-        self.greenView = greenView;
-
-        UIView *redView = UIView.new;
-        redView.backgroundColor = UIColor.redColor;
-        redView.layer.borderColor = UIColor.blackColor.CGColor;
-        redView.layer.borderWidth = 2;
-        [self addSubview:redView];
-        self.redView = redView;
-
-        UIView *blueView = UIView.new;
-        blueView.backgroundColor = UIColor.blueColor;
-        blueView.layer.borderColor = UIColor.blackColor.CGColor;
-        blueView.layer.borderWidth = 2;
-        [self addSubview:blueView];
-        self.blueView = blueView;
-
-        UIView *superview = self;
-
-        [greenView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(superview).offset(10);
-            make.top.equalTo(superview).offset(10);
-            make.width.equalTo(redView);
-            make.height.equalTo(@[redView, blueView]);
-        }];
-
-        [redView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(greenView.right).offset(10);
-            make.top.equalTo(greenView);
-            make.width.equalTo(greenView);
-            make.right.equalTo(superview).offset(-10);
-        }];
-
-        [blueView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(redView.bottom).offset(10);
-            make.left.equalTo(superview).offset(10);
-            make.right.equalTo(superview).offset(-10);
-            make.bottom.equalTo(superview).offset(-10);
-        }];
-//        [self setNeedsUpdateConstraints];
-    }
-    return self;
-}
-
-//- (void)updateConstraints {
-//    [self.blueView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.redView.bottom).offset(10);
-//        make.left.equalTo(self).offset(20);
-//        make.right.equalTo(self).offset(-20);
-//        make.bottom.equalTo(self).offset(-10);
-//    }];
-//    [super updateConstraints];
-//}
-@end
-</code></pre><p>我们建立的约束只需要建立一次。并且不再需要修改。因此调用<code>mas_makeConstraints</code>。这个例子十分简单。要注意的是equalTo的参数可以是视图数组。</p>
-<h3 id="equalTo的参数可以是常量"><a href="#equalTo的参数可以是常量" class="headerlink" title="equalTo的参数可以是常量"></a>equalTo的参数可以是常量</h3><p>实际上,三种约束参数都可以被equal所接收。他们分别是MASViewAttribute，UIView，NSNumber。当你传NSNumber的时候。实际是相对于其父视图的constant.</p>
-<pre><code>UIView *purpleView = UIView.new;
-[ purpleView.backgroundColor = UIColor.purpleColor;
-purpleView.layer.borderColor = UIColor.blackColor.CGColor;
-purpleView.layer.borderWidth = 2;
-[self addSubview:purpleView];
-
-UIView *orangeView = UIView.new;
-orangeView.backgroundColor = UIColor.orangeColor;
-orangeView.layer.borderColor = UIColor.blackColor.CGColor;
-orangeView.layer.borderWidth = 2;
-[self addSubview:orangeView];
-
-//example of using constants
-
-[purpleView mas_makeConstraints:^(MASConstraintMaker *make) {
-    make.top.equalTo(@20);
-    make.left.equalTo(@20);
-    make.bottom.equalTo(@-20);
-    make.right.equalTo(@-20);
-}];
-
-// auto-boxing macros allow you to simply use scalars and structs, they will be wrapped automatically
-
-[orangeView mas_makeConstraints:^(MASConstraintMaker *make) {
-    make.center.equalTo(CGPointMake(0, 50));
-    make.size.equalTo(CGSizeMake(200, 100));
-}];]
-</code></pre><h3 id="masonry可以结合xib一起使用"><a href="#masonry可以结合xib一起使用" class="headerlink" title="masonry可以结合xib一起使用"></a>masonry可以结合xib一起使用</h3><p>如果我在xib中已经布局了UI，而且建立了autolayout，当程序运行中需要动态修改autolayout，可以直接使用autolayout的API来修改和删除，更极端的，也可以直接使用masonry来删除</p>
-<h3 id="masonry-UITableView与autolayout"><a href="#masonry-UITableView与autolayout" class="headerlink" title="masonry,UITableView与autolayout"></a>masonry,UITableView与autolayout</h3><p>iOS8以上，对于autolayout，不可以根据子视图的约束动态计算tableViewCell的高度.(注意一般情况下的autolayout的子视图对父视图的约束不会影响父视图，只能影响子视图).tableViewCell通过一定的设置可以开启这个功能。<br>而iOS8以下的系统。autolayout就无能为例了。<br>我们先给出iOS8下的解决方案。这种子视图改变，动态改变自身tableViewCell高度的苹果叫做 Self-Sizing Table View Cell。</p>
-<pre><code>tableView.estimatedRowHeight = 85.0
-tableView.rowHeight = UITableViewAutomaticDimension
-</code></pre><p>首先第一句话，给一个预估高度，等会儿自动布局的会在这个值的基础上再进行调整。第二句话，是开启autolayout的自动布局功能。甚至连高度回调都不需要，完成了整个布局控件的实现。</p>
-<p>如果要适配iOS7，那么这种方法就不奏效了。我们依然可以对子视图使用autolayout来约束子视图和父视图之间位置。而对于tableViewCell本身。可以用frame算出高度后再返回。比较常规的实现是写一个类方法。</p>
+        <h3 id="UICollectionViewFlowLayout与UICollectionViewLayout"><a href="#UICollectionViewFlowLayout与UICollectionViewLayout" class="headerlink" title="UICollectionViewFlowLayout与UICollectionViewLayout"></a>UICollectionViewFlowLayout与UICollectionViewLayout</h3><p>一般我们要使用简单的类似多排UITableView的效果的时候，UICollectionView是最便利的方法，UICollectionView的创建</p>
+<pre><code>- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout NS_DESIGNATED_INITIALIZER;
+</code></pre><p>虽然接口告诉我们需要一个<code>UICollectionViewLayout</code>对象，但是实际上需要的对象是<code>UICollectionViewFlowLayout</code>对象。它们是继承关系。后者是前者的子类。为其提供了<strong>流式</strong>的排布。如果使用前者实际上相当于排布规则没有定义。只是提供了一些基础功能。前者主要是用在我们子类化实现自已的排布的时候的基类而已。如果使用前者，甚至会导致数据源回调方法</p>
+<pre><code>- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath 
+</code></pre><p>不被调用。</p>
 
       
     </div>
@@ -377,17 +276,13 @@ tableView.rowHeight = UITableViewAutomaticDimension
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/24/Masonry手写约束原理篇/" rel="next" title="Masonry手写约束原理篇">
-                <i class="fa fa-chevron-left"></i> Masonry手写约束原理篇
+              <a href="/2016/07/02/Layer的mask属性/" rel="next" title="Layer的mask属性">
+                <i class="fa fa-chevron-left"></i> Layer的mask属性
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/25/RunLoop之作用篇/" rel="prev" title="RunLoop之作用篇">
-                RunLoop之作用篇 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -498,7 +393,7 @@ tableView.rowHeight = UITableViewAutomaticDimension
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic"><span class="nav-number">1.</span> <span class="nav-text">Basic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#equalTo的参数可以是常量"><span class="nav-number">2.</span> <span class="nav-text">equalTo的参数可以是常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#masonry可以结合xib一起使用"><span class="nav-number">3.</span> <span class="nav-text">masonry可以结合xib一起使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#masonry-UITableView与autolayout"><span class="nav-number">4.</span> <span class="nav-text">masonry,UITableView与autolayout</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#UICollectionViewFlowLayout与UICollectionViewLayout"><span class="nav-number">1.</span> <span class="nav-text">UICollectionViewFlowLayout与UICollectionViewLayout</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
