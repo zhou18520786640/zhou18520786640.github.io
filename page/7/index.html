@@ -214,6 +214,231 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/20/UICollectionView Basic/" itemprop="url">
+                  UICollectionView Basic
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-20T13:06:15+08:00" content="2016-03-20">
+              2016-03-20
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://static.open-open.com/lib/uploadImg/20160126/20160126181554_540.gif" alt="image"></p>
+<h2 id="UICollectionView-作用"><a href="#UICollectionView-作用" class="headerlink" title="UICollectionView 作用"></a>UICollectionView 作用</h2><p>UICollectionView是增强版的UITableView,可以认为是方便实现一行多个cell的tableView。另外利用自定义布局的配置，可以实现更加灵活的布局展示。</p>
+<h2 id="UICollectionView的组成"><a href="#UICollectionView的组成" class="headerlink" title="UICollectionView的组成"></a>UICollectionView的组成</h2><p>UICollectionView其实不单单指的UICollectionView的类。而是一系列类和协议的总称。下面我们分标题一一介绍。</p>
+<h3 id="cells"><a href="#cells" class="headerlink" title="cells"></a>cells</h3><p>类似UITableViewCell,不过在collectionview中一行可以显示多个collectionviewcell,要定制化它，最佳实践也和UITableViewCell一样，子类化collectionviewcell.这个cell的是数据驱动的，即要展示什么内容并不是由自己负责，而是提供数据的类。要创建多少cell也是根据数据决定，数据item的个数决定了view的个数。在UITableView中，这个类就是遵从UITableViewDataSource的类。在UICollectionView中这个类就是遵从UICollectionViewDataSource的类。对于UICollectionViewDataSource 协议，我会在UICollectionViewDataSource中对其功能做详细的介绍。另外和tableview一样。对于用户操作cell产生的一些行为，我们也移交给遵从另外一个协议的类。也许你也猜到了。这个类就是UICollectionViewDelegate.实际来说，学习UICollectionView最基本的元素就是UICollectionViewCell。而cell的数据来源于UICollectionViewDataSource,其UICollectionViewDataSource协议的实现才是我们的关注重点。如果用户还需要操作cell后的一些反馈，那么就依靠UICollectionViewDelegate来了。从设计思想来说。我们把内容逻辑的处理，展示内容，cell的反馈处理。分别由三个类来承担了。达到了去耦的目的。这对于比较复杂视图是需要的。而普通的UILabel,UIButton就不需要这样复杂的设计了。</p>
+<h3 id="supplementary-views"><a href="#supplementary-views" class="headerlink" title="supplementary views"></a>supplementary views</h3><p>和collectionviewcell类似，supplementary views是数据驱动的。和collectionviewcell，不同这个对象并不是必须的。collectionviewcell的创建多少个和要显示的数据内容也依然依靠的是遵从UICollectionViewDataSource的类。在UICollectionViewDataSource协议中，<br><code>- collectionView:viewForSupplementaryElementOfKind:atIndexPath:</code>是个可选方法。其实通俗的讲。supplementary views就是tableview的header和footer.一个section可以配置一个section或者footer。至于标示header或者footer就依靠的是viewForSupplementaryElementOfKind的参数值</p>
+<h3 id="Decoration-views"><a href="#Decoration-views" class="headerlink" title="Decoration views"></a>Decoration views</h3><p>Decoration并不是数据驱动的，和UICollectionViewDataSource毫无关联</p>
+<h3 id="UICollectionViewDataSource"><a href="#UICollectionViewDataSource" class="headerlink" title="UICollectionViewDataSource"></a>UICollectionViewDataSource</h3><p>数据源协议回到了三个问题</p>
+<ul>
+<li>How many sections does the collection view contain?</li>
+<li>For a given section, how many items does a section contain?</li>
+<li>For a given section or item, what views should be used to display the corresponding content?</li>
+</ul>
+<p>UICollectionViewDataSource的实现是UICollectionView的核心。无论从设计思维上来看，和实际应用的角度。<br>其中有两个协议是必须实现的。它们是</p>
+<h3 id="UICollectionViewDelegate"><a href="#UICollectionViewDelegate" class="headerlink" title="UICollectionViewDelegate"></a>UICollectionViewDelegate</h3><h3 id="UICollectionViewFlowLayout"><a href="#UICollectionViewFlowLayout" class="headerlink" title="UICollectionViewFlowLayout"></a>UICollectionViewFlowLayout</h3><p>UITableView中，UITableViewCell都是单一的排布顺序。即从上到下。顺序排布。而UICollectionView中，可以实现非常灵活的排布。依靠的类就是UICollectionViewFlowLayout类。它的任务就是1.配置滚动方向。2.配置cell间隔。3.配置supplementary尺寸。其实使用UICollectionViewFlowLayout方法十分简单。<br>滚动方法有两种。一种是垂直的，一种是水平的。默认是垂直的。下面是垂直的时候的样子。</p>
+<p><img src="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/CollectionViewPGforIOS/Art/flow_horiz_headers_2x.png" alt="https://developer.apple.com/library/ios/documentation/WindowsViews/Conceptual/CollectionViewPGforIOS/Art/flow_horiz_headers_2x.png
+"><br>FlowLayout流程</p>
+<ul>
+<li>创建flow layout对象和赋值给collectionview对象（注意手写代码的时候，创建collectionview必须传入这个对象）</li>
+<li>配置cell的宽度和高度</li>
+<li>创建行间隔和item间隔</li>
+<li>如果需要设置headers和footers，指定它们的尺寸。</li>
+</ul>
+<h2 id="collectionview基本流程"><a href="#collectionview基本流程" class="headerlink" title="collectionview基本流程"></a>collectionview基本流程</h2><p>实现一个collectionview，最少意义上要做这些步骤。</p>
+<pre><code>0.创建UICollectionViewFlowLayout对象
+1.创建UICollectionview对象        
+2.设定UICollectionview对象的数据源委托，如有需要，设定视图委托，和布局委托
+3.实现UICollectionview对象的数据委托协议方法。如有需要，设定视图委托，和布局委托方法。
+</code></pre><p>在basic一节中，我打算用两个例子,分别用sb和纯代码来展现这些流程。第一个demo是官方demo.</p>
+<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><p><a href="https://developer.apple.com/library/ios/samplecode/CollectionView-Simple/Introduction/Intro.html" target="_blank" rel="external">https://developer.apple.com/library/ios/samplecode/CollectionView-Simple/Introduction/Intro.html</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/20/侧边栏的实现/" itemprop="url">
+                  侧边栏的实现
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-20T12:32:48+08:00" content="2016-03-20">
+              2016-03-20
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://www.lanou3g.com/upload/image/201312/20131227100929_666.png" alt="http://www.lanou3g.com/upload/image/201312/20131227100929_666.png
+"></p>
+<h3 id="本文大部分思路参考小王子"><a href="#本文大部分思路参考小王子" class="headerlink" title="本文大部分思路参考小王子"></a>本文大部分思路参考<a href="http://www.jianshu.com/p/3ddcb71df2f7" target="_blank" rel="external">小王子</a></h3><h3 id="基本框架"><a href="#基本框架" class="headerlink" title="基本框架"></a>基本框架</h3><p>类似容器视图控制器的思想。对于一个侧边栏，至少需要三个角色控制器。</p>
+<ol>
+<li>侧边栏视图控制器<br>提供侧边栏的显示内容。用户点击侧边栏的按钮可以调用管理控制器隐藏侧边栏，显示主要展示内容。</li>
+<li>主要展示内容控制器<br>多个内容控制器。和侧边栏上的按钮对应。</li>
+<li>管理容器控制器<br>侧边栏和主要展示内容控制器的视图都添加到管理控制器的视图上。真正决定显示内容给用户看的控制器。</li>
+</ol>
+<p>可以看出，三种角色控制器中，管理控制器是开发设计的核心。定义这个类叫做<code>ZZSlideBarViewController</code>.</p>
+<h3 id="不太好的思路"><a href="#不太好的思路" class="headerlink" title="不太好的思路"></a>不太好的思路</h3><p>可以考虑仅仅使用一个视图控制器。左边放侧边栏视图。右边放主内容视图。这样的的话，这个控制器实际上承担太多的职责。会使用类臃肿庞大，而且很难重用。</p>
+<h3 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h3><ol>
+<li>先不要求可以点击tab上的内容跳转不同的视图控制器，而是仅仅实现一个内容控制器的版本。而且动画是平行移动，  不是类似QQ侧边栏的缩放效果。</li>
+<li>再使用多个控制器的版本。</li>
+<li>最后实现可平行移动的控制器</li>
+</ol>
+<h3 id="初始版本1"><a href="#初始版本1" class="headerlink" title="初始版本1"></a>初始版本1</h3><h4 id="管理容器控制器的接口"><a href="#管理容器控制器的接口" class="headerlink" title="管理容器控制器的接口"></a>管理容器控制器的接口</h4><p>管理控制器需要管理两个视图控制器，分别叫做barController,contentController.我们可以初始化的时候叫两个控制器传递进去</p>
+<pre><code>@interface ZZSlideBarViewController
+- (instance)initWithContentViewController:(UIViewController *)viewController barController:(UIViewController *)barViewController;
+@end
+</code></pre><h4 id="管理容器控制器的接口-1"><a href="#管理容器控制器的接口-1" class="headerlink" title="管理容器控制器的接口"></a>管理容器控制器的接口</h4><p>为了方便布局。可以将slideBarViewController上添加两个视图。分别作为contentController，barController的父视图。</p>
+<h3 id="改进版本2"><a href="#改进版本2" class="headerlink" title="改进版本2"></a>改进版本2</h3><h3 id="最终版本3"><a href="#最终版本3" class="headerlink" title="最终版本3"></a>最终版本3</h3>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/12/hexo-github部署静态blog/" itemprop="url">
                   hexo github部署静态blog
                 </a>
@@ -553,117 +778,12 @@ ZZProduct *product = [[class alloc] init];
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/03/05/       使用GCD实现iOS多线程编程/" itemprop="url">
-                  使用GCD实现iOS多线程编程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-05T13:00:58+08:00" content="2016-03-05">
-              2016-03-05
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>GCD是iOS编程中实现多线程的一种解决方案。先贴出权威的表述,苹果官方文档中这样描述GCD:</p>
-<blockquote>
-<p>Grand Central Dispatch (GCD) comprises language features, runtime libraries, and system enhancements that provide systemic, comprehensive improvements to the support for concurrent code execution on<br>multicore hardware in iOS and OS X.</p>
-</blockquote>
-<p>个人认为对于开发者，学习GCD主要是学习GCD中涉及的概念和API.本文首先介绍GCD的一些基本术语和概念。然后介绍一些常见的GCD API的使用方法和使用场景，最后谈谈使用过程中注意的地方。</p>
-<h2 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h2><p>线程:程序的一条代码执行路径。<br>进程:处于运行状态的应用程序。</p>
-<p>主线程:一个进程必须有且只有一个主线程。</p>
-<p>子线程:处主线程之外的线程</p>
-<p>调度:</p>
-<p>任务:在iOS GCD编程中，可以简单理解为一段block</p>
-<p>同步:不用等</p>
-<p>异步:</p>
-<p>调度队列:</p>
-<p>串行队列:</p>
-<p>并行队列:</p>
-<h2 id="GCD的常见API和使用场景"><a href="#GCD的常见API和使用场景" class="headerlink" title="GCD的常见API和使用场景"></a>GCD的常见API和使用场景</h2><p>功能1:在非主线程上执行耗时的工作<br>功能2:创建单例<br>功能3:延时调用<br>功能4:同步刷新</p>
-<h2 id="GCD使用中注意的地方"><a href="#GCD使用中注意的地方" class="headerlink" title="GCD使用中注意的地方"></a>GCD使用中注意的地方</h2><p>注意点1:死锁<br>注意点2:</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -704,7 +824,7 @@ ZZProduct *product = [[class alloc] init];
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">36</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

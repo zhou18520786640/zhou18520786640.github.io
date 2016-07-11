@@ -214,6 +214,250 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/26/NSTextAttachMent实现图文混排/" itemprop="url">
+                  NSTextAttachment实现图文混排
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-26T23:12:14+08:00" content="2016-05-26">
+              2016-05-26
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="需求场景"><a href="#需求场景" class="headerlink" title="需求场景"></a>需求场景</h3><p>设计师希望在UILabel后面添加一个关于的图标。引导用户去点击这个Label.由于Label的文案接口返回，无法得知Label文案结束的位置，因此无法决定图标摆放在哪里。</p>
+<h3 id="NSAttributeString与NSTextAttachment"><a href="#NSAttributeString与NSTextAttachment" class="headerlink" title="NSAttributeString与NSTextAttachment"></a>NSAttributeString与NSTextAttachment</h3><p>NSTextAttachment，顾名思义，文本附件。<br>UILabel有一个attributeString属性，我们可以称为带属性的字符串。通过设置该属性值，可以实现文案不同颜色显示，文案带下划线或者带删除线等。在iOS7中，NSAttributeString甚至可以实现简单的图文混排，关键的核心是将文本附件转换为NSAttributeString.和一般的NSAttributeString拼接在一起。那么我们布局按钮的事情直接转换为布局一个简单的字符串了。说了那么多废话，让我们直接来代码演示一下。下面展示了不同长度的字符串下图文混排。</p>
+<pre><code>@interface ViewController ()
+
+@property (weak, nonatomic) IBOutlet UILabel *label;
+@property (weak, nonatomic) IBOutlet UILabel *label2;
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+   // 在变化的标签后添加图案
+    NSString *text = @&quot;我想实现简单的图文混排&quot;;
+    NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:text];
+
+    NSTextAttachment *attachment = [[NSTextAttachment alloc] initWithData:nil ofType:nil];
+    attachment.image = [UIImage imageNamed:@&quot;about&quot;];
+    attachment.bounds = CGRectMake(10, -1, attachment.image.size.width, attachment.image.size.height);
+
+    NSAttributedString *string = [NSAttributedString attributedStringWithAttachment:attachment];
+    [attributeString insertAttributedString:string atIndex:text.length];
+    self.label.attributedText = attributeString;
+
+
+    // 在变化的标签后添加图案
+    NSString *text2 = @&quot;我想实现简单的图文混排我想实现简单的图文混排&quot;;
+    NSMutableAttributedString *attributeString2 = [[NSMutableAttributedString alloc] initWithString:text2];
+
+    NSTextAttachment *attachment2 = [[NSTextAttachment alloc] initWithData:nil ofType:nil];
+    attachment2.image = [UIImage imageNamed:@&quot;about&quot;];
+    attachment2.bounds = CGRectMake(10, -1, attachment2.image.size.width, attachment2.image.size.height);
+    NSAttributedString *string2 = [NSAttributedString attributedStringWithAttachment:attachment2];
+    [attributeString2 insertAttributedString:string2 atIndex:text2.length];
+    self.label2.attributedText = attributeString2;
+
+}
+</code></pre><p>最终展示效果如下:</p>
+<p><img src="http://i2.buimg.com/76405ce088476ad0.png" alt="http://i2.buimg.com/76405ce088476ad0.png"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/05/25/RunLoop之作用篇/" itemprop="url">
+                  RunLoop之作用篇
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-25T00:29:36+08:00" content="2016-05-25">
+              2016-05-25
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="命令式执行与事件驱动"><a href="#命令式执行与事件驱动" class="headerlink" title="命令式执行与事件驱动"></a>命令式执行与事件驱动</h2><p>首先我们来看看命令行代码  </p>
+<pre><code>int main(int argc, char *argv[]) {
+    NSLog(@&quot;hello world&quot;);
+    return 0;
+}
+</code></pre><p>执行完了就程序结束。我们回想一下平时使用的手机应用程序，并非如此。可以不断的响应用户的操作，用户不做任何操作的时候，程序也不会终止。为了实现上面两个目标，实际的手机应用程序用伪代码来表示基本可以认为是这样的</p>
+<pre><code>int main(int argc, char *argv[]) {
+    while(AppIsRunning) {
+        id whoWakeMe = SleepForWakingup();
+        id event = GetEvent(whoWakeMe);
+        Handle(event);
+    }
+    return 0;
+}
+</code></pre><p>通过死循环。如果没事的时候，就处于休眠状态。如果有事件，就将其唤醒，然后去处理这个事件。</p>
+<h3 id="为什么需要RunLoop"><a href="#为什么需要RunLoop" class="headerlink" title="为什么需要RunLoop"></a>为什么需要RunLoop</h3><ol>
+<li>让程序一直运行并接受用户输入</li>
+<li>决定何时处理哪些事件Event</li>
+<li>调用解耦？</li>
+<li>节省CPU时间，没事的时候闲着，不让cpu执行它。</li>
+</ol>
+<h3 id="RunLoop到底是什么？"><a href="#RunLoop到底是什么？" class="headerlink" title="RunLoop到底是什么？"></a>RunLoop到底是什么？</h3><blockquote>
+<p> RunLoop 实际上就是一个对象，这个对象管理了其需要处理的事件和消息，并提供了一个入口函数来执行上面 Event Loop 的逻辑。线程执行了这个函数后，就会一直处于这个函数内部 “接受消息-&gt;等待-&gt;处理” 的循环中，直到这个循环结束（比如传入 quit 的消息），函数返回。</p>
+<p>OSX/iOS 系统中，提供了两个这样的对象：NSRunLoop 和 CFRunLoopRef。<br>CFRunLoopRef 是在 CoreFoundation 框架内的，它提供了纯 C 函数的 API，所有这些 API 都是线程安全的。<br>NSRunLoop 是基于 CFRunLoopRef 的封装，属于Foundation框架。提供了面向对象的 API，但是这些 API 不是线程安全的。</p>
+</blockquote>
+<h3 id="RunLoop-与线程的关系"><a href="#RunLoop-与线程的关系" class="headerlink" title="RunLoop 与线程的关系"></a>RunLoop 与线程的关系</h3><blockquote>
+<p>首先，iOS 开发中能遇到两个线程对象: pthread_t 和 NSThread。过去苹果有份文档标明了 NSThread 只是 pthread_t 的封装，但那份文档已经失效了，现在它们也有可能都是直接包装自最底层的 mach thread。苹果并没有提供这两个对象相互转换的接口，但不管怎么样，可以肯定的是 pthread_t 和 NSThread 是一一对应的。比如，你可以通过 pthread_main_np() 或 [NSThread mainThread] 来获取主线程；也可以通过 pthread_self() 或 [NSThread currentThread] 来获取当前线程。<strong>CFRunLoop 是基于 pthread 来管理的</strong>。</p>
+<p>线程和 RunLoop 之间是一一对应的，其关系是保存在一个全局的 Dictionary 里。线程刚创建时并没有 RunLoop，如果你不主动获取，那它一直都不会有。RunLoop 的创建是发生在第一次获取时，RunLoop 的销毁是发生在线程结束时。你<strong>只能在一个线程的内部获取其 RunLoop</strong>（主线程除外）。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/24/Masonry手写约束之Demo篇/" itemprop="url">
                   Masonry手写约束之Demo篇
                 </a>
@@ -608,217 +852,12 @@ tableView.rowHeight = UITableViewAutomaticDimension
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/10/使用新浪云来部署python应用/" itemprop="url">
-                  使用新浪云来部署python应用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-10T12:00:31+08:00" content="2016-04-10">
-              2016-04-10
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="注册新浪云和添加应用"><a href="#注册新浪云和添加应用" class="headerlink" title="注册新浪云和添加应用"></a>注册新浪云和添加应用</h3><p>进入<a href="http://www.sinacloud.com/" target="_blank" rel="external">http://www.sinacloud.com/</a>,使用sina帐号登录后，点击进入用户中心<br><img src="http://7xsf79.com1.z0.glb.clouddn.com/fff.png" alt="image">。选择云应用。<br><img src="http://7xsf79.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-04-10%2012.24.28.png" alt="image">。<br>然后进入控制台。添加应用即可。注意选择部署环境为python.配置如下<br><img src="http://7xsf79.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-04-10%2012.27.25.png" alt="image"></p>
-<h3 id="部署python代码"><a href="#部署python代码" class="headerlink" title="部署python代码"></a>部署python代码</h3><h4 id="编辑应用代码"><a href="#编辑应用代码" class="headerlink" title="编辑应用代码"></a>编辑应用代码</h4><p>进入我们的应用，使用git作为版本部署工具。实现一个简单的helloword程序。我们的思路是在本地创建我们的代码工程。然后push到新浪云应用中去。    这里本地我们只需要编写两个文件 config.yaml  index.wsgi。分别作为应用程序的配置文件和程序入口文件</p>
-<p>config.yaml文件内容如下</p>
-<pre><code>name: helloworld
-version: 1
-</code></pre><p>index.wsgi文件如下</p>
-<pre><code>import sae
-
-def app(environ, start_response):
-    status = &apos;200 OK&apos;
-    response_headers = [(&apos;Content-type&apos;, &apos;text/plain&apos;)]
-    start_response(status, response_headers)
-    return [&apos;Hello, world!&apos;]
-
-application = sae.create_wsgi_app(app)
-</code></pre><p>将这两个文件放在一个文件夹下（如helloword）.整个文件的编写就完成了。</p>
-<h4 id="部署应用"><a href="#部署应用" class="headerlink" title="部署应用"></a>部署应用</h4><p>我们选择Git作为部署工具。</p>
-<p>首先，创建一个Git代码仓库，将刚才的代码提交到Git仓库中。</p>
-<pre><code>jaime@westeros:~/helloworld$ git init
-jaime@westeros:~/helloworld$ git add .
-jaime@westeros:~/helloworld$ git commit -m &apos;Initial commit&apos;
-</code></pre><p>然后，添加一个新的Git远程仓库sae，地址为： <a href="https://git.sinacloud.com/应用名" target="_blank" rel="external">https://git.sinacloud.com/应用名</a> ，然后将刚才提交的代码推到远程Git仓库的分支1中。</p>
-<pre><code>jaime@westeros:~/helloworld$ git remote add sae https://git.sinacloud.com/helloworld
-jaime@westeros:~/helloworld$ git push sae master:1
-</code></pre><p>这时，需要输入帐号和密码，<b>千万注意不是输入</b>新浪的帐号和密码，而是<font color="red">安全帐号邮箱和安全帐号密码</font>,如果不知道，可以进入用户中心的自己的帐号下查询<br>至此，整个代码的部署就完成了，在浏览器中输入 <code>http://helloword.applinzi.com</code>,注意不是官网说的 <code>http://helloworld.sinaapp.com</code> ,就可以访问刚提交的应用了。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/09/UITableView的一些注意事项/" itemprop="url">
-                  UITableView的一些注意事项
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-09T23:19:55+08:00" content="2016-04-09">
-              2016-04-09
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="实现cell之间的间距"><a href="#实现cell之间的间距" class="headerlink" title="实现cell之间的间距"></a>实现cell之间的间距</h3><p>有两种常见的方案。<br>1.利用section.不同的section之间可以设置footerView和headerView。通过设置footerView和headerView来实现间距<br>2.将cell的背景色设置比要展示的内容高。那样看起来就有部分间距。</p>
-<h3 id="不要在UITableView中嵌套UITableView。"><a href="#不要在UITableView中嵌套UITableView。" class="headerlink" title="不要在UITableView中嵌套UITableView。"></a>不要在UITableView中嵌套UITableView。</h3><p>理论上说，UITableView中是可以嵌套UITableView的。但是实际上这样做会产生很多问题。</p>
-<h3 id="TableView的Header不滚动出显示区域"><a href="#TableView的Header不滚动出显示区域" class="headerlink" title="TableView的Header不滚动出显示区域"></a>TableView的Header不滚动出显示区域</h3><p>当设置plain风格的时候，Header不会和cell一样滚出屏幕显示区域。设置group风格即可。</p>
-<pre><code>self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -859,7 +898,7 @@ jaime@westeros:~/helloworld$ git push sae master:1
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">36</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

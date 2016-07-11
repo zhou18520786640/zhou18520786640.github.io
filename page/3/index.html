@@ -214,6 +214,193 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/24/Tip-cmd是什么/" itemprop="url">
+                  Tip:_cmd是什么?
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-24T01:24:26+08:00" content="2016-06-24">
+              2016-06-24
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="cmd-是什么？"><a href="#cmd-是什么？" class="headerlink" title="_cmd 是什么？"></a>_cmd 是什么？</h2><blockquote>
+<p>The _cmd variable is a hidden argument passed to every method that is the current selector</p>
+</blockquote>
+<p>_cmd在Objective-C的方法中表示当前方法的selector，正如同self表示当前方法调用的对象实例一样</p>
+<h2 id="cmd来打印当前方法名"><a href="#cmd来打印当前方法名" class="headerlink" title="_cmd来打印当前方法名"></a>_cmd来打印当前方法名</h2><pre><code>NSStringFromSelector(_cmd)
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/24/让视图控制器的视图位置不要和导航栏重合的三种方法/" itemprop="url">
+                  让视图控制器的视图位置不要和导航栏重合的三种方法
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-24T00:51:13+08:00" content="2016-06-24">
+              2016-06-24
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="方法1-设置edgesForExtendedLayout"><a href="#方法1-设置edgesForExtendedLayout" class="headerlink" title="方法1 设置edgesForExtendedLayout"></a>方法1 设置edgesForExtendedLayout</h2><pre><code>rootViewController.edgesForExtendedLayout = UIRectEdgeNone;
+</code></pre><p>viewController的左上角位置会在导航栏下面。</p>
+<h2 id="方法2-设置导航栏不透明"><a href="#方法2-设置导航栏不透明" class="headerlink" title="方法2 设置导航栏不透明"></a>方法2 设置导航栏不透明</h2><pre><code>navigationController.navigationBar.translucent = NO;
+</code></pre><p>viewController的左上角位置会在导航栏下面，会影响其导航控制器的其他子视图也下降。</p>
+<h2 id="方法3-所有的子视图都为viewController-view留白。"><a href="#方法3-所有的子视图都为viewController-view留白。" class="headerlink" title="方法3 所有的子视图都为viewController.view留白。"></a>方法3 所有的子视图都为viewController.view留白。</h2><p>所有子视图都从y＝64开始算起。不把子视图放在y = 64更小的位置.看起来viewController.view变小了</p>
+<p>这种方法最不可取。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/19/导航栏透明的设置/" itemprop="url">
                   导航栏透明的设置
                 </a>
@@ -536,274 +723,12 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/11/Tip-UIButton的imageView的显示/" itemprop="url">
-                  Tip:UIButton的imageView的显示
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-11T00:01:07+08:00" content="2016-06-11">
-              2016-06-11
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p><img src="http://ww1.sinaimg.cn/large/0060lm7Tgw1f4qna6lfdjj304a09r3yg.jpg" alt="image"></p>
-<p>当我们在为视图控制器添加leftBarItem或者rightBarItem的时候，视觉工程师给我们的图的位置总不是苹果设计好的位置。而leftBarItem的customview又不是自己能决定的。这时候我们可以利用UIButton的一些属性来达到想要的位置和效果。</p>
-<h2 id="setImage-与setBackgroundImage"><a href="#setImage-与setBackgroundImage" class="headerlink" title="setImage:...与setBackgroundImage:..."></a><code>setImage:...</code>与<code>setBackgroundImage:...</code></h2><p>使用<code>setImage:</code>会保持image大小不变，让内部的ImageView和image一样大，并将ImageView居中显示在button上<br>使用<code>setBackgroundImage</code>也会让image大小和button一样大，并且让imageview也和image，button一样。<br>总结来说。一个不会拉伸图像。一个会拉伸图像。但无论拉伸与否，都会让imageView的尺寸和image一样。<br>如图1，图2</p>
-<h2 id="imageEdgeInsets调整位置"><a href="#imageEdgeInsets调整位置" class="headerlink" title="imageEdgeInsets调整位置"></a><code>imageEdgeInsets</code>调整位置</h2><p>UIEdgeInsets 是一个结构体,描述了一个视图与父视图的直接的间距。</p>
-<pre><code>typedef struct UIEdgeInsets {
-    CGFloat top, left, bottom, right;  // specify amount to inset (positive) for each of the edges. values can be negative to &apos;outset&apos;
-} UIEdgeInsets;
-</code></pre><p>正数表示离父视图内部的距离。负数表示离父视图外部的距离。top,bottom都是垂直维度的变量。left,right是水平维度的变量。我们只需要改变垂直维度的其中一个变量即可影响垂直位置。同理改变left就可以改变水平维度（right = 0 ） 。当我们使用<code>setImage:</code>设置imageView后，发现imageView水平位置不满足要求,可以这样设置</p>
-<pre><code>button.imageEdgeInsets = UIEdgeInsetsMake(28,0,0,0);
-</code></pre><p>28将覆盖原来相对button垂直居中的布局。<strong>直接将让imageView垂直方向下与button间隔28.因为我们让top值为28.因为不再需要设置bottom.(bottom = 0)依然不变。注意这个时候不会对button进行拉伸。同时也不会改变水平位置</strong>。依然水平居中。就如图3。</p>
-<p>如果要改变水平方向。可以设置</p>
-<pre><code>button.imageEdgeInsets = UIEdgeInsetsMake(0,28,0,0);
-</code></pre><h2 id="完整demo"><a href="#完整demo" class="headerlink" title="完整demo"></a>完整demo</h2><pre><code>#import &quot;ViewController.h&quot;
-
-@interface ViewController ()
-
-@end
-
-@implementation ViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    {   // 不自动铺满，image维持原来的位置,并且居中
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(20, 20, 44, 44);
-        [button setImage:[UIImage imageNamed:@&quot;add&quot;] forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor redColor];
-        [self.view addSubview:button];
-    }
-
-    {   // 自动铺满，不管uiimage 本身的大小
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(20, 70, 44, 44);
-        [button setBackgroundImage:[UIImage imageNamed:@&quot;add&quot;] forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor redColor];
-        [self.view addSubview:button];
-    }
-
-
-//    UIKIT_STATIC_INLINE UIEdgeInsets UIEdgeInsetsMake(CGFloat top, CGFloat left, CGFloat bottom, CGFloat right) {
-
-    {   // image维持原来的尺寸.
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(20, 130, 44, 44);
-        [button setImage:[UIImage imageNamed:@&quot;add&quot;] forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor redColor];
-
-        // top 让他不再遵从垂直方向的居中。而是以button顶部内边距28
-        // left,right等于0 表示依然遵从水平方向居中
-        button.imageEdgeInsets = UIEdgeInsetsMake(28,0,0,0);
-        [self.view addSubview:button];
-    }
-
-
-    {   // image维持原来的尺寸.
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(20, 200, 44, 44);
-        [button setImage:[UIImage imageNamed:@&quot;add&quot;] forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor redColor];
-        // left 让他不再遵从水平方向的居中。而是以button左边内边距28
-        //  注意left有值就不再是居中后再加上left的距离。而是直接以left距离为依据
-        //  top,bottom= 0 表示依然遵从垂直方向居中
-        //   在image&quot;内部&quot;插入一个你“看不见”的内边距
-        button.imageEdgeInsets = UIEdgeInsetsMake(0,28,0,0);
-        [self.view addSubview:button];
-
-        UIView *blueView = [[UIView alloc] init];
-        blueView.backgroundColor = [UIColor blueColor];
-        blueView.frame = CGRectMake( 0, 14, 28, 16);
-        [button addSubview:blueView];
-    }
-
-}
-
-@end
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/04/一周技术小结/" itemprop="url">
-                  一周实践小结
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-04T08:23:09+08:00" content="2016-06-04">
-              2016-06-04
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="主动实践的被动学习"><a href="#主动实践的被动学习" class="headerlink" title="主动实践的被动学习"></a>主动实践的被动学习</h3><pre><code>在实际工作中会遇到一些知识的盲点和积累一些经验，这里做一点简单的总结。
-</code></pre><h3 id="不要试图使用button-titleLabel-text来读写button的显示内容？"><a href="#不要试图使用button-titleLabel-text来读写button的显示内容？" class="headerlink" title="不要试图使用button.titleLabel.text来读写button的显示内容？"></a>不要试图使用<code>button.titleLabel.text</code>来读写button的显示内容？</h3><p>我们都知道使用button要显示一个值的时候。不能类似cell一样调用<code>cell.textLabel.text = @&quot;123123&quot;;</code>来调用<br><code>button.titleLabel.text = @&quot;rrr&quot;</code>(虽然有时候有效),正确的写的方法应该是 <code>[button setTitle:@&quot;我是按钮&quot; forState:UIControlStateNormal];</code>.</p>
-<p><strong>同时读的操作也不该使用<code>button.titleLabel.text</code>来获取其显示内容。<code>[button titleForState:UIControlStateNormal]</code>是更加稳妥的方案。
-</strong><code>button.titleLabel.&lt;#property#&gt;</code>是用于设置title的颜色和字体大小等。如<code>button.titleLabel.textColor</code>等。</p>
-<h3 id="手写collectionview一定要在初始化对象的时候传入UICollectionViewFlowLayout对象"><a href="#手写collectionview一定要在初始化对象的时候传入UICollectionViewFlowLayout对象" class="headerlink" title="手写collectionview一定要在初始化对象的时候传入UICollectionViewFlowLayout对象"></a>手写<code>collectionview</code>一定要在初始化对象的时候传入<code>UICollectionViewFlowLayout</code>对象</h3><h3 id="只有在iOS8下才可以使用自动布局-xib下来自动布局tableViewcell"><a href="#只有在iOS8下才可以使用自动布局-xib下来自动布局tableViewcell" class="headerlink" title="只有在iOS8下才可以使用自动布局+xib下来自动布局tableViewcell"></a>只有在iOS8下才可以使用自动布局+xib下来自动布局tableViewcell</h3><h3 id="拖入xib后的控件视图宽度不一定等于屏幕宽度？"><a href="#拖入xib后的控件视图宽度不一定等于屏幕宽度？" class="headerlink" title="拖入xib后的控件视图宽度不一定等于屏幕宽度？"></a>拖入xib后的控件视图宽度不一定等于屏幕宽度？</h3><p>拖入xib后的视图控件的宽度不一定等于当前屏幕的宽度。<br>需求场景如下。我现在有一个ImageView 几个UILabel.放置顺序是从上到下。imageView对齐。其他Label和imageView左对齐。我设定UIImageView居中后。只是把Label放在和uiimageview同样x的位置。然后设定它们与父视图的位置的约束。因为屏幕的宽度和xib view宽度不一致。程序运行后，label还是保持原来的位置。uiimageview为了居中，会向左偏移。实际上uiimageview的位置才是我真正需要的位置。我应该设定uiimageview后。其他label都和uiimageview左对齐才对。并且保险的方案是将xib中的根视图的宽度调节到一致。</p>
-<h3 id="为什么RAC中叫做双向绑定而不是双向赋值？"><a href="#为什么RAC中叫做双向绑定而不是双向赋值？" class="headerlink" title="为什么RAC中叫做双向绑定而不是双向赋值？"></a>为什么RAC中叫做双向绑定而不是双向赋值？</h3><p>因为rac中有一个响应式概念。对一个对象的属性做持续的观察而并不是简简单单的只是一次赋值操作<br>如命令式编程中<br><code>label.text = model.text;</code> // model的text再赋予新的值不会影响label的显示值。<br>rac中对model的属性进行监听。然后将信号的输出反馈给<code>label</code>，就是绑定model的属性。因为model的text在model生命周期内任何一次变化都会反馈给<code>label</code>.而双向绑定就是说身为视图角色的view的属性也可以被监听。</p>
-<h3 id="xib和自动布局不适用一些场景？"><a href="#xib和自动布局不适用一些场景？" class="headerlink" title="xib和自动布局不适用一些场景？"></a>xib和自动布局不适用一些场景？</h3><p>复杂的动画不适用于。cell的高度计算在iOS8以下。UITableViewCell,UICollectionViewCell的变动很剧烈的场景。复杂的布局场景不太适用于。复杂的视图层次也不利于调试。</p>
-<h3 id="如果工时的估计还缺乏必要的关键条件。可以给PMO说一下要等会儿再给他答复。"><a href="#如果工时的估计还缺乏必要的关键条件。可以给PMO说一下要等会儿再给他答复。" class="headerlink" title="如果工时的估计还缺乏必要的关键条件。可以给PMO说一下要等会儿再给他答复。"></a>如果工时的估计还缺乏必要的关键条件。可以给PMO说一下要等会儿再给他答复。</h3><h3 id="自定义导航条的一些方法？"><a href="#自定义导航条的一些方法？" class="headerlink" title="自定义导航条的一些方法？"></a>自定义导航条的一些方法？</h3><p>1.可以隐藏系统的导航条。然后贴一个自己的view,注意要在合适的时机隐藏或者显示导航条。<br>2.使用运行时。这个专门写一篇文章分析</p>
-<h3 id="简单的东西一学就会，复杂的东西一学不会？"><a href="#简单的东西一学就会，复杂的东西一学不会？" class="headerlink" title="简单的东西一学就会，复杂的东西一学不会？"></a>简单的东西一学就会，复杂的东西一学不会？</h3><p>简单的东西我一学就会，一些小技巧，小tips用的得心应手。但是这些都是<code>术</code>的范畴。对于复杂的东西，如架构设计 运行时之类的每一次只是浅尝一下就放在一边了。这种可以上升到<code>艺</code>的东西还是按照学习小tip的方法来实践显然是没有效果的的。要花时间来实践提高我自己<code>艺</code>的学习方法。现在暂时想到的方法步骤是1.看国内demo 2.看国内教程 3.实践写玩具应用，同时不断google 4.看官方文档 5.在1，2，3，4过程中不断问老司机。6.在1，2，3，4，5中不断写个人技术文档 7.把任务或者分阶段来设定目标</p>
-<h3 id="向别人学习学习其学习方法比学习知识更能受益"><a href="#向别人学习学习其学习方法比学习知识更能受益" class="headerlink" title="向别人学习学习其学习方法比学习知识更能受益"></a>向别人学习学习其学习方法比学习知识更能受益</h3><p>学习别人的学习方法，如果适用自己，就果断使用。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -844,7 +769,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-count">36</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
