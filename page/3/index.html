@@ -214,6 +214,150 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/24/Learning-CoreData-建立sqlite文件/" itemprop="url">
+                  Learning CoreData:建立sqlite文件
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-24T01:31:59+08:00" content="2016-06-24">
+              2016-06-24
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h3><pre><code>// 1. 找目录
+- (NSString *)applicationDocumentsDirectory {
+    if (debug==1) {
+        NSLog(@&quot;Running %@ &apos;%@&apos;&quot;, self.class,NSStringFromSelector(_cmd));
+    }
+    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask,YES) lastObject];
+}
+
+
+// 2. 建新目录
+- (NSURL *)applicationStoresDirectory {
+    if (debug==1) {
+        NSLog(@&quot;Running %@ &apos;%@&apos;&quot;, self.class, NSStringFromSelector(_cmd));
+    }
+
+    NSURL *storesDirectory =
+    [[NSURL fileURLWithPath:[self applicationDocumentsDirectory]]
+     URLByAppendingPathComponent:@&quot;Stores&quot;];
+
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if (![fileManager fileExistsAtPath:[storesDirectory path]]) {
+        NSError *error = nil;
+        if ([fileManager createDirectoryAtURL:storesDirectory
+                  withIntermediateDirectories:YES
+                                   attributes:nil
+                                        error:&amp;error]) {
+            if (debug==1) {
+                NSLog(@&quot;Successfully created Stores directory&quot;);}
+        }
+        else {NSLog(@&quot;FAILED to create Stores directory: %@&quot;, error);}
+    }
+    return storesDirectory;
+}
+
+// 3.新目录下建新文件 `Grocery-Dude.sqlite`
+- (NSURL *)storeURL {
+    if (debug==1) {
+        NSLog(@&quot;Running %@ &apos;%@&apos;&quot;, self.class, NSStringFromSelector(_cmd));
+    }
+    return [[self applicationStoresDirectory]
+            URLByAppendingPathComponent:storeFilename];
+}
+</code></pre><h3 id="API详解"><a href="#API详解" class="headerlink" title="API详解"></a>API详解</h3><ol>
+<li><p>[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask,YES) lastObject]</p>
+<p> NSUserDomainMask: mask domain. mask 就是~<br> NSDocumentDirectory: document目录。<br> YES:将波浪形展开。</p>
+</li>
+<li><p>stringByAppendingPathComponent和stringByAppendingString的区别</p>
+<p> 自我理解，不保证正确，但亲自试验确实可行：若用 stringByAppendingString  则需要手动在名称前加 “/”符号，而stringByAppendingPathComponent则不需要，它会自动添加</p>
+</li>
+<li><p><code>NSURL *storesDirectory = [NSURL fileURLWithPath:[documentPath stringByAppendingPathComponent:@&quot;Store&quot;]];</code>不会创建新目录，只是给出一个链接。真正创建目录的是<br>`[fileManager createDirectoryAtURL:storesDirectory</p>
+<pre><code>withIntermediateDirectories:YES
+                 attributes:nil
+                      error:&amp;error]`
+</code></pre></li>
+</ol>
+<h3 id="持久化存储区"><a href="#持久化存储区" class="headerlink" title="持久化存储区"></a>持久化存储区</h3><pre><code>就是保存数据的文件。可以是SQLite数据库Binary store等。重启后还存在，所以是持久化的
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/24/Tip-cmd是什么/" itemprop="url">
                   Tip:_cmd是什么?
                 </a>
@@ -634,95 +778,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/14/Tip-一次git冲突文件的简单解决/" itemprop="url">
-                  Tip:一次git冲突文件的简单解决
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-14T23:24:06+08:00" content="2016-06-14">
-              2016-06-14
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="project-pbxproj的文件冲突如何解决？"><a href="#project-pbxproj的文件冲突如何解决？" class="headerlink" title="project.pbxproj的文件冲突如何解决？"></a>project.pbxproj的文件冲突如何解决？</h3><p>今天使用pull代码的时候产生了project.pbxproj的文件冲突。按照惯常的方法打开project.pbxproj手动去搜索&lt;&lt;&lt;&lt;这样类似文本，删掉你不需要的，移动代码到需要的位置。但是实际过程中非常不理想。因为project.pbxproj的可读性比较差。因为记得自己本地的修改方法是创建了几个新的文件和目录。在同事的建议下，标记project.pbxproj为服务器的版本为准。然后这个时候再运行xcode,发现project.pbxproj不再报错。而是提醒找不到一些头文件。因为相关的头文件和实现文件虽然已经在了工程中。却没有被project.pbxproj所管理，这个时候只需要自己在工程所在的目录搜索后自己手动添加到xcode的管理中即可。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -769,7 +824,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -214,6 +214,116 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/12/Flask-Tips/" itemprop="url">
+                  Flask Tips
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-12T21:47:05+08:00" content="2016-07-12">
+              2016-07-12
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="app-run-的几种模式"><a href="#app-run-的几种模式" class="headerlink" title="app.run()的几种模式"></a>app.run()的几种模式</h3><ol>
+<li><code>app.run()</code>服务器只在当前电脑可见，且修改代码后不能自动载入代码，不会刷新显示</li>
+<li><code>app.run(host=&#39;0.0.0.0&#39;)</code>,使服务器公开可用</li>
+<li><code>app.run(debug=True)</code>,启用了调试支持，服务器会在代码修改后自动重新载入，并在发生错误时提供一个相当有用的调试器</li>
+</ol>
+<h3 id="路由转换器"><a href="#路由转换器" class="headerlink" title="路由转换器"></a>路由转换器</h3><p> route() 装饰器把一个函数绑定到对应的 URL 上<br> 要给 URL 添加变量部分，你可以把这些特殊的字段标记为 <variable_name> ， 这个部分将会作为命名参数传递到你的函数。规则可以用 <converter:variable_name> 指定一个可选的转换器。这里有一些不错的例子</converter:variable_name></variable_name></p>
+<pre><code> @app.route(&apos;/user/&lt;username&gt;&apos;)
+def show_user_profile(username):
+    # show the user profile for that user
+    return &apos;User %s&apos; % username
+
+@app.route(&apos;/post/&lt;int:post_id&gt;&apos;)
+def show_post(post_id):
+    # show the post with the given id, the id is an integer
+    return &apos;Post %d&apos; % post_id
+</code></pre><p> 转换器有下面几种：</p>
+<ol>
+<li>int        接受整数</li>
+<li>float    同 int ，但是接受浮点数</li>
+<li>path    和默认的相似，但也接受斜线</li>
+</ol>
+<p>默认是string,可以通过转换器转换为init,float,path</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/12/Virtualenv入门基础教程/" itemprop="url">
                   Virtualenv入门基础教程
                 </a>
@@ -273,7 +383,9 @@
 <h3 id="创建和激活虚拟环境"><a href="#创建和激活虚拟环境" class="headerlink" title="创建和激活虚拟环境"></a>创建和激活虚拟环境</h3><p>我们需要在demo文件下建立工程。实际上与虚拟环境相关的文件夹也会在这个文件夹下创建。使用</p>
 <pre><code>$ virtualenv venv
 </code></pre><p>创建一个指定名称的文件夹和在里面的、与<strong>虚拟环境相关的所有文件</strong>会在当前目录下被创建。按照惯例，这个文件名叫做venu.</p>
-<p>现在你有一个venv文件夹和一个全新的虚拟环境，包含<strong>一个私有的Python解释器</strong>。使用虚拟环境的时候，你必须“激活”它。使用bash命令行工具(Linux和Mac OSX用户)，你可以使用这个命令激活虚拟环境：</p>
+<p><strong>默认情况下，虚拟环境会依赖系统环境中的site packages，就是说系统中已经安装好的第三方package也会安装在虚拟环境中，如果不想依赖这些package，那么可以加上参数 –no-site-packages建立虚拟环境</strong></p>
+<pre><code>$ virtualenv --no-site-packages [虚拟环境名称]
+</code></pre><p>现在你有一个venv文件夹和一个全新的虚拟环境，包含<strong>一个私有的Python解释器</strong>。使用虚拟环境的时候，你必须“激活”它。使用bash命令行工具(Linux和Mac OSX用户)，你可以使用这个命令激活虚拟环境：</p>
 <pre><code>$ source venv/bin/activate
 </code></pre><p>当<strong>虚拟环境被激活</strong>了，<strong>Python解释器的位置会被添加到 PATH 中</strong>，但是这个改动并不是永久的；它只影响当前命令会话。提醒一下，你激活了虚拟环境，该激活命令会将环境的名称包含在命令提示符里面：</p>
 <pre><code>(venv)$
@@ -624,134 +736,6 @@ kWidth() // call
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/02/Layer的mask属性/" itemprop="url">
-                  Layer的mask属性
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-02T10:57:02+08:00" content="2016-07-02">
-              2016-07-02
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="图层蒙版的理解"><a href="#图层蒙版的理解" class="headerlink" title="图层蒙版的理解"></a>图层蒙版的理解</h3><p><img src="https://zsisme.gitbooks.io/ios-/content/chapter4/4.12.png" alt="CALayer"></p>
-<blockquote>
-<p> CALayer有一个属性叫做mask可以解决这个问题。这个属性本身就是个CALayer类型，有和其他图层一样的绘制和布局属性。它类似于一个子图层，相对于父图层（即拥有该属性的图层）布局，但是它却不是一个普通的子图层。不同于那些绘制在父图层中的子图层，mask图层定义了父图层的部分可见区域。<br>    mask图层的Color属性是无关紧要的，真正重要的是图层的轮廓。mask属性就像是一个饼干切割机，mask<strong>图层实心的部分</strong>会被保留下来，其他的则会被抛弃。</p>
-</blockquote>
-<p>以上都摘自ios核心动画高级技巧,关键是对实心部分理解。所谓实心部分。就是非透明部分。透明部分会被挖空，不透明部分会保留。场景一个使用场景是镂空的渐变的loading图。</p>
-<pre><code>// Demo
-#import &quot;VSCustomView.h&quot;
-
-@implementation VSCustomView
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        [self setupSubView];
-    }
-    return self;
-}
-
-- (void)setupSubView {
-    CAGradientLayer *gradientLayer = [CAGradientLayer layer];
-    gradientLayer.frame = self.layer.bounds;
-    gradientLayer.startPoint = CGPointMake(0, 0);
-    gradientLayer.endPoint = CGPointMake(0, 1);
-    gradientLayer.colors = @[(__bridge id)[UIColor redColor].CGColor, (__bridge id)[UIColor yellowColor].CGColor];
-    [self.layer addSublayer:gradientLayer];
-
-    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-
-    shapeLayer.fillColor = [UIColor clearColor].CGColor;
-    shapeLayer.strokeColor = [UIColor blackColor].CGColor;
-    CGPoint center = CGPointMake(self.layer.bounds.size.width * 0.5, self.layer.bounds.size.height * 0.5);
-    shapeLayer.path = [UIBezierPath bezierPathWithArcCenter:center radius:(self.layer.bounds.size.width * 0.5 - 2) startAngle:0 endAngle:M_PI * 2 clockwise:YES].CGPath;
-    shapeLayer.lineWidth = 2;
-
-    [gradientLayer setMask:shapeLayer];
-}
-
-@end
-</code></pre><h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="http://7xsf79.com1.z0.glb.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202016-07-02%2011.52.47.png" alt="image"></p>
-<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>shapeLayer作为mask Layer,使用clearColor镂空gradientLayer.strokeColor无论什么颜色都不会影响gradientLayer的颜色。但是不能是透明色。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -798,7 +782,7 @@ kWidth() // call
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -57,31 +57,31 @@
 
 
 
-<meta name="description" content="宏的缺陷使用宏是有缺陷的，无类型安全，长度和格式的具体限制，而且不便于调试
+<meta name="description" content="app.run()的几种模式
+app.run()服务器只在当前电脑可见，且修改代码后不能自动载入代码，不会刷新显示
+app.run(host=&amp;#39;0.0.0.0&amp;#39;),使服务器公开可用
+app.run(debug=True),启用了调试支持，服务器会在代码修改后自动重新载入，并在发生错误时提供一个相当有用的调试器
 
-如果你的.m文件需要频繁调用一个函数,可以用static inline来声明,这相当于把函数体当做一个大号的宏定义.不过这也不是百分之百有效,到底能不能把函数体转换为大号宏定义来用要看编译器心情,它要是觉得你的方法太复杂,他就不转了.他直接调用函数.
-
-内联函数格式必须是 c function,所以是c的格式类似这样
-s">
+路由转换器 route() 装饰器把一个函数绑定到对应的 URL 上">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用内联函数代替宏定义">
-<meta property="og:url" content="http://yoursite.com/2016/07/07/使用内联函数代替宏定义/index.html">
+<meta property="og:title" content="Flask Tips">
+<meta property="og:url" content="http://yoursite.com/2016/07/12/Flask-Tips/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="宏的缺陷使用宏是有缺陷的，无类型安全，长度和格式的具体限制，而且不便于调试
+<meta property="og:description" content="app.run()的几种模式
+app.run()服务器只在当前电脑可见，且修改代码后不能自动载入代码，不会刷新显示
+app.run(host=&amp;#39;0.0.0.0&amp;#39;),使服务器公开可用
+app.run(debug=True),启用了调试支持，服务器会在代码修改后自动重新载入，并在发生错误时提供一个相当有用的调试器
 
-如果你的.m文件需要频繁调用一个函数,可以用static inline来声明,这相当于把函数体当做一个大号的宏定义.不过这也不是百分之百有效,到底能不能把函数体转换为大号宏定义来用要看编译器心情,它要是觉得你的方法太复杂,他就不转了.他直接调用函数.
-
-内联函数格式必须是 c function,所以是c的格式类似这样
-s">
-<meta property="og:updated_time" content="2016-07-06T17:47:13.000Z">
+路由转换器 route() 装饰器把一个函数绑定到对应的 URL 上">
+<meta property="og:updated_time" content="2016-07-12T14:15:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用内联函数代替宏定义">
-<meta name="twitter:description" content="宏的缺陷使用宏是有缺陷的，无类型安全，长度和格式的具体限制，而且不便于调试
+<meta name="twitter:title" content="Flask Tips">
+<meta name="twitter:description" content="app.run()的几种模式
+app.run()服务器只在当前电脑可见，且修改代码后不能自动载入代码，不会刷新显示
+app.run(host=&amp;#39;0.0.0.0&amp;#39;),使服务器公开可用
+app.run(debug=True),启用了调试支持，服务器会在代码修改后自动重新载入，并在发生错误时提供一个相当有用的调试器
 
-如果你的.m文件需要频繁调用一个函数,可以用static inline来声明,这相当于把函数体当做一个大号的宏定义.不过这也不是百分之百有效,到底能不能把函数体转换为大号宏定义来用要看编译器心情,它要是觉得你的方法太复杂,他就不转了.他直接调用函数.
-
-内联函数格式必须是 c function,所以是c的格式类似这样
-s">
+路由转换器 route() 装饰器把一个函数绑定到对应的 URL 上">
 
 
 
@@ -99,7 +99,7 @@ s">
   };
 </script>
 
-  <title> 使用内联函数代替宏定义 | 周明的技术博客 </title>
+  <title> Flask Tips | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -221,7 +221,7 @@ s">
             
             
               
-                使用内联函数代替宏定义
+                Flask Tips
               
             
           </h1>
@@ -233,8 +233,8 @@ s">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-07T01:35:14+08:00" content="2016-07-07">
-              2016-07-07
+            <time itemprop="dateCreated" datetime="2016-07-12T21:47:05+08:00" content="2016-07-12">
+              2016-07-12
             </time>
           </span>
 
@@ -260,18 +260,28 @@ s">
       
 
       
-        <h3 id="宏的缺陷"><a href="#宏的缺陷" class="headerlink" title="宏的缺陷"></a>宏的缺陷</h3><p>使用宏是有缺陷的，无类型安全，长度和格式的具体限制，而且不便于调试</p>
-<blockquote>
-<p>如果你的.m文件需要频繁调用一个函数,可以用static inline来声明,这相当于把函数体<strong>当做一个大号的宏定义</strong>.不过这也不是百分之百有效,到底能不能把函数体转换为大号宏定义来用要看编译器心情,它要是觉得你的方法太复杂,他就不转了.他直接调用函数.</p>
-</blockquote>
-<h3 id="内联函数格式"><a href="#内联函数格式" class="headerlink" title="内联函数格式"></a>内联函数格式</h3><p>必须是 c function,所以是c的格式类似这样</p>
-<pre><code>static inline fun_returnType  Fun_name(param...){}
-</code></pre><h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><pre><code>static inline CGFloat kWidth() {return [UIScreen mainScreen].bounds.size.width;}
+        <h3 id="app-run-的几种模式"><a href="#app-run-的几种模式" class="headerlink" title="app.run()的几种模式"></a>app.run()的几种模式</h3><ol>
+<li><code>app.run()</code>服务器只在当前电脑可见，且修改代码后不能自动载入代码，不会刷新显示</li>
+<li><code>app.run(host=&#39;0.0.0.0&#39;)</code>,使服务器公开可用</li>
+<li><code>app.run(debug=True)</code>,启用了调试支持，服务器会在代码修改后自动重新载入，并在发生错误时提供一个相当有用的调试器</li>
+</ol>
+<h3 id="路由转换器"><a href="#路由转换器" class="headerlink" title="路由转换器"></a>路由转换器</h3><p> route() 装饰器把一个函数绑定到对应的 URL 上<br> 要给 URL 添加变量部分，你可以把这些特殊的字段标记为 <variable_name> ， 这个部分将会作为命名参数传递到你的函数。规则可以用 <converter:variable_name> 指定一个可选的转换器。这里有一些不错的例子</converter:variable_name></variable_name></p>
+<pre><code> @app.route(&apos;/user/&lt;username&gt;&apos;)
+def show_user_profile(username):
+    # show the user profile for that user
+    return &apos;User %s&apos; % username
 
-kWidth() // call
-</code></pre><p>调用 Fun_name（param…）.因为是c function,是该文件全局可见，不需要调用self.Fun_name（）</p>
-<h3 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h3><p><strong>不能写太复杂的语句。不能递归。
-</strong></p>
+@app.route(&apos;/post/&lt;int:post_id&gt;&apos;)
+def show_post(post_id):
+    # show the post with the given id, the id is an integer
+    return &apos;Post %d&apos; % post_id
+</code></pre><p> 转换器有下面几种：</p>
+<ol>
+<li>int        接受整数</li>
+<li>float    同 int ，但是接受浮点数</li>
+<li>path    和默认的相似，但也接受斜线</li>
+</ol>
+<p>默认是string,可以通过转换器转换为init,float,path</p>
 
       
     </div>
@@ -295,17 +305,13 @@ kWidth() // call
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/07/使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView/" rel="next" title="使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView">
-                <i class="fa fa-chevron-left"></i> 使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView
+              <a href="/2016/07/12/Virtualenv入门基础教程/" rel="next" title="Virtualenv入门基础教程">
+                <i class="fa fa-chevron-left"></i> Virtualenv入门基础教程
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/10/use-flask-to-access-json/" rel="prev" title="use flask to access json">
-                use flask to access json <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -416,7 +422,7 @@ kWidth() // call
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#宏的缺陷"><span class="nav-number">1.</span> <span class="nav-text">宏的缺陷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内联函数格式"><span class="nav-number">2.</span> <span class="nav-text">内联函数格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo"><span class="nav-number">3.</span> <span class="nav-text">Demo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局限性"><span class="nav-number">4.</span> <span class="nav-text">局限性</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#app-run-的几种模式"><span class="nav-number">1.</span> <span class="nav-text">app.run()的几种模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#路由转换器"><span class="nav-number">2.</span> <span class="nav-text">路由转换器</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

@@ -77,7 +77,7 @@ VirtualEnv用于在一台机器上创建多个独立的Python虚拟运行环境�
 套件升级不影响其他应用
 
 虚拟环境是在Python解释器上的一个私有复制，你可以在一个隔绝的环境下安装packages，不会影响到你系统中全局的Python解释器。    虚拟环境非常有用，因为它">
-<meta property="og:updated_time" content="2016-07-11T17:04:07.000Z">
+<meta property="og:updated_time" content="2016-07-11T17:14:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Virtualenv入门基础教程">
 <meta name="twitter:description" content="虚拟环境简介
@@ -282,7 +282,9 @@ VirtualEnv用于在一台机器上创建多个独立的Python虚拟运行环境�
 <h3 id="创建和激活虚拟环境"><a href="#创建和激活虚拟环境" class="headerlink" title="创建和激活虚拟环境"></a>创建和激活虚拟环境</h3><p>我们需要在demo文件下建立工程。实际上与虚拟环境相关的文件夹也会在这个文件夹下创建。使用</p>
 <pre><code>$ virtualenv venv
 </code></pre><p>创建一个指定名称的文件夹和在里面的、与<strong>虚拟环境相关的所有文件</strong>会在当前目录下被创建。按照惯例，这个文件名叫做venu.</p>
-<p>现在你有一个venv文件夹和一个全新的虚拟环境，包含<strong>一个私有的Python解释器</strong>。使用虚拟环境的时候，你必须“激活”它。使用bash命令行工具(Linux和Mac OSX用户)，你可以使用这个命令激活虚拟环境：</p>
+<p><strong>默认情况下，虚拟环境会依赖系统环境中的site packages，就是说系统中已经安装好的第三方package也会安装在虚拟环境中，如果不想依赖这些package，那么可以加上参数 –no-site-packages建立虚拟环境</strong></p>
+<pre><code>$ virtualenv --no-site-packages [虚拟环境名称]
+</code></pre><p>现在你有一个venv文件夹和一个全新的虚拟环境，包含<strong>一个私有的Python解释器</strong>。使用虚拟环境的时候，你必须“激活”它。使用bash命令行工具(Linux和Mac OSX用户)，你可以使用这个命令激活虚拟环境：</p>
 <pre><code>$ source venv/bin/activate
 </code></pre><p>当<strong>虚拟环境被激活</strong>了，<strong>Python解释器的位置会被添加到 PATH 中</strong>，但是这个改动并不是永久的；它只影响当前命令会话。提醒一下，你激活了虚拟环境，该激活命令会将环境的名称包含在命令提示符里面：</p>
 <pre><code>(venv)$
@@ -348,6 +350,10 @@ psycopg2==2.5.1
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/12/Flask-Tips/" rel="prev" title="Flask Tips">
+                Flask Tips <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -415,7 +421,7 @@ psycopg2==2.5.1
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">36</span>
+              <span class="site-state-item-count">37</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
