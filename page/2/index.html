@@ -214,6 +214,99 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/07/使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView/" itemprop="url">
+                  使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-07T01:16:58+08:00" content="2016-07-07">
+              2016-07-07
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="UICollectionViewFlowLayout与UICollectionViewLayout"><a href="#UICollectionViewFlowLayout与UICollectionViewLayout" class="headerlink" title="UICollectionViewFlowLayout与UICollectionViewLayout"></a>UICollectionViewFlowLayout与UICollectionViewLayout</h3><p>一般我们要使用简单的类似多排UITableView的效果的时候，UICollectionView是最便利的方法，UICollectionView的创建</p>
+<pre><code>- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout NS_DESIGNATED_INITIALIZER;
+</code></pre><p>虽然接口告诉我们需要一个<code>UICollectionViewLayout</code>对象，但是实际上需要的对象是<code>UICollectionViewFlowLayout</code>对象。它们是继承关系。后者是前者的子类。为其提供了<strong>流式</strong>的排布。如果使用前者实际上相当于排布规则没有定义。只是提供了一些基础功能。前者主要是用在我们子类化实现自已的排布的时候的基类而已。如果使用前者，甚至会导致数据源回调方法</p>
+<pre><code>- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath 
+</code></pre><p>不被调用。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/02/Layer的mask属性/" itemprop="url">
                   Layer的mask属性
                 </a>
@@ -688,96 +781,6 @@ transform 仿射变换
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/24/Learning-CoreData-托管对象模型基本知识/" itemprop="url">
-                  Learning CoreData:托管对象模型基本知识
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-24T02:45:16+08:00" content="2016-06-24">
-              2016-06-24
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="模型文件与托管对象模型"><a href="#模型文件与托管对象模型" class="headerlink" title="模型文件与托管对象模型"></a>模型文件与托管对象模型</h3><p>模型文件:后缀为.dataModel的文件<br>托管对象模型:一个类，使用<code>mergedModelFromBundles</code>来初始化。</p>
-<p>### </p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -824,7 +827,7 @@ transform 仿射变换
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-count">38</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

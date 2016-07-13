@@ -214,6 +214,168 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/19/UITableViewCell-动画/" itemprop="url">
+                  UITableViewCell 动画
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-19T09:30:21+08:00" content="2016-06-19">
+              2016-06-19
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p style="text-align:center"><img src="http://7xsf79.com1.z0.glb.clouddn.com/1234.gif"></p>
+
+<h2 id="目标与思路"><a href="#目标与思路" class="headerlink" title="目标与思路"></a>目标与思路</h2><p>希望做如上图的动画。观察这个动画，每一个cell从左到右进入眼帘。下面的cell比上面的cell到底最终位置的时间更久。现在有两种思路。<br>1.每个cell动画启动时间不同。动画的执行时间相同<br>2.每个cell动画启动时间相同。后面的动画执行时间更久。</p>
+<p>方案2更简单，因为很难实现每一个动画的启动时间固定时间间隔</p>
+<h2 id="执行动画的时机"><a href="#执行动画的时机" class="headerlink" title="执行动画的时机"></a>执行动画的时机</h2><p>UITableView的委托方法来执行动画。</p>
+<pre><code>- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath 
+</code></pre><p>是tableViewCell的动画的最佳时机</p>
+<p>该方法中可以使用<code>[UIView animateWithDuration:animations:]</code>。要注意的是，我们的动画只是在第一次cell出现在屏幕上的时候执行。在其他时候。如滑到上面后又滑下来的时候是不该被调用的。我们可以用一个全局变量。保证动画执行次数和屏幕的显示个数一致。</p>
+<h2 id="完整demo"><a href="#完整demo" class="headerlink" title="完整demo"></a>完整demo</h2><pre><code>//
+//  ViewController.m
+//  Animation
+//
+//  Created by zhou on 16/6/15.
+//  Copyright © 2016年 jeff.zhou. All rights reserved.
+//
+
+#import &quot;ViewController.h&quot;
+#import &quot;ZZCell.h&quot;
+
+@interface ViewController () &lt;UITableViewDelegate, UITableViewDataSource&gt;
+@property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, assign) NSInteger count;
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupTableView];
+}
+
+- (void)setupTableView {
+    CGRect rect = CGRectMake(0, 0, 80, [UIScreen mainScreen].bounds.size.height);
+    UITableView *tableView = [[UITableView alloc] initWithFrame:rect];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [tableView registerClass:[ZZCell class] forCellReuseIdentifier:@&quot;cell&quot;];
+    self.tableView = tableView;
+    self.count = 0;
+    [self.view addSubview:self.tableView];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    // 16是一屏显示的cell个数，这个方法是要保证第一次出现cell的时候动画
+    if (self.count &gt; 16) {
+        return;
+    }
+    self.count++;
+
+    CGPoint oldPoint = cell.frame.origin;
+    CGPoint newPoint = oldPoint;
+    newPoint.x = - 80 -indexPath.row * 80 * 0.15;
+    // 设置开始位置
+    cell.frame = CGRectMake(newPoint.x, newPoint.y, cell.frame.size.width, cell.frame.size.height);
+    // 核心思想是越下面的cell离cell最后位置越远。每一个cell的动画时间相同。每个cell速度相同
+    [UIView animateWithDuration:(0.5 + 0.125 * indexPath.row) animations:^{
+     // 设置结束为止
+        cell.frame = CGRectMake(oldPoint.x, oldPoint.y, cell.frame.size.width, cell.frame.size.height);
+    }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 20;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ZZCell *cell = [tableView dequeueReusableCellWithIdentifier:@&quot;cell&quot; forIndexPath:indexPath];
+    return cell;
+}
+
+
+@end
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/14/Tip-一次git冲突文件的简单解决/" itemprop="url">
                   Tip:一次git冲突文件的简单解决
                 </a>
@@ -671,102 +833,6 @@ if (cell == nil) {
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/30/Core-Data应用开发实践指南读书笔记1/" itemprop="url">
-                  Core Data应用开发实践指南读书笔记1
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-30T00:30:58+08:00" content="2016-05-30">
-              2016-05-30
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
-<li>CoreData是个框架，使得开发者把<strong>数据</strong>当做<strong>对象</strong>来操作。CoreData提供的数据对象叫做托管对象（managed object）.CoreData位于应用程序和持久化存储区(persisten store)之间.</li>
-<li>一个<strong>托管对象</strong>可能对应于数据库中某张数据表中的一<strong>行</strong>。</li>
-<li>可以将CoreData按照数据流动方向分为三层。分别是持久化存储协调器 托管对象模型 托管对象上下文。具体的是什么这里我还看不太懂。等深入后再做研究。或者去问同事。</li>
-<li>持久化存储区可以是SQlite数据库,XML文件，Binary store等数据文件。</li>
-<li>注意托管对象模式和托管对象并不是同一个东西。</li>
-</ul>
-<h3 id="CoreDataHelper类"><a href="#CoreDataHelper类" class="headerlink" title="CoreDataHelper类"></a>CoreDataHelper类</h3><p>我们先写一个工具类CoreDataHelper，抽象成一个类而不是放在视图控制器中，这样便于移植。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -813,7 +879,7 @@ if (cell == nil) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-count">38</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

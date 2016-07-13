@@ -214,6 +214,102 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/13/Python-Tips-查看是否有安装某个模块/" itemprop="url">
+                  Python Tips:查看是否有安装某个模块
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-13T22:16:46+08:00" content="2016-07-13">
+              2016-07-13
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>在交互式环境中可以很方便的查看是否有安装某模块</p>
+<h3 id="进入交互式环境"><a href="#进入交互式环境" class="headerlink" title="进入交互式环境"></a>进入交互式环境</h3><p>在终端上中输入<code>python</code>,即进入python交互式环境。<br>然后终端最终会有<code>&gt;&gt;&gt;</code></p>
+<pre><code>Python 2.7.10 (v2.7.10:15c95b7d81dc, May 23 2015, 09:39:00) 
+[GCC 4.2.1 (Apple Inc. build 5577)] on darwin
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; 
+</code></pre><h3 id="检测是否有安装"><a href="#检测是否有安装" class="headerlink" title="检测是否有安装"></a>检测是否有安装</h3><p>在交互式环境中输入<code>import module名</code><br>如果继续返回空，则表示有该模块，否则就需要安装模块.</p>
+<h3 id="退出环境"><a href="#退出环境" class="headerlink" title="退出环境"></a>退出环境</h3><p>输入<code>Ctrl + D</code></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/12/Flask-Tips/" itemprop="url">
                   Flask Tips
                 </a>
@@ -643,99 +739,6 @@ kWidth() // call
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/07/使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView/" itemprop="url">
-                  使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-07T01:16:58+08:00" content="2016-07-07">
-              2016-07-07
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="UICollectionViewFlowLayout与UICollectionViewLayout"><a href="#UICollectionViewFlowLayout与UICollectionViewLayout" class="headerlink" title="UICollectionViewFlowLayout与UICollectionViewLayout"></a>UICollectionViewFlowLayout与UICollectionViewLayout</h3><p>一般我们要使用简单的类似多排UITableView的效果的时候，UICollectionView是最便利的方法，UICollectionView的创建</p>
-<pre><code>- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout NS_DESIGNATED_INITIALIZER;
-</code></pre><p>虽然接口告诉我们需要一个<code>UICollectionViewLayout</code>对象，但是实际上需要的对象是<code>UICollectionViewFlowLayout</code>对象。它们是继承关系。后者是前者的子类。为其提供了<strong>流式</strong>的排布。如果使用前者实际上相当于排布规则没有定义。只是提供了一些基础功能。前者主要是用在我们子类化实现自已的排布的时候的基类而已。如果使用前者，甚至会导致数据源回调方法</p>
-<pre><code>- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath 
-</code></pre><p>不被调用。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -782,7 +785,7 @@ kWidth() // call
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">37</span>
+              <span class="site-state-item-count">38</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
