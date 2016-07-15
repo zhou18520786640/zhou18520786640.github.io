@@ -214,6 +214,191 @@
             
               
                 
+                <a class="post-title-link" href="/2016/05/24/Masonry手写约束之Demo篇/" itemprop="url">
+                  Masonry手写约束之Demo篇
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-24T21:49:00+08:00" content="2016-05-24">
+              2016-05-24
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="Basic"><a href="#Basic" class="headerlink" title="Basic"></a>Basic</h3><p>实现三个视图redView,greenView,blueView.其中red,green占一行。等高等宽。blueView占下一行。高度以red，green也相等。red,green,blue和父视图之间的间隔还有他们两两之间间隔都是10.</p>
+<pre><code>- (instancetype)init {
+    self = [super init];
+    if (self) {
+        UIView *greenView = UIView.new;
+        greenView.backgroundColor = UIColor.greenColor;
+        greenView.layer.borderColor = UIColor.blackColor.CGColor;
+        greenView.layer.borderWidth = 2;
+        [self addSubview:greenView];
+        self.greenView = greenView;
+
+        UIView *redView = UIView.new;
+        redView.backgroundColor = UIColor.redColor;
+        redView.layer.borderColor = UIColor.blackColor.CGColor;
+        redView.layer.borderWidth = 2;
+        [self addSubview:redView];
+        self.redView = redView;
+
+        UIView *blueView = UIView.new;
+        blueView.backgroundColor = UIColor.blueColor;
+        blueView.layer.borderColor = UIColor.blackColor.CGColor;
+        blueView.layer.borderWidth = 2;
+        [self addSubview:blueView];
+        self.blueView = blueView;
+
+        UIView *superview = self;
+
+        [greenView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(superview).offset(10);
+            make.top.equalTo(superview).offset(10);
+            make.width.equalTo(redView);
+            make.height.equalTo(@[redView, blueView]);
+        }];
+
+        [redView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(greenView.right).offset(10);
+            make.top.equalTo(greenView);
+            make.width.equalTo(greenView);
+            make.right.equalTo(superview).offset(-10);
+        }];
+
+        [blueView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(redView.bottom).offset(10);
+            make.left.equalTo(superview).offset(10);
+            make.right.equalTo(superview).offset(-10);
+            make.bottom.equalTo(superview).offset(-10);
+        }];
+//        [self setNeedsUpdateConstraints];
+    }
+    return self;
+}
+
+//- (void)updateConstraints {
+//    [self.blueView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.redView.bottom).offset(10);
+//        make.left.equalTo(self).offset(20);
+//        make.right.equalTo(self).offset(-20);
+//        make.bottom.equalTo(self).offset(-10);
+//    }];
+//    [super updateConstraints];
+//}
+@end
+</code></pre><p>我们建立的约束只需要建立一次。并且不再需要修改。因此调用<code>mas_makeConstraints</code>。这个例子十分简单。要注意的是equalTo的参数可以是视图数组。</p>
+<h3 id="equalTo的参数可以是常量"><a href="#equalTo的参数可以是常量" class="headerlink" title="equalTo的参数可以是常量"></a>equalTo的参数可以是常量</h3><p>实际上,三种约束参数都可以被equal所接收。他们分别是MASViewAttribute，UIView，NSNumber。当你传NSNumber的时候。实际是相对于其父视图的constant.</p>
+<pre><code>UIView *purpleView = UIView.new;
+[ purpleView.backgroundColor = UIColor.purpleColor;
+purpleView.layer.borderColor = UIColor.blackColor.CGColor;
+purpleView.layer.borderWidth = 2;
+[self addSubview:purpleView];
+
+UIView *orangeView = UIView.new;
+orangeView.backgroundColor = UIColor.orangeColor;
+orangeView.layer.borderColor = UIColor.blackColor.CGColor;
+orangeView.layer.borderWidth = 2;
+[self addSubview:orangeView];
+
+//example of using constants
+
+[purpleView mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.top.equalTo(@20);
+    make.left.equalTo(@20);
+    make.bottom.equalTo(@-20);
+    make.right.equalTo(@-20);
+}];
+
+// auto-boxing macros allow you to simply use scalars and structs, they will be wrapped automatically
+
+[orangeView mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.center.equalTo(CGPointMake(0, 50));
+    make.size.equalTo(CGSizeMake(200, 100));
+}];]
+</code></pre><h3 id="masonry可以结合xib一起使用"><a href="#masonry可以结合xib一起使用" class="headerlink" title="masonry可以结合xib一起使用"></a>masonry可以结合xib一起使用</h3><p>如果我在xib中已经布局了UI，而且建立了autolayout，当程序运行中需要动态修改autolayout，可以直接使用autolayout的API来修改和删除，更极端的，也可以直接使用masonry来删除</p>
+<h3 id="masonry-UITableView与autolayout"><a href="#masonry-UITableView与autolayout" class="headerlink" title="masonry,UITableView与autolayout"></a>masonry,UITableView与autolayout</h3><p>iOS8以上，对于autolayout，不可以根据子视图的约束动态计算tableViewCell的高度.(注意一般情况下的autolayout的子视图对父视图的约束不会影响父视图，只能影响子视图).tableViewCell通过一定的设置可以开启这个功能。<br>而iOS8以下的系统。autolayout就无能为例了。<br>我们先给出iOS8下的解决方案。这种子视图改变，动态改变自身tableViewCell高度的苹果叫做 Self-Sizing Table View Cell。</p>
+<pre><code>tableView.estimatedRowHeight = 85.0
+tableView.rowHeight = UITableViewAutomaticDimension
+</code></pre><p>首先第一句话，给一个预估高度，等会儿自动布局的会在这个值的基础上再进行调整。第二句话，是开启autolayout的自动布局功能。甚至连高度回调都不需要，完成了整个布局控件的实现。</p>
+<p>如果要适配iOS7，那么这种方法就不奏效了。我们依然可以对子视图使用autolayout来约束子视图和父视图之间位置。而对于tableViewCell本身。可以用frame算出高度后再返回。比较常规的实现是写一个类方法。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/05/24/Masonry手写约束原理篇/" itemprop="url">
                   Masonry手写约束原理篇
                 </a>
@@ -628,100 +813,6 @@ jaime@westeros:~/helloworld$ git push sae master:1
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/04/03/MySQL的安装与配置/" itemprop="url">
-                  MySQL的安装与配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-03T13:14:47+08:00" content="2016-04-03">
-              2016-04-03
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><img src="http://images.51cto.com/files/uploadimg/20100601/1626140.jpg" alt="image"></p>
-<h3 id="软件下载"><a href="#软件下载" class="headerlink" title="软件下载"></a>软件下载</h3><ol>
-<li>MySQL <a href="http://dev.mysql.com/downloads/mysql/" target="_blank" rel="external">下载</a></li>
-<li>MySQL workbenach (GUI工具) <a href="http://dev.mysql.com/downloads/workbench/" target="_blank" rel="external">下载</a></li>
-</ol>
-<h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><p>重置密码后,打开workbenach,连接本地数据库。注意端口号是3306.</p>
-<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -768,7 +859,7 @@ jaime@westeros:~/helloworld$ git push sae master:1
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-count">39</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

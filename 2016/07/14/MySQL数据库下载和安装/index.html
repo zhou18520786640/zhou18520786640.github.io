@@ -57,31 +57,31 @@
 
 
 
-<meta name="description" content="命令式执行与事件驱动首先我们来看看命令行代码  
-int main(int argc, char *argv[]) {
-    NSLog(@&amp;quot;hello world&amp;quot;);
-    return 0;
-}
-执行完了就程序结束。我们回想一下平时使用的手机应用程序，并非如此。可以不断的响应用户的操作，用户不做任何操作的时候，程序也不会终止。为了实现上面两个目标，实际的手机应用程序用">
+<meta name="description" content="命令行方式。。失败下载
+在浏览器中输入mysql.com
+点击Download Tab,然后Download Tab下子分类下点击Community.
+在打开的页面点击MySQL Community Server.
+选择对应的平台，这里我选择Mac OS X, 选择第一个Mac OS X 10.11 (x86, 645. -bit), TAR,点击    Download    
+弹出页面要求你注">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RunLoop之作用篇">
-<meta property="og:url" content="http://yoursite.com/2016/05/25/RunLoop之作用篇/index.html">
+<meta property="og:title" content="MySQL数据库下载和安装">
+<meta property="og:url" content="http://yoursite.com/2016/07/14/MySQL数据库下载和安装/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="命令式执行与事件驱动首先我们来看看命令行代码  
-int main(int argc, char *argv[]) {
-    NSLog(@&amp;quot;hello world&amp;quot;);
-    return 0;
-}
-执行完了就程序结束。我们回想一下平时使用的手机应用程序，并非如此。可以不断的响应用户的操作，用户不做任何操作的时候，程序也不会终止。为了实现上面两个目标，实际的手机应用程序用">
-<meta property="og:updated_time" content="2016-05-25T17:01:02.000Z">
+<meta property="og:description" content="命令行方式。。失败下载
+在浏览器中输入mysql.com
+点击Download Tab,然后Download Tab下子分类下点击Community.
+在打开的页面点击MySQL Community Server.
+选择对应的平台，这里我选择Mac OS X, 选择第一个Mac OS X 10.11 (x86, 645. -bit), TAR,点击    Download    
+弹出页面要求你注">
+<meta property="og:updated_time" content="2016-07-15T15:27:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RunLoop之作用篇">
-<meta name="twitter:description" content="命令式执行与事件驱动首先我们来看看命令行代码  
-int main(int argc, char *argv[]) {
-    NSLog(@&amp;quot;hello world&amp;quot;);
-    return 0;
-}
-执行完了就程序结束。我们回想一下平时使用的手机应用程序，并非如此。可以不断的响应用户的操作，用户不做任何操作的时候，程序也不会终止。为了实现上面两个目标，实际的手机应用程序用">
+<meta name="twitter:title" content="MySQL数据库下载和安装">
+<meta name="twitter:description" content="命令行方式。。失败下载
+在浏览器中输入mysql.com
+点击Download Tab,然后Download Tab下子分类下点击Community.
+在打开的页面点击MySQL Community Server.
+选择对应的平台，这里我选择Mac OS X, 选择第一个Mac OS X 10.11 (x86, 645. -bit), TAR,点击    Download    
+弹出页面要求你注">
 
 
 
@@ -99,7 +99,7 @@ int main(int argc, char *argv[]) {
   };
 </script>
 
-  <title> RunLoop之作用篇 | 周明的技术博客 </title>
+  <title> MySQL数据库下载和安装 | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -221,7 +221,7 @@ int main(int argc, char *argv[]) {
             
             
               
-                RunLoop之作用篇
+                MySQL数据库下载和安装
               
             
           </h1>
@@ -233,8 +233,8 @@ int main(int argc, char *argv[]) {
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-25T00:29:36+08:00" content="2016-05-25">
-              2016-05-25
+            <time itemprop="dateCreated" datetime="2016-07-14T21:34:08+08:00" content="2016-07-14">
+              2016-07-14
             </time>
           </span>
 
@@ -260,35 +260,43 @@ int main(int argc, char *argv[]) {
       
 
       
-        <h2 id="命令式执行与事件驱动"><a href="#命令式执行与事件驱动" class="headerlink" title="命令式执行与事件驱动"></a>命令式执行与事件驱动</h2><p>首先我们来看看命令行代码  </p>
-<pre><code>int main(int argc, char *argv[]) {
-    NSLog(@&quot;hello world&quot;);
-    return 0;
-}
-</code></pre><p>执行完了就程序结束。我们回想一下平时使用的手机应用程序，并非如此。可以不断的响应用户的操作，用户不做任何操作的时候，程序也不会终止。为了实现上面两个目标，实际的手机应用程序用伪代码来表示基本可以认为是这样的</p>
-<pre><code>int main(int argc, char *argv[]) {
-    while(AppIsRunning) {
-        id whoWakeMe = SleepForWakingup();
-        id event = GetEvent(whoWakeMe);
-        Handle(event);
-    }
-    return 0;
-}
-</code></pre><p>通过死循环。如果没事的时候，就处于休眠状态。如果有事件，就将其唤醒，然后去处理这个事件。</p>
-<h3 id="为什么需要RunLoop"><a href="#为什么需要RunLoop" class="headerlink" title="为什么需要RunLoop"></a>为什么需要RunLoop</h3><ol>
-<li>让程序一直运行并接受用户输入</li>
-<li>决定何时处理哪些事件Event</li>
-<li>调用解耦？</li>
-<li>节省CPU时间，没事的时候闲着，不让cpu执行它。</li>
+        <h2 id="命令行方式。。失败"><a href="#命令行方式。。失败" class="headerlink" title="命令行方式。。失败"></a>命令行方式。。失败</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><ol>
+<li>在浏览器中输入mysql.com</li>
+<li>点击Download Tab,然后Download Tab下子分类下点击Community.</li>
+<li>在打开的页面点击MySQL Community Server.</li>
+<li>选择对应的平台，这里我选择Mac OS X, 选择第一个<code>Mac OS X 10.11 (x86, 645. -bit), TAR</code>,点击    Download    </li>
+<li>弹出页面要求你注册或者登陆，其实不用管它，注意左下角有一个<code>No thanks, just start my download.</code>.点击    它，成功下载。</li>
 </ol>
-<h3 id="RunLoop到底是什么？"><a href="#RunLoop到底是什么？" class="headerlink" title="RunLoop到底是什么？"></a>RunLoop到底是什么？</h3><blockquote>
-<p> RunLoop 实际上就是一个对象，这个对象管理了其需要处理的事件和消息，并提供了一个入口函数来执行上面 Event Loop 的逻辑。线程执行了这个函数后，就会一直处于这个函数内部 “接受消息-&gt;等待-&gt;处理” 的循环中，直到这个循环结束（比如传入 quit 的消息），函数返回。</p>
-<p>OSX/iOS 系统中，提供了两个这样的对象：NSRunLoop 和 CFRunLoopRef。<br>CFRunLoopRef 是在 CoreFoundation 框架内的，它提供了纯 C 函数的 API，所有这些 API 都是线程安全的。<br>NSRunLoop 是基于 CFRunLoopRef 的封装，属于Foundation框架。提供了面向对象的 API，但是这些 API 不是线程安全的。</p>
+<h3 id="安装与简单配置"><a href="#安装与简单配置" class="headerlink" title="安装与简单配置"></a>安装与简单配置</h3><ol>
+<li>将下载的压缩包拷贝到/usr/local（在传统的unix系统中，/usr通常只包含系统发行时自带的程序，而/usr/local则是本地系统管理员用来自由添加程序的目录）下，我们使用命令行来完成<br><code>sudo cp mysql-5.7.13-osx10.11-x86_64.tar.gz /usr/local</code></li>
+<li><p>切换到/usr/local,解压目录</p>
+<p><code>cd /usr/local</code><br><code>tar zxvf mysql-5.7.13-osx10.11-x86_64.tar.gz</code></p>
+</li>
+<li>解压后会有一个文件夹<code>mysql-5.7.13-osx10.11-x86_64</code>,将其重命名为<code>mysql</code>.<br><code>mv mysql-5.7.13-osx10.11-x86_64 mysql</code></li>
+</ol>
+<h3 id="启动mysql"><a href="#启动mysql" class="headerlink" title="启动mysql"></a>启动mysql</h3><p>在启动mysql之前，需要执行一下初始化操作。<strong>卡在初始化操作</strong>中…下载dmg文件来操作。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><pre><code>sudo cp mysql-5.7.13-osx10.11-x86_64.tar.gz /usr/local 
+cd /usr/local
+tar zxvf mysql-5.7.13-osx10.11-x86_64.tar.gz 
+mv mysql-5.7.13-osx10.11-x86_64 mysql
+rm mysql-5.7.13-osx10.11-x86_64
+</code></pre><p>拷贝到指定目录，切换到该目录/usr/local,解压mysql,重命名mysql.删除压缩包</p>
+<h2 id="dmg方式-成功"><a href="#dmg方式-成功" class="headerlink" title="dmg方式 成功"></a>dmg方式 成功</h2><h3 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h3><ol>
+<li>在浏览器中输入mysql.com</li>
+<li>点击Download Tab,然后Download Tab下子分类下点击Community.</li>
+<li>在打开的页面点击MySQL Community Server.</li>
+<li>选择对应的平台，这里我选择Mac OS X, 选择最后一个<code>Mac OS X 10.11 (x86, 64-bit), DMG Archive</code>。</li>
+<li>弹出页面要求你注册或者登陆，其实不用管它，注意左下角有一个<code>No thanks, just start my download.</code>.点击    它，成功下载。</li>
+</ol>
+<h3 id="安装与简单配置-1"><a href="#安装与简单配置-1" class="headerlink" title="安装与简单配置"></a>安装与简单配置</h3><ol>
+<li>一路点击确定。最后会弹出一个框。告诉你应用程序给你的root账户分配了一个临时密码.</li>
+</ol>
+<blockquote>
+<p>2016-07-14T16:14:55.804440Z 1 [Note] A temporary password is generated for root@localhost:QDWf-(f/2#x<br>If you lose this password, please consult the section How to Reset the Root Password in the MySQL reference manual.</p>
 </blockquote>
-<h3 id="RunLoop-与线程的关系"><a href="#RunLoop-与线程的关系" class="headerlink" title="RunLoop 与线程的关系"></a>RunLoop 与线程的关系</h3><blockquote>
-<p>首先，iOS 开发中能遇到两个线程对象: pthread_t 和 NSThread。过去苹果有份文档标明了 NSThread 只是 pthread_t 的封装，但那份文档已经失效了，现在它们也有可能都是直接包装自最底层的 mach thread。苹果并没有提供这两个对象相互转换的接口，但不管怎么样，可以肯定的是 pthread_t 和 NSThread 是一一对应的。比如，你可以通过 pthread_main_np() 或 [NSThread mainThread] 来获取主线程；也可以通过 pthread_self() 或 [NSThread currentThread] 来获取当前线程。<strong>CFRunLoop 是基于 pthread 来管理的</strong>。</p>
-<p>线程和 RunLoop 之间是一一对应的，其关系是保存在一个全局的 Dictionary 里。线程刚创建时并没有 RunLoop，如果你不主动获取，那它一直都不会有。RunLoop 的创建是发生在第一次获取时，RunLoop 的销毁是发生在线程结束时。你<strong>只能在一个线程的内部获取其 RunLoop</strong>（主线程除外）。</p>
-</blockquote>
+<p>2.点击左上角apple-&gt;preference.多出了一个MySql按钮，点击它，勾选start MySQL server。就启动了mysql 软件。</p>
+<p>3.跳转到终端。输入<code>mysql -u root -p</code>.就是以root身份连接数据库。回车后要求输入密码。输入步骤1中弹出的密码。进入mysql命令行交互界面。<code>mysql&gt;</code></p>
+<p>4.在交互界面中输入一个命令如，show databases.会弹出下面警告<br><code>ERROR 1820 (HY000): You must SET PASSWORD before executing this statement</code>.此时，是因为刚才的root账号的密码是临时的账号密码。输入<code>SET PASSWORD = PASSWORD(&#39;123456&#39;);</code>就可以重置密码了。整个配置就完成了。</p>
 
       
     </div>
@@ -312,17 +320,13 @@ int main(int argc, char *argv[]) {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/05/24/Masonry手写约束之Demo篇/" rel="next" title="Masonry手写约束之Demo篇">
-                <i class="fa fa-chevron-left"></i> Masonry手写约束之Demo篇
+              <a href="/2016/07/13/Python-Tips-查看是否有安装某个模块/" rel="next" title="Python Tips:查看是否有安装某个模块">
+                <i class="fa fa-chevron-left"></i> Python Tips:查看是否有安装某个模块
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/05/26/NSTextAttachMent实现图文混排/" rel="prev" title="NSTextAttachment实现图文混排">
-                NSTextAttachment实现图文混排 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -433,7 +437,7 @@ int main(int argc, char *argv[]) {
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令式执行与事件驱动"><span class="nav-number">1.</span> <span class="nav-text">命令式执行与事件驱动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么需要RunLoop"><span class="nav-number">1.1.</span> <span class="nav-text">为什么需要RunLoop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RunLoop到底是什么？"><span class="nav-number">1.2.</span> <span class="nav-text">RunLoop到底是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RunLoop-与线程的关系"><span class="nav-number">1.3.</span> <span class="nav-text">RunLoop 与线程的关系</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行方式。。失败"><span class="nav-number">1.</span> <span class="nav-text">命令行方式。。失败</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载"><span class="nav-number">1.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装与简单配置"><span class="nav-number">1.2.</span> <span class="nav-text">安装与简单配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动mysql"><span class="nav-number">1.3.</span> <span class="nav-text">启动mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dmg方式-成功"><span class="nav-number">2.</span> <span class="nav-text">dmg方式 成功</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载-1"><span class="nav-number">2.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装与简单配置-1"><span class="nav-number">2.2.</span> <span class="nav-text">安装与简单配置</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
