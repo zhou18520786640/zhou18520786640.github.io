@@ -294,6 +294,11 @@ rm mysql-5.7.13-osx10.11-x86_64
 <p>2.点击左上角apple-&gt;preference.多出了一个MySql按钮，点击它，勾选start MySQL server。就启动了mysql 软件。</p>
 <p>3.跳转到终端。输入<code>mysql -u root -p</code>.就是以root身份连接数据库。回车后要求输入密码。输入步骤1中弹出的密码。进入mysql命令行交互界面。<code>mysql&gt;</code></p>
 <p>4.在交互界面中输入一个命令如，show databases.会弹出下面警告<br><code>ERROR 1820 (HY000): You must SET PASSWORD before executing this statement</code>.此时，是因为刚才的root账号的密码是临时的账号密码。输入<code>SET PASSWORD = PASSWORD(&#39;123456&#39;);</code>就可以重置密码了。整个配置就完成了。</p>
+<ul>
+<li>注意在mysql交互界面，enter不会执行.要执行sql命令，必须使用</li>
+</ul>
+<h2 id="使用navicat-for-Mysql-可视化工具来编写数据库"><a href="#使用navicat-for-Mysql-可视化工具来编写数据库" class="headerlink" title="使用navicat for Mysql 可视化工具来编写数据库"></a>使用navicat for Mysql 可视化工具来编写数据库</h2><p>虽然mysql终端命令可以帮助我们完成sql语句的执行。但是效率低。可以下载navicat for Mysql 来提高数据库编写的效率。它提供了一个可视化的界面来操作数据库。它的使用也十分简单，可以参考<br><a href="http://jingyan.baidu.com/article/6181c3e074ba0d152ff15346.html" target="_blank" rel="external">http://jingyan.baidu.com/article/6181c3e074ba0d152ff15346.html
+</a></p>
 
           
         
