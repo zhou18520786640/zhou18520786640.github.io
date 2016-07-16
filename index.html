@@ -214,6 +214,201 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/16/python函数-类，异常处理拾遗/" itemprop="url">
+                  python函数,类，异常处理拾遗
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-16T11:49:54+08:00" content="2016-07-16">
+              2016-07-16
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p> python中定义函数时无论函数是否需要返回，都不需要声明返回值</p>
+<pre><code>def my_abs(x):
+    if x &gt;= 0:
+        return x
+    else:
+        return -x
+</code></pre><h3 id="类"><a href="#类" class="headerlink" title="类"></a>类</h3><p>类定义:类方法中，无论是初始化方法，还是其他方法，类方法必须包含参数self,且为第一个参数</p>
+<pre><code>def __init__(self, name, score):
+   self.name = name
+   self.score = score
+</code></pre><p>方法调用:调用的时候不需要传入self参数对象<br>    foo.Foo()</p>
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><p>以try…except为例.</p>
+<pre><code>try:
+    sql = &apos;select * from FreeVideo&apos;
+    self.cur.execute(sql)
+except MySQLdb.Error,e:
+    print &quot;Mysql Error %d: %s&quot; % (e.args[0], e.args[1])
+</code></pre><p>except 的两个参数依次表示。1异常类型。2接收的异常对象变量</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>换行: 添加 \,解释器认为是换行。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/16/Python-Tips-异常处理/" itemprop="url">
+                  Python Tips:异常处理
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-16T04:18:42+08:00" content="2016-07-16">
+              2016-07-16
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/14/MySQL数据库下载和安装/" itemprop="url">
                   MySQL数据库下载和安装
                 </a>
@@ -529,252 +724,12 @@ def show_post(post_id):
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/12/Virtualenv入门基础教程/" itemprop="url">
-                  Virtualenv入门基础教程
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-12T00:24:25+08:00" content="2016-07-12">
-              2016-07-12
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="虚拟环境简介"><a href="#虚拟环境简介" class="headerlink" title="虚拟环境简介"></a>虚拟环境简介</h3><blockquote>
-<p>VirtualEnv用于在一台机器上创建多个独立的Python虚拟运行环境，多个Python环境相互独立，互不影响，它能够：</p>
-<ol>
-<li>在没有权限的情况下安装新套件</li>
-<li>不同应用可以使用不同的套件版本</li>
-<li>套件升级不影响其他应用</li>
-</ol>
-<p>虚拟环境是在<strong>Python解释器上的一个私有复制</strong>，你可以在一个隔绝的环境下安装packages，不会影响到你系统中全局的Python解释器。<br>    虚拟环境非常有用，因为它可以防止系统出现包管理混乱和版本冲突的问题。为每个应用程序创建一个虚拟环境可以确保应用程序只能访问它们自己使用的包，从而全局解释器只作为一个源且依然整洁干净去更多的虚拟环境。另一个好处是，虚拟环境不需要管理员权限。</p>
-</blockquote>
-<p>所谓虚拟环境可以在当前工作目录下创建一个新的Python解释器。防止系统出现包管理混乱和版本冲突的问题<br>一个不太恰当的比方，虚拟环境相当于虚拟机。</p>
-<h3 id="安装Virtualenv"><a href="#安装Virtualenv" class="headerlink" title="安装Virtualenv"></a>安装Virtualenv</h3><p>使用命令行安装，可以在任意目录下安装，这一步骤<strong>并不创建虚拟环境</strong>。只是下载了创建虚拟环境的工具virtualenv</p>
-<pre><code>$ sudo easy_install virtualenv
-</code></pre><p>此步骤不会影响任何工程文件。不管建立多少工程，只需要安装一次Virtualenv就可以了。</p>
-<h3 id="创建和激活虚拟环境"><a href="#创建和激活虚拟环境" class="headerlink" title="创建和激活虚拟环境"></a>创建和激活虚拟环境</h3><p>我们需要在demo文件下建立工程。实际上与虚拟环境相关的文件夹也会在这个文件夹下创建。使用</p>
-<pre><code>$ virtualenv venv
-</code></pre><p>创建一个指定名称的文件夹和在里面的、与<strong>虚拟环境相关的所有文件</strong>会在当前目录下被创建。按照惯例，这个文件名叫做venu.</p>
-<p><strong>默认情况下，虚拟环境会依赖系统环境中的site packages，就是说系统中已经安装好的第三方package也会安装在虚拟环境中，如果不想依赖这些package，那么可以加上参数 –no-site-packages建立虚拟环境</strong></p>
-<pre><code>$ virtualenv --no-site-packages [虚拟环境名称]
-</code></pre><p>现在你有一个venv文件夹和一个全新的虚拟环境，包含<strong>一个私有的Python解释器</strong>。使用虚拟环境的时候，你必须“激活”它。使用bash命令行工具(Linux和Mac OSX用户)，你可以使用这个命令激活虚拟环境：</p>
-<pre><code>$ source venv/bin/activate
-</code></pre><p>当<strong>虚拟环境被激活</strong>了，<strong>Python解释器的位置会被添加到 PATH 中</strong>，但是这个改动并不是永久的；它只影响当前命令会话。提醒一下，你激活了虚拟环境，该激活命令会将环境的名称包含在命令提示符里面：</p>
-<pre><code>(venv)$
-</code></pre><p>即当前目录下有一个Python解释器，激活的过程会制定这个私有的Python解释器作为解释器。不会使用全局的Python解释器。</p>
-<h3 id="退出虚拟环境"><a href="#退出虚拟环境" class="headerlink" title="退出虚拟环境"></a>退出虚拟环境</h3><blockquote>
-<p>当你在虚拟环境中完成工作并<strong>想回到全局Python解释器</strong>，在命令提示符中输入 deactivate 就可以了。</p>
-</blockquote>
-<pre><code>(venv)$ deactivate
-</code></pre><h3 id="使用pip安装python包"><a href="#使用pip安装python包" class="headerlink" title="使用pip安装python包"></a>使用pip安装python包</h3><blockquote>
-<p>大多数的Python包是通过 pip 程序安装的，在<strong>创建虚拟环境的时候virtualenv会自动添加进去</strong>。当一个虚拟环境被激活后，<strong>pip程序的位置会被添加到 PATH 中</strong>。</p>
-</blockquote>
-<p>所谓PATH,PATH可执行文件的搜索路径.pip也是一个程序（可执行文件），bash要找到这个程序，必须要添加到PATH.<br>虚拟环境被创建后会自动将pip添加进去。安装Flask到虚拟环境中，使用下面的命令：</p>
-<pre><code>(venv)$ pip install flask
-</code></pre><h3 id="验证是否在虚拟环境下安装成功"><a href="#验证是否在虚拟环境下安装成功" class="headerlink" title="验证是否在虚拟环境下安装成功"></a>验证是否在虚拟环境下安装成功</h3><pre><code>(venv)$ python
-&gt;&gt;&gt; import flask
-&gt;&gt;&gt;         &lt;!--出现这个代表成功--&gt;
-</code></pre><p>然后，ctrl+D退出&gt;&gt;&gt;</p>
-<p>另外，我们也可以查看bin目录下是否又一个可执行文件flask，如果有，可以表示安装成功</p>
-<h3 id="批量安装多个包"><a href="#批量安装多个包" class="headerlink" title="批量安装多个包"></a>批量安装多个包</h3><p>如果需要安装的包比较多的时候，这样做会比较繁琐，我们还有一键安装的方法。首先新建一个文本文件，如：requirements.txt，然后将你需要安装的包名保存到该文件中(根据自己的需要)，如下：</p>
-<pre><code>Babel==1.3
-Flask==0.10.1
-Flask-Login==0.2.7
-Flask-SQLAlchemy==1.0
-Flask-WTF==0.9.3
-Jinja2==2.7.1
-SQLAlchemy==0.8.2
-WTForms==1.0.5
-Werkzeug==0.9.4
-psycopg2==2.5.1
-...
-</code></pre><p>最后你只需要输入以下命令，所有需要的包就可以全部安装好了：</p>
-<pre><code>(venv)$ pip install -r requirements.txt
-</code></pre><p>如果没有出现错误，祝贺你：安装成功了。</p>
-<h3 id="查看当前环境安装了哪些包"><a href="#查看当前环境安装了哪些包" class="headerlink" title="查看当前环境安装了哪些包"></a>查看当前环境安装了哪些包</h3><p>若要查看当前环境安装了哪些包，可以使用下面的命令：</p>
-<pre><code>(venv)$ pip freeze
-</code></pre>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/10/use-flask-to-access-json/" itemprop="url">
-                  use flask to access json
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-10T09:35:04+08:00" content="2016-07-10">
-              2016-07-10
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="空的项目"><a href="#空的项目" class="headerlink" title="空的项目"></a>空的项目</h3><p>我们先建立一个flask的空项目</p>
-<pre><code>from flask import Flask
-
-app = Flask(__name__)
-
-@app.route(&apos;/&apos;)
-    return &quot;test&quot;;
-
-if __name__ == &apos;__main__&apos;:
-    app.run(debug=True)
-</code></pre><h3 id="读"><a href="#读" class="headerlink" title="读"></a>读</h3>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -815,7 +770,7 @@ if __name__ == &apos;__main__&apos;:
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">39</span>
+              <span class="site-state-item-count">41</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
