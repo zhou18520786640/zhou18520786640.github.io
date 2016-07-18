@@ -214,6 +214,107 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/18/bash拾遗/" itemprop="url">
+                  bash拾遗
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-18T23:45:44+08:00" content="2016-07-18">
+              2016-07-18
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="重命名文件"><a href="#重命名文件" class="headerlink" title="重命名文件"></a>重命名文件</h3><pre><code>mv oldName newName
+</code></pre><h3 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h3><pre><code>alias cdH=&apos;cd ~/Documents/Hexo&apos;  // 不能省略&apos;&apos;
+</code></pre><h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><pre><code>// 符号&gt;,常见应用：将输出到屏幕的内容输出到一个文件
+ls -al &gt; 1.txt
+</code></pre><h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><pre><code>rm file // 删除文件
+rm -r path //删除文件夹
+</code></pre><h3 id="Bash中命令连接符"><a href="#Bash中命令连接符" class="headerlink" title="Bash中命令连接符"></a>Bash中命令连接符</h3><pre><code>每个命令被 &amp;&amp; 号分隔，那么这些命令会一直执行下去，如果中间有错误的命令存在，则不再执行后面的命
+command1 &amp;&amp; command2 &amp;&amp; command3
+
+如果每个命令被双竖线(||)分隔符分隔，如果命令遇到可以成功执行的命令，那么命令停止执行，即使后面还有正确的命令则后面的所有命令都将得不到执行。
+command1 || command2 || command3
+
+&amp;&amp; 更常用
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/16/python函数-类，异常处理拾遗/" itemprop="url">
                   python函数,类，异常处理拾遗
                 </a>
@@ -614,116 +715,6 @@ Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;licen
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/12/Flask-Tips/" itemprop="url">
-                  Flask Tips
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-12T21:47:05+08:00" content="2016-07-12">
-              2016-07-12
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="app-run-的几种模式"><a href="#app-run-的几种模式" class="headerlink" title="app.run()的几种模式"></a>app.run()的几种模式</h3><ol>
-<li><code>app.run()</code>服务器只在当前电脑可见，且修改代码后不能自动载入代码，不会刷新显示</li>
-<li><code>app.run(host=&#39;0.0.0.0&#39;)</code>,使服务器公开可用</li>
-<li><code>app.run(debug=True)</code>,启用了调试支持，服务器会在代码修改后自动重新载入，并在发生错误时提供一个相当有用的调试器</li>
-</ol>
-<h3 id="路由转换器"><a href="#路由转换器" class="headerlink" title="路由转换器"></a>路由转换器</h3><p> route() 装饰器把一个函数绑定到对应的 URL 上<br> 要给 URL 添加变量部分，你可以把这些特殊的字段标记为 <variable_name> ， 这个部分将会作为命名参数传递到你的函数。规则可以用 <converter:variable_name> 指定一个可选的转换器。这里有一些不错的例子</converter:variable_name></variable_name></p>
-<pre><code> @app.route(&apos;/user/&lt;username&gt;&apos;)
-def show_user_profile(username):
-    # show the user profile for that user
-    return &apos;User %s&apos; % username
-
-@app.route(&apos;/post/&lt;int:post_id&gt;&apos;)
-def show_post(post_id):
-    # show the post with the given id, the id is an integer
-    return &apos;Post %d&apos; % post_id
-</code></pre><p> 转换器有下面几种：</p>
-<ol>
-<li>int        接受整数</li>
-<li>float    同 int ，但是接受浮点数</li>
-<li>path    和默认的相似，但也接受斜线</li>
-</ol>
-<p>默认是string,可以通过转换器转换为init,float,path</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -770,7 +761,7 @@ def show_post(post_id):
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">41</span>
+              <span class="site-state-item-count">42</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

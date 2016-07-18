@@ -57,31 +57,34 @@
 
 
 
-<meta name="description" content="宏的缺陷使用宏是有缺陷的，无类型安全，长度和格式的具体限制，而且不便于调试
-
-如果你的.m文件需要频繁调用一个函数,可以用static inline来声明,这相当于把函数体当做一个大号的宏定义.不过这也不是百分之百有效,到底能不能把函数体转换为大号宏定义来用要看编译器心情,它要是觉得你的方法太复杂,他就不转了.他直接调用函数.
-
-内联函数格式必须是 c function,所以是c的格式类似这样
-s">
+<meta name="description" content="重命名文件mv oldName newName
+别名alias cdH=&amp;apos;cd ~/Documents/Hexo&amp;apos;  // 不能省略&amp;apos;&amp;apos;
+重定向// 符号&amp;gt;,常见应用：将输出到屏幕的内容输出到一个文件
+ls -al &amp;gt; 1.txt
+删除文件rm file // 删除文件
+rm -r path //删除文件夹
+Bash中命令连接符每个命令被 &amp;am">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用内联函数代替宏定义">
-<meta property="og:url" content="http://yoursite.com/2016/07/07/使用内联函数代替宏定义/index.html">
+<meta property="og:title" content="bash拾遗">
+<meta property="og:url" content="http://yoursite.com/2016/07/18/bash拾遗/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="宏的缺陷使用宏是有缺陷的，无类型安全，长度和格式的具体限制，而且不便于调试
-
-如果你的.m文件需要频繁调用一个函数,可以用static inline来声明,这相当于把函数体当做一个大号的宏定义.不过这也不是百分之百有效,到底能不能把函数体转换为大号宏定义来用要看编译器心情,它要是觉得你的方法太复杂,他就不转了.他直接调用函数.
-
-内联函数格式必须是 c function,所以是c的格式类似这样
-s">
-<meta property="og:updated_time" content="2016-07-06T17:47:13.000Z">
+<meta property="og:description" content="重命名文件mv oldName newName
+别名alias cdH=&amp;apos;cd ~/Documents/Hexo&amp;apos;  // 不能省略&amp;apos;&amp;apos;
+重定向// 符号&amp;gt;,常见应用：将输出到屏幕的内容输出到一个文件
+ls -al &amp;gt; 1.txt
+删除文件rm file // 删除文件
+rm -r path //删除文件夹
+Bash中命令连接符每个命令被 &amp;am">
+<meta property="og:updated_time" content="2016-07-18T15:53:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用内联函数代替宏定义">
-<meta name="twitter:description" content="宏的缺陷使用宏是有缺陷的，无类型安全，长度和格式的具体限制，而且不便于调试
-
-如果你的.m文件需要频繁调用一个函数,可以用static inline来声明,这相当于把函数体当做一个大号的宏定义.不过这也不是百分之百有效,到底能不能把函数体转换为大号宏定义来用要看编译器心情,它要是觉得你的方法太复杂,他就不转了.他直接调用函数.
-
-内联函数格式必须是 c function,所以是c的格式类似这样
-s">
+<meta name="twitter:title" content="bash拾遗">
+<meta name="twitter:description" content="重命名文件mv oldName newName
+别名alias cdH=&amp;apos;cd ~/Documents/Hexo&amp;apos;  // 不能省略&amp;apos;&amp;apos;
+重定向// 符号&amp;gt;,常见应用：将输出到屏幕的内容输出到一个文件
+ls -al &amp;gt; 1.txt
+删除文件rm file // 删除文件
+rm -r path //删除文件夹
+Bash中命令连接符每个命令被 &amp;am">
 
 
 
@@ -99,7 +102,7 @@ s">
   };
 </script>
 
-  <title> 使用内联函数代替宏定义 | 周明的技术博客 </title>
+  <title> bash拾遗 | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -221,7 +224,7 @@ s">
             
             
               
-                使用内联函数代替宏定义
+                bash拾遗
               
             
           </h1>
@@ -233,8 +236,8 @@ s">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-07T01:35:14+08:00" content="2016-07-07">
-              2016-07-07
+            <time itemprop="dateCreated" datetime="2016-07-18T23:45:44+08:00" content="2016-07-18">
+              2016-07-18
             </time>
           </span>
 
@@ -260,19 +263,20 @@ s">
       
 
       
-        <h3 id="宏的缺陷"><a href="#宏的缺陷" class="headerlink" title="宏的缺陷"></a>宏的缺陷</h3><p>使用宏是有缺陷的，无类型安全，长度和格式的具体限制，而且不便于调试</p>
-<blockquote>
-<p>如果你的.m文件需要频繁调用一个函数,可以用static inline来声明,这相当于把函数体<strong>当做一个大号的宏定义</strong>.不过这也不是百分之百有效,到底能不能把函数体转换为大号宏定义来用要看编译器心情,它要是觉得你的方法太复杂,他就不转了.他直接调用函数.</p>
-</blockquote>
-<h3 id="内联函数格式"><a href="#内联函数格式" class="headerlink" title="内联函数格式"></a>内联函数格式</h3><p>必须是 c function,所以是c的格式类似这样</p>
-<pre><code>static inline fun_returnType  Fun_name(param...){}
-</code></pre><h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><pre><code>static inline CGFloat kWidth() {return [UIScreen mainScreen].bounds.size.width;}
+        <h3 id="重命名文件"><a href="#重命名文件" class="headerlink" title="重命名文件"></a>重命名文件</h3><pre><code>mv oldName newName
+</code></pre><h3 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h3><pre><code>alias cdH=&apos;cd ~/Documents/Hexo&apos;  // 不能省略&apos;&apos;
+</code></pre><h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><pre><code>// 符号&gt;,常见应用：将输出到屏幕的内容输出到一个文件
+ls -al &gt; 1.txt
+</code></pre><h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><pre><code>rm file // 删除文件
+rm -r path //删除文件夹
+</code></pre><h3 id="Bash中命令连接符"><a href="#Bash中命令连接符" class="headerlink" title="Bash中命令连接符"></a>Bash中命令连接符</h3><pre><code>每个命令被 &amp;&amp; 号分隔，那么这些命令会一直执行下去，如果中间有错误的命令存在，则不再执行后面的命
+command1 &amp;&amp; command2 &amp;&amp; command3
 
-kWidth() // call
-</code></pre><p>调用 Fun_name（param…）.因为是c function,是该文件全局可见，不需要调用self.Fun_name（）</p>
-<h3 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h3><p><strong>不能写太复杂的语句。不能递归。
-</strong></p>
+如果每个命令被双竖线(||)分隔符分隔，如果命令遇到可以成功执行的命令，那么命令停止执行，即使后面还有正确的命令则后面的所有命令都将得不到执行。
+command1 || command2 || command3
 
+&amp;&amp; 更常用
+</code></pre>
       
     </div>
 
@@ -295,17 +299,13 @@ kWidth() // call
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/07/07/使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView/" rel="next" title="使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView">
-                <i class="fa fa-chevron-left"></i> 使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView
+              <a href="/2016/07/16/python函数-类，异常处理拾遗/" rel="next" title="python函数,类，异常处理拾遗">
+                <i class="fa fa-chevron-left"></i> python函数,类，异常处理拾遗
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/10/use-flask-to-access-json/" rel="prev" title="use flask to access json">
-                use flask to access json <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -416,7 +416,7 @@ kWidth() // call
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#宏的缺陷"><span class="nav-number">1.</span> <span class="nav-text">宏的缺陷</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内联函数格式"><span class="nav-number">2.</span> <span class="nav-text">内联函数格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo"><span class="nav-number">3.</span> <span class="nav-text">Demo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#局限性"><span class="nav-number">4.</span> <span class="nav-text">局限性</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#重命名文件"><span class="nav-number">1.</span> <span class="nav-text">重命名文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#别名"><span class="nav-number">2.</span> <span class="nav-text">别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向"><span class="nav-number">3.</span> <span class="nav-text">重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除文件"><span class="nav-number">4.</span> <span class="nav-text">删除文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bash中命令连接符"><span class="nav-number">5.</span> <span class="nav-text">Bash中命令连接符</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
