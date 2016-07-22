@@ -57,25 +57,16 @@
 
 
 
-<meta name="description" content="方法1 设置edgesForExtendedLayoutrootViewController.edgesForExtendedLayout = UIRectEdgeNone;
-viewController的左上角位置会在导航栏下面。
-方法2 设置导航栏不透明navigationController.navigationBar.translucent = NO;
-viewController的左上角">
+<meta name="description" content="匿名函数与filter()匿名函数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="让视图控制器的视图位置不要和导航栏重合的三种方法">
-<meta property="og:url" content="http://yoursite.com/2016/06/24/让视图控制器的视图位置不要和导航栏重合的三种方法/index.html">
+<meta property="og:title" content="Python Tip:匿名函数，数组下标-1,filter(),字典取value">
+<meta property="og:url" content="http://yoursite.com/2016/07/21/Python-Tip-匿名函数，数组下标-1-filter-字典取value/index.html">
 <meta property="og:site_name" content="周明的技术博客">
-<meta property="og:description" content="方法1 设置edgesForExtendedLayoutrootViewController.edgesForExtendedLayout = UIRectEdgeNone;
-viewController的左上角位置会在导航栏下面。
-方法2 设置导航栏不透明navigationController.navigationBar.translucent = NO;
-viewController的左上角">
-<meta property="og:updated_time" content="2016-06-23T17:20:02.000Z">
+<meta property="og:description" content="匿名函数与filter()匿名函数">
+<meta property="og:updated_time" content="2016-07-20T16:25:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="让视图控制器的视图位置不要和导航栏重合的三种方法">
-<meta name="twitter:description" content="方法1 设置edgesForExtendedLayoutrootViewController.edgesForExtendedLayout = UIRectEdgeNone;
-viewController的左上角位置会在导航栏下面。
-方法2 设置导航栏不透明navigationController.navigationBar.translucent = NO;
-viewController的左上角">
+<meta name="twitter:title" content="Python Tip:匿名函数，数组下标-1,filter(),字典取value">
+<meta name="twitter:description" content="匿名函数与filter()匿名函数">
 
 
 
@@ -93,7 +84,7 @@ viewController的左上角">
   };
 </script>
 
-  <title> 让视图控制器的视图位置不要和导航栏重合的三种方法 | 周明的技术博客 </title>
+  <title> Python Tip:匿名函数，数组下标-1,filter(),字典取value | 周明的技术博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -215,7 +206,7 @@ viewController的左上角">
             
             
               
-                让视图控制器的视图位置不要和导航栏重合的三种方法
+                Python Tip:匿名函数，数组下标-1,filter(),字典取value
               
             
           </h1>
@@ -227,8 +218,8 @@ viewController的左上角">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-24T00:51:13+08:00" content="2016-06-24">
-              2016-06-24
+            <time itemprop="dateCreated" datetime="2016-07-21T00:06:45+08:00" content="2016-07-21">
+              2016-07-21
             </time>
           </span>
 
@@ -254,12 +245,7 @@ viewController的左上角">
       
 
       
-        <h2 id="方法1-设置edgesForExtendedLayout"><a href="#方法1-设置edgesForExtendedLayout" class="headerlink" title="方法1 设置edgesForExtendedLayout"></a>方法1 设置edgesForExtendedLayout</h2><pre><code>rootViewController.edgesForExtendedLayout = UIRectEdgeNone;
-</code></pre><p>viewController的左上角位置会在导航栏下面。</p>
-<h2 id="方法2-设置导航栏不透明"><a href="#方法2-设置导航栏不透明" class="headerlink" title="方法2 设置导航栏不透明"></a>方法2 设置导航栏不透明</h2><pre><code>navigationController.navigationBar.translucent = NO;
-</code></pre><p>viewController的左上角位置会在导航栏下面，会影响其导航控制器的其他子视图也下降。</p>
-<h2 id="方法3-所有的子视图都为viewController-view留白。"><a href="#方法3-所有的子视图都为viewController-view留白。" class="headerlink" title="方法3 所有的子视图都为viewController.view留白。"></a>方法3 所有的子视图都为viewController.view留白。</h2><p>所有子视图都从y＝64开始算起。不把子视图放在y = 64更小的位置.看起来viewController.view变小了</p>
-<p>这种方法最不可取。</p>
+        <h3 id="匿名函数与filter"><a href="#匿名函数与filter" class="headerlink" title="匿名函数与filter()"></a>匿名函数与filter()</h3><p>匿名函数</p>
 
       
     </div>
@@ -283,16 +269,16 @@ viewController的左上角">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/06/19/导航栏透明的设置/" rel="next" title="导航栏透明的设置">
-                <i class="fa fa-chevron-left"></i> 导航栏透明的设置
+              <a href="/2016/07/18/bash拾遗/" rel="next" title="bash拾遗">
+                <i class="fa fa-chevron-left"></i> bash拾遗
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/06/24/Tip-cmd是什么/" rel="prev" title="Tip:_cmd是什么?">
-                Tip:_cmd是什么? <i class="fa fa-chevron-right"></i>
+              <a href="/2016/07/23/flask-返回json/" rel="prev" title="flask 返回json">
+                flask 返回json <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -404,7 +390,7 @@ viewController的左上角">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#方法1-设置edgesForExtendedLayout"><span class="nav-number">1.</span> <span class="nav-text">方法1 设置edgesForExtendedLayout</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法2-设置导航栏不透明"><span class="nav-number">2.</span> <span class="nav-text">方法2 设置导航栏不透明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法3-所有的子视图都为viewController-view留白。"><span class="nav-number">3.</span> <span class="nav-text">方法3 所有的子视图都为viewController.view留白。</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#匿名函数与filter"><span class="nav-number">1.</span> <span class="nav-text">匿名函数与filter()</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

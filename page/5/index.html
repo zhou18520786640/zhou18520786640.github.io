@@ -214,6 +214,260 @@
             
               
                 
+                <a class="post-title-link" href="/2016/06/19/导航栏透明的设置/" itemprop="url">
+                  导航栏透明的设置
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-19T15:00:31+08:00" content="2016-06-19">
+              2016-06-19
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="导航栏透明不能依靠alpha值"><a href="#导航栏透明不能依靠alpha值" class="headerlink" title="导航栏透明不能依靠alpha值"></a>导航栏透明不能依靠alpha值</h2><pre><code>viewController.navigationController.navigationBar.alpha = 0.0;
+</code></pre><p>一般视图都是利用<code>alpha</code>来设置透明度。这一套对于继承<code>UIView</code>的的<code>navigationBar</code>并不生效.设置后依然可以显示。实际上导航栏设置透明是只需设置NavigationBar的背景图片为一张空图片即可</p>
+<pre><code>[self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsCompact];
+</code></pre><h2 id="透明的导航栏还可以放置titleView-leftBarItem"><a href="#透明的导航栏还可以放置titleView-leftBarItem" class="headerlink" title="透明的导航栏还可以放置titleView leftBarItem"></a>透明的导航栏还可以放置<code>titleView</code> <code>leftBarItem</code></h2><p>在视图的概念中，如果设置<code>alpha</code> = 0后呈现透明效果后，其子视图也会透明。但是我们导航栏的透明并不是依赖｀<code>alpha</code> ＝ 0.而是依靠设置空白图片的方法。我们设置的titleView，leftBarItem依然可以显示。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/06/19/UITableViewCell-动画/" itemprop="url">
+                  UITableViewCell 动画
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-06-19T09:30:21+08:00" content="2016-06-19">
+              2016-06-19
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p style="text-align:center"><img src="http://7xsf79.com1.z0.glb.clouddn.com/1234.gif"></p>
+
+<h2 id="目标与思路"><a href="#目标与思路" class="headerlink" title="目标与思路"></a>目标与思路</h2><p>希望做如上图的动画。观察这个动画，每一个cell从左到右进入眼帘。下面的cell比上面的cell到底最终位置的时间更久。现在有两种思路。<br>1.每个cell动画启动时间不同。动画的执行时间相同<br>2.每个cell动画启动时间相同。后面的动画执行时间更久。</p>
+<p>方案2更简单，因为很难实现每一个动画的启动时间固定时间间隔</p>
+<h2 id="执行动画的时机"><a href="#执行动画的时机" class="headerlink" title="执行动画的时机"></a>执行动画的时机</h2><p>UITableView的委托方法来执行动画。</p>
+<pre><code>- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath 
+</code></pre><p>是tableViewCell的动画的最佳时机</p>
+<p>该方法中可以使用<code>[UIView animateWithDuration:animations:]</code>。要注意的是，我们的动画只是在第一次cell出现在屏幕上的时候执行。在其他时候。如滑到上面后又滑下来的时候是不该被调用的。我们可以用一个全局变量。保证动画执行次数和屏幕的显示个数一致。</p>
+<h2 id="完整demo"><a href="#完整demo" class="headerlink" title="完整demo"></a>完整demo</h2><pre><code>//
+//  ViewController.m
+//  Animation
+//
+//  Created by zhou on 16/6/15.
+//  Copyright © 2016年 jeff.zhou. All rights reserved.
+//
+
+#import &quot;ViewController.h&quot;
+#import &quot;ZZCell.h&quot;
+
+@interface ViewController () &lt;UITableViewDelegate, UITableViewDataSource&gt;
+@property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, assign) NSInteger count;
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self setupTableView];
+}
+
+- (void)setupTableView {
+    CGRect rect = CGRectMake(0, 0, 80, [UIScreen mainScreen].bounds.size.height);
+    UITableView *tableView = [[UITableView alloc] initWithFrame:rect];
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    [tableView registerClass:[ZZCell class] forCellReuseIdentifier:@&quot;cell&quot;];
+    self.tableView = tableView;
+    self.count = 0;
+    [self.view addSubview:self.tableView];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    // 16是一屏显示的cell个数，这个方法是要保证第一次出现cell的时候动画
+    if (self.count &gt; 16) {
+        return;
+    }
+    self.count++;
+
+    CGPoint oldPoint = cell.frame.origin;
+    CGPoint newPoint = oldPoint;
+    newPoint.x = - 80 -indexPath.row * 80 * 0.15;
+    // 设置开始位置
+    cell.frame = CGRectMake(newPoint.x, newPoint.y, cell.frame.size.width, cell.frame.size.height);
+    // 核心思想是越下面的cell离cell最后位置越远。每一个cell的动画时间相同。每个cell速度相同
+    [UIView animateWithDuration:(0.5 + 0.125 * indexPath.row) animations:^{
+     // 设置结束为止
+        cell.frame = CGRectMake(oldPoint.x, oldPoint.y, cell.frame.size.width, cell.frame.size.height);
+    }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 20;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ZZCell *cell = [tableView dequeueReusableCellWithIdentifier:@&quot;cell&quot; forIndexPath:indexPath];
+    return cell;
+}
+
+
+@end
+</code></pre>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/06/14/Tip-一次git冲突文件的简单解决/" itemprop="url">
                   Tip:一次git冲突文件的简单解决
                 </a>
@@ -544,229 +798,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/01/UITableView复用机制浅析/" itemprop="url">
-                  UITableView复用机制浅析
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-01T22:35:03+08:00" content="2016-06-01">
-              2016-06-01
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="UITableViewCell的复用机制疑惑"><a href="#UITableViewCell的复用机制疑惑" class="headerlink" title="UITableViewCell的复用机制疑惑"></a>UITableViewCell的复用机制疑惑</h2><p>无论是刚接触iOS不久的新人，还是拥有几年从业经验的老司机，都写过下面的代码。</p>
-<pre><code>// initTableView的时候
-[self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@&quot;cell&quot;];
-// UITableViewDataSource回调中
-static NSString *reuseIdentifier = @&quot;cell&quot;;
-UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-</code></pre><p>或者在iOS6更早的版本中。使用如下的代码</p>
-<pre><code>// UITableViewDataSource回调中
-static NSString *reuseIdentifier = @&quot;cell&quot;;
-UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
-if (cell == nil) {
-        UITableViewCell *tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@&quot;cell&quot;];
-
-}
-</code></pre><p>上面两种方法，并明显区别。实现目的一样。只是换了不同的API而已。所谓复用，就体现在<code>UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];</code>。这里有一些概念。<code>identifier</code>每创建一个cell必须附带一个identifier标识自己。<code>ReusableCell</code>表示这个cell是复用的。那么何为复用。实际上就是反复循环使用呗。既然要反复循环使用。就必须将可复用的对象放在一个数据结构中。需要的时候取出来放在显示区域。所谓显示区域的cell.我们翻看UITableView的头文件，看到一个<code>@property (nonatomic, readonly) NSArray&lt;__kindof UITableViewCell *&gt; *visibleCells</code>.显示区域的cell全部放在这个数组中。有了显示区域的cells.<code>dequeue</code>表示苹果实现了一个队列的结构。既然有出队列。那么必然有入队列。何时入，何时出？</p>
-<p>总结来说。我们需要回到下面几个问题。<br>1.苹果是用什么数据结构来保存复用的cells.<br>2.何时将cell加入复用的数据结构。何时从这个复用结构中移除？</p>
-<h2 id="隐藏的-reuseTableViewCells"><a href="#隐藏的-reuseTableViewCells" class="headerlink" title="隐藏的_reuseTableViewCells"></a>隐藏的_reuseTableViewCells</h2><p>实际上,苹果将UITableView中有个私有变量叫做<code>_reuseTableViewCells</code>。利用运行时的api我们可以将其打印出来。</p>
-<pre><code>- (void)tryMember
-{
-    const char *cellName = &quot;_reusableTableCells&quot;;
-    Ivar var = class_getInstanceVariable([UITableView class], cellName);
-
-    const char *memberName = ivar_getName(var);
-    const char *memberType = ivar_getTypeEncoding(var);
-    NSLog(@&quot;%s----%s&quot;, memberName, memberType);
-
-}
-</code></pre><p>发现_reuseTableViewCells是一个cell为value的可变字典。它是作为reuseCell的<code>队列</code>结构的关键。</p>
-<h2 id="cell在-reuseTableViewCells和visibleCells的相互迁移"><a href="#cell在-reuseTableViewCells和visibleCells的相互迁移" class="headerlink" title="cell在_reuseTableViewCells和visibleCells的相互迁移"></a>cell在_reuseTableViewCells和visibleCells的相互迁移</h2><p>我有100条数据，屏幕可以显示17个cell.</p>
-<ol>
-<li><p>在tableView首次初始化并添加到其父视图后。会自动reloadData<br>实际上。UITableView只会调用<br><code>- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath</code>17次。同时每次调用这个方法都会调用<code>UITableViewCell *tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@&quot;cell&quot;];</code>这17个cell都是用户可以看到的。其实也都在visibleCells中。而执行[tableView dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];都会为nil.即这个时候没有cell在<code>_reuseTableViewCells</code>中。所以出队列操作都是nil.</p>
-</li>
-<li><p>当向上滚动时候。这个时候会先出_reuseTableViewCells中去取。发现为nil.那么<strong>回再调用一次</strong><code>UITableViewCell *tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault</code>reuseIdentifier:@”cell”]。并自动将cell加入到visibleCells中。</p>
-</li>
-<li>继续往上滑动。第一个cell退出了显示区域。这个时候就从visibleCells中移除。同时将其放入_reuseTableViewCells。这个过程对_reuseTableViewCells而言。就是入队列了。</li>
-<li>再往上滑动。新出来的cell其实不再是alloc出来。而是从_reuseTableViewCells中出队列来的。一旦出队列。就显示到屏幕上。即加入到visibleCells中。</li>
-</ol>
-<p>总结来说。任何一个时间点。cell要么在visibleCells中。要么在_reuseTableViewCells中。它们之间会因为隐藏和显示，有限个的cell（屏幕个数+1）不断的在这个两个对象中迁移。</p>
-<h2 id="cell虽复用，数据常更新"><a href="#cell虽复用，数据常更新" class="headerlink" title="cell虽复用，数据常更新"></a>cell虽复用，数据常更新</h2><p><code>- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath</code><br>cell虽然复用，但是新出来的cell的展示数据并不是以前的数据。是因为上述方法会更新显示出来的（实际是_reuseTableViewCells中的）显示数据。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/05/30/Core-Data应用开发实践指南读书笔记1/" itemprop="url">
-                  Core Data应用开发实践指南读书笔记1
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-30T00:30:58+08:00" content="2016-05-30">
-              2016-05-30
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
-<li>CoreData是个框架，使得开发者把<strong>数据</strong>当做<strong>对象</strong>来操作。CoreData提供的数据对象叫做托管对象（managed object）.CoreData位于应用程序和持久化存储区(persisten store)之间.</li>
-<li>一个<strong>托管对象</strong>可能对应于数据库中某张数据表中的一<strong>行</strong>。</li>
-<li>可以将CoreData按照数据流动方向分为三层。分别是持久化存储协调器 托管对象模型 托管对象上下文。具体的是什么这里我还看不太懂。等深入后再做研究。或者去问同事。</li>
-<li>持久化存储区可以是SQlite数据库,XML文件，Binary store等数据文件。</li>
-<li>注意托管对象模式和托管对象并不是同一个东西。</li>
-</ul>
-<h3 id="CoreDataHelper类"><a href="#CoreDataHelper类" class="headerlink" title="CoreDataHelper类"></a>CoreDataHelper类</h3><p>我们先写一个工具类CoreDataHelper，抽象成一个类而不是放在视图控制器中，这样便于移植。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -813,7 +844,7 @@ if (cell == nil) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

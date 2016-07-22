@@ -214,6 +214,232 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/14/MySQL数据库下载和安装/" itemprop="url">
+                  MySQL数据库下载和安装
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-14T21:34:08+08:00" content="2016-07-14">
+              2016-07-14
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="命令行方式。。失败"><a href="#命令行方式。。失败" class="headerlink" title="命令行方式。。失败"></a>命令行方式。。失败</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><ol>
+<li>在浏览器中输入mysql.com</li>
+<li>点击Download Tab,然后Download Tab下子分类下点击Community.</li>
+<li>在打开的页面点击MySQL Community Server.</li>
+<li>选择对应的平台，这里我选择Mac OS X, 选择第一个<code>Mac OS X 10.11 (x86, 645. -bit), TAR</code>,点击    Download    </li>
+<li>弹出页面要求你注册或者登陆，其实不用管它，注意左下角有一个<code>No thanks, just start my download.</code>.点击    它，成功下载。</li>
+</ol>
+<h3 id="安装与简单配置"><a href="#安装与简单配置" class="headerlink" title="安装与简单配置"></a>安装与简单配置</h3><ol>
+<li>将下载的压缩包拷贝到/usr/local（在传统的unix系统中，/usr通常只包含系统发行时自带的程序，而/usr/local则是本地系统管理员用来自由添加程序的目录）下，我们使用命令行来完成<br><code>sudo cp mysql-5.7.13-osx10.11-x86_64.tar.gz /usr/local</code></li>
+<li><p>切换到/usr/local,解压目录</p>
+<p><code>cd /usr/local</code><br><code>tar zxvf mysql-5.7.13-osx10.11-x86_64.tar.gz</code></p>
+</li>
+<li>解压后会有一个文件夹<code>mysql-5.7.13-osx10.11-x86_64</code>,将其重命名为<code>mysql</code>.<br><code>mv mysql-5.7.13-osx10.11-x86_64 mysql</code></li>
+</ol>
+<h3 id="启动mysql"><a href="#启动mysql" class="headerlink" title="启动mysql"></a>启动mysql</h3><p>在启动mysql之前，需要执行一下初始化操作。<strong>卡在初始化操作</strong>中…下载dmg文件来操作。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><pre><code>sudo cp mysql-5.7.13-osx10.11-x86_64.tar.gz /usr/local 
+cd /usr/local
+tar zxvf mysql-5.7.13-osx10.11-x86_64.tar.gz 
+mv mysql-5.7.13-osx10.11-x86_64 mysql
+rm mysql-5.7.13-osx10.11-x86_64
+</code></pre><p>拷贝到指定目录，切换到该目录/usr/local,解压mysql,重命名mysql.删除压缩包</p>
+<h2 id="dmg方式-成功"><a href="#dmg方式-成功" class="headerlink" title="dmg方式 成功"></a>dmg方式 成功</h2><h3 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h3><ol>
+<li>在浏览器中输入mysql.com</li>
+<li>点击Download Tab,然后Download Tab下子分类下点击Community.</li>
+<li>在打开的页面点击MySQL Community Server.</li>
+<li>选择对应的平台，这里我选择Mac OS X, 选择最后一个<code>Mac OS X 10.11 (x86, 64-bit), DMG Archive</code>。</li>
+<li>弹出页面要求你注册或者登陆，其实不用管它，注意左下角有一个<code>No thanks, just start my download.</code>.点击    它，成功下载。</li>
+</ol>
+<h3 id="安装与简单配置-1"><a href="#安装与简单配置-1" class="headerlink" title="安装与简单配置"></a>安装与简单配置</h3><ol>
+<li>一路点击确定。最后会弹出一个框。告诉你应用程序给你的root账户分配了一个临时密码.</li>
+</ol>
+<blockquote>
+<p>2016-07-14T16:14:55.804440Z 1 [Note] A temporary password is generated for root@localhost:QDWf-(f/2#x<br>If you lose this password, please consult the section How to Reset the Root Password in the MySQL reference manual.</p>
+</blockquote>
+<p>2.点击左上角apple-&gt;preference.多出了一个MySql按钮，点击它，勾选start MySQL server。就启动了mysql 软件。</p>
+<p>3.跳转到终端。输入<code>mysql -u root -p</code>.就是以root身份连接数据库。回车后要求输入密码。输入步骤1中弹出的密码。进入mysql命令行交互界面。<code>mysql&gt;</code></p>
+<p>4.在交互界面中输入一个命令如，show databases.会弹出下面警告<br><code>ERROR 1820 (HY000): You must SET PASSWORD before executing this statement</code>.此时，是因为刚才的root账号的密码是临时的账号密码。输入<code>SET PASSWORD = PASSWORD(&#39;123456&#39;);</code>就可以重置密码了。整个配置就完成了。</p>
+<ul>
+<li>注意在mysql交互界面，enter不会执行.要执行sql命令，必须使用</li>
+</ul>
+<h2 id="使用navicat-for-Mysql-可视化工具来编写数据库"><a href="#使用navicat-for-Mysql-可视化工具来编写数据库" class="headerlink" title="使用navicat for Mysql 可视化工具来编写数据库"></a>使用navicat for Mysql 可视化工具来编写数据库</h2><p>虽然mysql终端命令可以帮助我们完成sql语句的执行。但是效率低。可以下载navicat for Mysql 来提高数据库编写的效率。它提供了一个可视化的界面来操作数据库。它的使用也十分简单，可以参考<br><a href="http://jingyan.baidu.com/article/6181c3e074ba0d152ff15346.html" target="_blank" rel="external">http://jingyan.baidu.com/article/6181c3e074ba0d152ff15346.html
+</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/07/13/Python-Tips-查看是否有安装某个模块/" itemprop="url">
+                  Python Tips:查看是否有安装某个模块
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-13T22:16:46+08:00" content="2016-07-13">
+              2016-07-13
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>在交互式环境中可以很方便的查看是否有安装某模块</p>
+<h3 id="进入交互式环境"><a href="#进入交互式环境" class="headerlink" title="进入交互式环境"></a>进入交互式环境</h3><p>在终端上中输入<code>python</code>,即进入python交互式环境。<br>然后终端最终会有<code>&gt;&gt;&gt;</code></p>
+<pre><code>Python 2.7.10 (v2.7.10:15c95b7d81dc, May 23 2015, 09:39:00) 
+[GCC 4.2.1 (Apple Inc. build 5577)] on darwin
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; 
+</code></pre><h3 id="检测是否有安装"><a href="#检测是否有安装" class="headerlink" title="检测是否有安装"></a>检测是否有安装</h3><p>在交互式环境中输入<code>import module名</code><br>如果继续返回空，则表示有该模块，否则就需要安装模块.</p>
+<h3 id="退出环境"><a href="#退出环境" class="headerlink" title="退出环境"></a>退出环境</h3><p>输入<code>Ctrl + D</code></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/12/Flask-Tips/" itemprop="url">
                   Flask Tips
                 </a>
@@ -543,199 +769,6 @@ if __name__ == &apos;__main__&apos;:
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/07/使用内联函数代替宏定义/" itemprop="url">
-                  使用内联函数代替宏定义
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-07T01:35:14+08:00" content="2016-07-07">
-              2016-07-07
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="宏的缺陷"><a href="#宏的缺陷" class="headerlink" title="宏的缺陷"></a>宏的缺陷</h3><p>使用宏是有缺陷的，无类型安全，长度和格式的具体限制，而且不便于调试</p>
-<blockquote>
-<p>如果你的.m文件需要频繁调用一个函数,可以用static inline来声明,这相当于把函数体<strong>当做一个大号的宏定义</strong>.不过这也不是百分之百有效,到底能不能把函数体转换为大号宏定义来用要看编译器心情,它要是觉得你的方法太复杂,他就不转了.他直接调用函数.</p>
-</blockquote>
-<h3 id="内联函数格式"><a href="#内联函数格式" class="headerlink" title="内联函数格式"></a>内联函数格式</h3><p>必须是 c function,所以是c的格式类似这样</p>
-<pre><code>static inline fun_returnType  Fun_name(param...){}
-</code></pre><h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><pre><code>static inline CGFloat kWidth() {return [UIScreen mainScreen].bounds.size.width;}
-
-kWidth() // call
-</code></pre><p>调用 Fun_name（param…）.因为是c function,是该文件全局可见，不需要调用self.Fun_name（）</p>
-<h3 id="局限性"><a href="#局限性" class="headerlink" title="局限性"></a>局限性</h3><p><strong>不能写太复杂的语句。不能递归。
-</strong></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/07/07/使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView/" itemprop="url">
-                  使用UICollectionViewFlowLayout而不是UICollectionViewLayout来创建基本的UICollectionView
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-07T01:16:58+08:00" content="2016-07-07">
-              2016-07-07
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="UICollectionViewFlowLayout与UICollectionViewLayout"><a href="#UICollectionViewFlowLayout与UICollectionViewLayout" class="headerlink" title="UICollectionViewFlowLayout与UICollectionViewLayout"></a>UICollectionViewFlowLayout与UICollectionViewLayout</h3><p>一般我们要使用简单的类似多排UITableView的效果的时候，UICollectionView是最便利的方法，UICollectionView的创建</p>
-<pre><code>- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout NS_DESIGNATED_INITIALIZER;
-</code></pre><p>虽然接口告诉我们需要一个<code>UICollectionViewLayout</code>对象，但是实际上需要的对象是<code>UICollectionViewFlowLayout</code>对象。它们是继承关系。后者是前者的子类。为其提供了<strong>流式</strong>的排布。如果使用前者实际上相当于排布规则没有定义。只是提供了一些基础功能。前者主要是用在我们子类化实现自已的排布的时候的基类而已。如果使用前者，甚至会导致数据源回调方法</p>
-<pre><code>- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath 
-</code></pre><p>不被调用。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
@@ -782,7 +815,7 @@ kWidth() // call
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-count">44</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
